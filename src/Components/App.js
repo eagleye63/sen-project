@@ -1,7 +1,10 @@
 import React,{Component} from 'react';
 import Publicpage from './public-page/PublicPage';
+// import SendProps from './SendProps';
+// import SlotBooking from './SlotBooking'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css'
+//import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 
 class App extends Component{
     constructor(props){
@@ -19,7 +22,8 @@ class App extends Component{
         document.body.style.backgroundRepeat = "no-repeat";
     
         return(
-            <Publicpage />
+             <Publicpage />
+             //<SendProps doctorName="Parth Patel"/>
         );
     }
 }
