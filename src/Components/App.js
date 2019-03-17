@@ -8,12 +8,14 @@ import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom
 import AuthorizedRoute from './AuthorizedRoute';
 import Home from './home-page/homepage';
 
+export const Context = React.createContext();
+
 class App extends Component{
     constructor(props){
         super(props);
         this.state={
-            isAuthenticated: false,
-            isuser:'ispatient'
+            isAuthenticated: true,
+            user:'isdoctor'
             //user: ispatient or isdoctor 
         }
 
@@ -34,7 +36,7 @@ class App extends Component{
             document.body.style.background = "#ffffff";
         }
         else{
-        var urlString = 'url(' + require('../images/publicpage2.jpg') + ')';
+        var urlString = 'url(' + require('../images/publicpage2.jpg') + ')'; 
         //urlString.style.width=100;
         document.body.style.background = urlString;
         document.body.style.backgroundSize = "cover";
@@ -43,21 +45,29 @@ class App extends Component{
         }
     
         return(
+            <Context.Provider value={
+                {
+                    user:this.state.user
+                }
+            }>
+
+            
             <Router>
                 <React.Fragment>
-                    <switch>
+                    <Switch>
                     {/* <Publicpage /> */}
                     <AuthorizedRoute permission={true} excat path="/" 
                         component={isAuthenticated ? Home : Publicpage }
-                         />
+                        user={this.state.user} />
                    
                     {/* <AuthorizedRoute permission={} excat path="/" 
                         component={isAuthenticated ? Home : Publicpage }>
                     </AuthorizedRoute> */}
-                    </switch>
+                    </Switch>
                 </React.Fragment>
              
             </Router>
+            </Context.Provider>
             
              //<SendProps doctorName="Parth Patel"/>
         );
