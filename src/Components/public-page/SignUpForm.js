@@ -54,7 +54,7 @@ class SignUpForm extends React.Component{
     handlesubmit=(e)=>{
         e.preventDefault();
         this.props.submitsignup(this.getdetail());
-
+        
     }
 
 

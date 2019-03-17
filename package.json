@@ -12,6 +12,7 @@
     "react-bootstrap4-modal": "^1.7.0",
     "react-dom": "^16.8.2",
     "react-fontawesome": "^1.6.1",
+    "react-router-dom": "^4.4.0",
     "react-scripts": "2.1.5"
   },
   "scripts": {
@@ -28,5 +29,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {}
 }
