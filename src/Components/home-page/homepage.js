@@ -46,7 +46,12 @@ class home extends React.Component{
             <React.Fragment>
                 <NavigationBar/>
                 <h1>Thsi is home page</h1>
-                <Datalist data={this.state.cliniclist} />
+                         
+                <Datalist data={this.state.cliniclist} user={this.props.user} />
+                
+                    
+                
+                
              
                  {/* <ul>
             

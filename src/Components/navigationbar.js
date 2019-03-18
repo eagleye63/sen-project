@@ -4,11 +4,11 @@ import {Link,withRouter} from 'react-router-dom';
 import AuthorizedComponent from './AuthorizedComponent';
 
 function NavLink ({path,text,onClick,className,currPath,icon}){
-    console.log('currPath'+currPath);
+    // console.log('currPath'+currPath);
     if(currPath){
         currPath="./"+currPath.split('/')[1];
     }
-    console.log('currPath second '+currPath);
+    // console.log('currPath second '+currPath);
     return(
         <li className={"nav-item"+(currPath==path ? "active" : " ")+" "+className}>
             <Link className="nav-link" onClick={onClick} to={{
@@ -59,12 +59,29 @@ class navigationbar extends PureComponent{
                                                 text={'Profile'}  
                                                 icon={'user'} 
                                                 currPath={this.props.location.pathname} />
+                                    <AuthorizedComponent permission={(value.user=='patient') ? true : false}
+                                                             path={'/prescription'}
+                                                             currPath={this.props.location.pathname}
+                                                             component={NavLink}
+                                                             icon={'cog'}
+                                                             text={"prescription"}/>
+                                    <AuthorizedComponent permission={(value.user=='patient') ? true : false}
+                                                             path={'/currprescription'}
+                                                             currPath={this.props.location.pathname}
+                                                             component={NavLink}
+                                                             icon={'cog'}
+                                                             text={"Current prescription"}/>                                             
                                      <AuthorizedComponent permission={(value.user=='clinic') ? true : false}
                                                              path={'/slotsettng'}
                                                              currPath={this.props.location.pathname}
                                                              component={NavLink}
                                                              icon={'cog'}
-                                                             text={"Slot Setting"}/>                
+                                                             text={"Slot Setting"}/>
+                                          <NavLink text={'Logout'}
+                                                 icon={'sign-out'}
+                                                 path={this.props.location.pathname}
+                                                 currPath={""}
+                                                 onClick={value.logOut}/>                                 
                             </ul>
 
                             </div>

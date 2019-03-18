@@ -7,7 +7,8 @@ class Datalist extends  React.Component{
     }
 
     render(){
-        const {data}=this.props;
+        const {data,user}=this.props;
+        console.log('i am in data list '+ user);
         return(
             <div>
                 <div className='list-group'>
@@ -15,8 +16,17 @@ class Datalist extends  React.Component{
                         data.length !==0
                         ? _.map(data,(data,i)=>{
                             return(
-                                <div key={data.key}>
-                                <h3>{data.name}</h3>
+                                <div className='list-group' key={data.key}>
+                                <div className='list-group-item'>
+                                <h2 >{data.clinicname}</h2>
+                                <h3>Doctor Name: {data.name}</h3> 
+                                <h3>Specialist: {data.specialist}</h3>
+                                <h3>Gender: {data.gender}</h3>
+                                <h3>Age: {data.age}</h3>
+
+                                <h4>{data.area}, {data.city}</h4>
+
+                                </div>
                                 </div>
                             )
                         })
