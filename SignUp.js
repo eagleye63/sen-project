@@ -71,6 +71,14 @@ export class SignUp extends Component {
             street:this.state.street,
             label:'patient'
         })
+
+        firebase.database().ref('blood group').child(this.state.blood_group)
+        .child(user).set({
+          num:0
+        });
+        firebase.database().ref('list').child(user).set({
+          type:'patient'
+        })
       }
       }
         )
@@ -94,13 +102,13 @@ export class SignUp extends Component {
        <form  onSubmit={this.Signup}  className='container'>
         {/* <div className="Container" color="red" > */}
         <div>
-        <Container bg="dark">
+      
             <h1>Sign Up</h1>
             <p>Please fill in this form to create an account.</p>
             <hr/>
             <FormGroup row>
             <Label htmlFor="email" sm={1}><b>Email:</b></Label>
-            <Col sm={7}>
+            <Col sm={8}>
             <Input type="text" placeholder="Enter Email" name="email" onChange={this.handleChage}
              value={this.state.email} required/><hr/>
              </Col>
@@ -108,7 +116,7 @@ export class SignUp extends Component {
 
             <FormGroup row>
             <Label htmlFor="psw"  sm={1}><b>Password:</b></Label>
-            <Col sm={7}>
+            <Col sm={8}>
             <Input type="password" placeholder="Enter Password" name="password" onChange={this.handleChage}
              value={this.state.password} required/><hr/>
              </Col>
@@ -116,7 +124,7 @@ export class SignUp extends Component {
 
             <FormGroup row>
             <Label htmlFor="name" sm={1}><b>Name:</b></Label>
-            <Col sm={7}>
+            <Col sm={8}>
             <Input type="text" placeholder="Enter Name" name="name" onChange={this.handleChage}
             value={this.state.name} required/><hr/>
             </Col>
@@ -124,7 +132,7 @@ export class SignUp extends Component {
 
             <FormGroup row>
             <Label htmlFor="age" sm={1}><b>Age:</b></Label>
-            <Col sm={7}>
+            <Col sm={8}>
             <Input type="number"  name="age" onChange={this.handleChage}
             value={this.state.age} placeholder="age" required/><hr/>
             </Col>
@@ -132,7 +140,7 @@ export class SignUp extends Component {
 
             <FormGroup row>
             <Label htmlFor="area" sm={1}><b>Area:</b></Label>
-            <Col sm={7}>
+            <Col sm={8}>
             <Input type="text" placeholder="Enter Area" name="area" onChange={this.handleChage} 
             value={this.state.area} required/><hr/>
             </Col>
@@ -140,7 +148,7 @@ export class SignUp extends Component {
 
             <FormGroup row>
             <Label htmlFor="blood_group" sm={1}><b>Blood Group:</b></Label>
-            <Col sm={7}>
+            <Col sm={8}>
             <Input type="text" placeholder="Enter Blood group" name="blood_group" onChange={this.handleChage}
              value={this.state.blood_group} required/><hr/>
              </Col>
@@ -148,7 +156,7 @@ export class SignUp extends Component {
 
             <FormGroup row>
             <Label htmlFor="city" sm={1}><b>City:</b></Label>
-            <Col sm={7}>
+            <Col sm={8}>
             <Input type="text" placeholder="Enter City" name="city" onChange={this.handleChage}
             value={this.state.city} required/><hr/>
             </Col>
@@ -156,7 +164,7 @@ export class SignUp extends Component {
 
             <FormGroup row>
             <Label htmlFor="gender" sm={1}><b>Gender:</b></Label>
-            <Col sm={7}>
+            <Col sm={8}>
             <Input type="text" placeholder="Enter Gender" name="gender" onChange={this.handleChage}
             value={this.state.gender} required/><hr/>
             </Col>
@@ -164,7 +172,7 @@ export class SignUp extends Component {
 
             <FormGroup row>
             <Label htmlFor="phone" sm={1}><b>Phone:</b></Label>
-            <Col sm={7}>
+            <Col sm={8}>
             <Input type="number" placeholder="Enter Phone Number" name="phone" onChange={this.handleChage}
             value={this.state.phone} required/><hr/>
             </Col>
@@ -172,7 +180,7 @@ export class SignUp extends Component {
 
             <FormGroup row>
             <Label htmlFor="pincode" sm={1}><b>Pincode:</b></Label>
-            <Col sm={7}>
+            <Col sm={8}>
             <Input type="text" placeholder="Enter Pincode" name="pincode" onChange={this.handleChage}
             value={this.state.pincode} required/><hr/>
             </Col>
@@ -180,18 +188,18 @@ export class SignUp extends Component {
 
             <FormGroup row>
             <Label htmlFor="street" sm={1}><b>Street:</b></Label>
-            <Col sm={7}>
+            <Col sm={8}>
             <Input type="text" placeholder="Enter Street" name="street" onChange={this.handleChage}
             value={this.state.street} required/><hr/>
             </Col>
             </FormGroup>
 
-            <div className="clearfix">
+           {/* <div className="clearfix">
             {/* <button type="button" class="cancelbtn">Cancel</button> */}
-            <Button type="submit" className="btn" color='primary'  >Sign Up</Button>
+            <Button type="submit" className="btn55" color='primary'   >Sign Up</Button>
             <br/><br/><br/>
-            </div>
-            </Container>
+            
+            
             </div>
     </form>
     
@@ -201,3 +209,4 @@ export class SignUp extends Component {
 }
 
 export default SignUp
+
