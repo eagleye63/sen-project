@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import SlotBooking from './SlotBooking';
 import TempPage from './TempPage'
-import firebase from './firebase'
+import firebase from '../config/configuration';
 
  class SendProps extends PureComponent {
 

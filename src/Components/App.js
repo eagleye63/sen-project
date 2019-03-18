@@ -7,12 +7,13 @@ import 'font-awesome/css/font-awesome.min.css'
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import AuthorizedRoute from './AuthorizedRoute';
 import Home from './home-page/homepage';
+import TempPage from './TempPage';
 
 class App extends Component{
     constructor(props){
         super(props);
         this.state={
-            isAuthenticated: false,
+            isAuthenticated: true,
             isuser:'ispatient'
             //user: ispatient or isdoctor 
         }
@@ -41,14 +42,14 @@ class App extends Component{
         document.body.style.backgroundPositionY= "-50px";
         document.body.style.backgroundRepeat = "no-repeat";
         }
-    
+        ///// PLEASE DOWNLOAD npm install node-sass --save  FOR SCSS file
         return(
             <Router>
                 <React.Fragment>
                     <switch>
                     {/* <Publicpage /> */}
                     <AuthorizedRoute permission={true} excat path="/" 
-                        component={isAuthenticated ? Home : Publicpage }
+                        component={TempPage} doctorName="Dr. Parth" patientId="20101010"
                          />
                    
                     {/* <AuthorizedRoute permission={} excat path="/" 

@@ -3,7 +3,7 @@ import "./DoctorDescription.css";
 //import "./todaytomorrow.css";
 import "./TempPage.scss";
 import PropTypes from "prop-types";
-import firebase from './firebase'
+import firebase from '../config/configuration';
 import Calendar from 'react-calendar';
 import Button from 'react-bootstrap/Button'
 import SlotBooking from "./SlotBooking";
@@ -13,9 +13,10 @@ import SendProps from "./SendProps";
 ////// WARNING : PASS ALL THE PROPS RECEIVED IN THIS COMPONENT TO SLOT BOOKING PAGE OTHERWISE IT WILL NOT WORK/////
 
 class TempPage extends Component {
- 
+    
     constructor(props) {
     super(props);
+    console.log('Hello this is Temppage');
     this.state = ({
         date:new Date(),
         bookSlot:false,

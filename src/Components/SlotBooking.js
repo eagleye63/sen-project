@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./DoctorDescription.css";
 import PropTypes from "prop-types";
-import firebase from './firebase'
+import firebase from '../config/configuration';
 import "./SlotBooking.scss";
 
 
