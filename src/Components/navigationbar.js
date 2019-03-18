@@ -4,9 +4,11 @@ import {Link,withRouter} from 'react-router-dom';
 import AuthorizedComponent from './AuthorizedComponent';
 
 function NavLink ({path,text,onClick,className,currPath,icon}){
+    console.log('currPath'+currPath);
     if(currPath){
         currPath="./"+currPath.split('/')[1];
     }
+    console.log('currPath second '+currPath);
     return(
         <li className={"nav-item"+(currPath==path ? "active" : " ")+" "+className}>
             <Link className="nav-link" onClick={onClick} to={{
@@ -25,6 +27,7 @@ class navigationbar extends PureComponent{
     render(){
         return(
             <Context.Consumer>{
+
                 value=>{
                     return(
                         <div>
@@ -56,7 +59,7 @@ class navigationbar extends PureComponent{
                                                 text={'Profile'}  
                                                 icon={'user'} 
                                                 currPath={this.props.location.pathname} />
-                                     <AuthorizedComponent permission={(value.user=='isdoctor') ? true : false}
+                                     <AuthorizedComponent permission={(value.user=='clinic') ? true : false}
                                                              path={'/slotsettng'}
                                                              currPath={this.props.location.pathname}
                                                              component={NavLink}

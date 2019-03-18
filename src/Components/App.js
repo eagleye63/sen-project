@@ -15,8 +15,8 @@ class App extends Component{
         super(props);
         this.state={
             isAuthenticated: true,
-            user:'isdoctor'
-            //user: ispatient or isdoctor 
+            user:'clinic'
+            //user: patient or clinic 
         }
 
     }
