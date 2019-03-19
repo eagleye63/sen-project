@@ -21,7 +21,7 @@ function NavLink ({path,text,onClick,className,currPath,icon}){
     )
 }
 
-class navigationbar extends PureComponent{
+class Navigationbar extends PureComponent{
     
 
     render(){
@@ -97,4 +97,4 @@ class navigationbar extends PureComponent{
 
 }
 
-export default  withRouter(navigationbar);
+export default  withRouter(Navigationbar);

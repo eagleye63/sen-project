@@ -7,6 +7,7 @@ import 'font-awesome/css/font-awesome.min.css'
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import AuthorizedRoute from './AuthorizedRoute';
 import Home from './home-page/homepage';
+import Slotbook from './slots/slotbooking';
 
 export const Context = React.createContext();
 
@@ -56,13 +57,24 @@ class App extends Component{
                 <React.Fragment>
                     <Switch>
                     {/* <Publicpage /> */}
-                    <AuthorizedRoute permission={true} excat path="/" 
+                    <AuthorizedRoute permission={true}  path="/" exact strict
                         component={isAuthenticated ? Home : Publicpage }
                         user={this.state.user} />
                    
-                    {/* <AuthorizedRoute permission={} excat path="/" 
-                        component={isAuthenticated ? Home : Publicpage }>
-                    </AuthorizedRoute> */}
+                    <AuthorizedRoute permission={true}  path="/slotbook" exact strict 
+                        component={Slotbook}/>
+                    {/* <AuthorizedRoute permission={true}  path="/slotbook" exact strict 
+                        component={}/>
+                    <AuthorizedRoute permission={true}  path="/slotbook" exact strict 
+                        component={Slotbook}/> */}
+        
+                    
+                    {/* <Route
+                                exact path="/slotbook"
+                                component={Slotbook}
+                                 /> */}
+
+                    {/* <Route render={() => <Redirect to='/'/>}/> */}
                     </Switch>
                 </React.Fragment>
              
