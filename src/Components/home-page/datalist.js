@@ -1,10 +1,33 @@
 import React,{Component} from 'react';
 import _ from 'lodash';
-class Datalist extends  React.Component{
+import {Link} from 'react-router-dom';
+import Slotbook from '../slots/slotbooking';
+import Gotoslot from '../slots/Gotoslot';
+import AuthorizedComponent from '../AuthorizedComponent';
+import { withRouter } from 'react-router-dom';
+class Datalist extends  React.PureComponent{
     constructor(props){
         super(props);
         
     }
+
+
+//    var Gotoslotbook=(
+//         <div className={'d-flex justify-content-end mt-5'}>
+//                 <Link to={'/slotbook'}>
+//                     <button className="btn btn-outline-dark btn-lg">
+//                         <span className="mr-2">Go To Cart</span>
+//                         <i className="fa fa-angle-right"></i>
+//                     </button>
+//                 </Link>
+//             </div>
+//         )
+redirect(data){
+    this.props.history.push({
+        pathname: "/slotbook"
+     });
+     console.log('i am inn datalist'+data);
+}
 
     render(){
         const {data,user}=this.props;
@@ -25,8 +48,12 @@ class Datalist extends  React.Component{
                                 <h3>Age: {data.age}</h3>
 
                                 <h4>{data.area}, {data.city}</h4>
-
-                                </div>
+                                <AuthorizedComponent
+                                    component={Gotoslot} permission={true} /> 
+                                </div> 
+                                {/* <button className='btn btn-outline-primary' style={{'fontSize' :'13px' }} onClick={() => this.redirect(data.area)}>
+                                Book Slot
+                                </button> */}
                                 </div>
                             )
                         })
@@ -39,4 +66,4 @@ class Datalist extends  React.Component{
     }
 }
 
-export default (Datalist);
+export default withRouter(Datalist);
