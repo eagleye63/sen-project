@@ -58,6 +58,12 @@ class Home extends React.Component{
                         <i className="fa fa-angle-right"></i>
                     </button>
                 </Link>
+                <Link to={'/reviappoitment'}>
+                    <button className="btn btn-outline-dark btn-lg">
+                        <span className="mr-2">Revisit Appoitment</span>
+                        <i className="fa fa-angle-right"></i>
+                    </button>
+                </Link>
                 
                 {/* <buttton className='btn btn-outline-dark btn-lg' type='button' onClick={this.opencurrapp}>
                 {this.state.iscurrappoitmentopen ? 'close current appointment' : 'open current appointment '}</buttton>
@@ -87,7 +93,7 @@ class Home extends React.Component{
                    </div>
                     : ''
                 } */}
-
+                
                 <AuthorizedComponent   data={this.state.cliniclist}  permission={(this.props.user === 'patient') ? true : false }
                  component={Datalist}  user={this.props.user} />       
                 {/* <Datalist data={this.state.cliniclist} user={this.props.user} /> */}

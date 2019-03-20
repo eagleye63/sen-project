@@ -9,6 +9,9 @@ import AuthorizedRoute from './AuthorizedRoute';
 import Home from './home-page/homepage';
 import Slotbook from './slots/slotbooking';
 import Currappo from './appoitment-page/currappo';
+import Reviappo from './appoitment-page/reviappo';
+import Profile from './profile/Profile';
+
 export const Context = React.createContext();
 
 class App extends Component{
@@ -65,6 +68,10 @@ class App extends Component{
                         component={Slotbook}/>
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/currappoitment" exact strict 
                         component={Currappo} />
+                        <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/reviappoitment" exact strict 
+                        component={Reviappo} />
+                        <AuthorizedRoute permission={true} path="/reviappoitment" exact strict 
+                        component={Profile} user={this.state.user} />
                    
                     {/* <Route render={() => <Redirect to='/'/>}/> */}
                     </Switch>
