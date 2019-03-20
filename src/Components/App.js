@@ -8,7 +8,7 @@ import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom
 import AuthorizedRoute from './AuthorizedRoute';
 import Home from './home-page/homepage';
 import Slotbook from './slots/slotbooking';
-
+import Currappo from './appoitment-page/currappo';
 export const Context = React.createContext();
 
 class App extends Component{
@@ -61,19 +61,11 @@ class App extends Component{
                         component={isAuthenticated ? Home : Publicpage }
                         user={this.state.user} />
                    
-                    <AuthorizedRoute permission={true}  path="/slotbook" exact strict 
+                    <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path="/slotbook" exact strict 
                         component={Slotbook}/>
-                    {/* <AuthorizedRoute permission={true}  path="/slotbook" exact strict 
-                        component={}/>
-                    <AuthorizedRoute permission={true}  path="/slotbook" exact strict 
-                        component={Slotbook}/> */}
-        
-                    
-                    {/* <Route
-                                exact path="/slotbook"
-                                component={Slotbook}
-                                 /> */}
-
+                    <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/currappoitment" exact strict 
+                        component={Currappo} />
+                   
                     {/* <Route render={() => <Redirect to='/'/>}/> */}
                     </Switch>
                 </React.Fragment>

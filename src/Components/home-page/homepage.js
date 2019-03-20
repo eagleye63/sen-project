@@ -5,7 +5,8 @@ import firebase from '../../config/configuration';
 import _ from 'lodash';
 import Datalist from './datalist';
 import Slotbook from '../slots/slotbooking';
-import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route, Switch,Link} from "react-router-dom";
+import AuthorizedComponent from '../AuthorizedComponent';
 class Home extends React.Component{
     constructor(props){
         super(props);
@@ -51,7 +52,14 @@ class Home extends React.Component{
             <React.Fragment>
                 <NavigationBar/>
                 <h1>Thsi is home page</h1>
-                <buttton className='btn btn-outline-dark btn-lg' type='button' onClick={this.opencurrapp}>
+                <Link to={'/currappoitment'}>
+                    <button className="btn btn-outline-dark btn-lg">
+                        <span className="mr-2">Current Appoitment</span>
+                        <i className="fa fa-angle-right"></i>
+                    </button>
+                </Link>
+                
+                {/* <buttton className='btn btn-outline-dark btn-lg' type='button' onClick={this.opencurrapp}>
                 {this.state.iscurrappoitmentopen ? 'close current appointment' : 'open current appointment '}</buttton>
                 <buttton className='btn btn-outline-dark btn-lg' type='button' onClick={this.openrevisapp}>
                 {this.state.isrevisappoitmentopen ? 'close revisit appointment' : 'open revisit appointment '}</buttton>
@@ -78,10 +86,11 @@ class Home extends React.Component{
                     </div> 
                    </div>
                     : ''
-                }
+                } */}
 
-                         
-                <Datalist data={this.state.cliniclist} user={this.props.user} />
+                <AuthorizedComponent   data={this.state.cliniclist}  permission={(this.props.user === 'patient') ? true : false }
+                 component={Datalist}  user={this.props.user} />       
+                {/* <Datalist data={this.state.cliniclist} user={this.props.user} /> */}
                
 
             </React.Fragment>
