@@ -7,21 +7,6 @@
 
 
 
-  
-
-body {
-  /* The image used */
-  background-image: linear-gradient(to right, rgba(83, 76, 97, 0.322), rgb(46, 50, 65));
-  background-size: cover;
-
-  /* Control the height of the image */
-  
-
-  /* Center and scale the image nicely */
- opacity: 1;
-  
-}
-
 .container {
     
   right: 0;

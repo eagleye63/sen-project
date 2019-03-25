@@ -28,6 +28,8 @@ class Home extends React.Component{
            
             this.setState({
                 cliniclist : snapshot.val()
+            },()=>{
+                console.log(this.state);
             })
                      
         })  
@@ -46,7 +48,7 @@ class Home extends React.Component{
     }
     render(){
         const {user}=this.props;
-        //console.log('home-page i am '+user);
+        console.log('home-page i am '+user);
         return(
 
             <React.Fragment>
@@ -63,7 +65,7 @@ class Home extends React.Component{
                         <span className="mr-2">Revisit Appoitment</span>
                         <i className="fa fa-angle-right"></i>
                     </button>
-                </Link>
+                </Link> 
                 
                 {/* <buttton className='btn btn-outline-dark btn-lg' type='button' onClick={this.opencurrapp}>
                 {this.state.iscurrappoitmentopen ? 'close current appointment' : 'open current appointment '}</buttton>
@@ -96,10 +98,13 @@ class Home extends React.Component{
                 
                 <AuthorizedComponent   data={this.state.cliniclist}  permission={(this.props.user === 'patient') ? true : false }
                  component={Datalist}  user={this.props.user} />       
-                {/* <Datalist data={this.state.cliniclist} user={this.props.user} /> */}
-               
+                             
 
             </React.Fragment>
+
+           
+
+
         )
     }
 }

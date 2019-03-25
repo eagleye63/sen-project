@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import firebase from './firebase';
+import firebase from '../../config/configuration';
 import { Col,Button, Form, FormGroup, Label, Input, FormText ,Container} from 'reactstrap';
 
 import Stylee from './Stylee.css'
