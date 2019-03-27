@@ -51,16 +51,22 @@ class App extends React.PureComponent{
         event.preventDefault();
         var flag=1;
        // console.log('hii'); 
+       //console.log(this.state);
                 firebase.auth().signInWithEmailAndPassword(this.state.email,this.state.password).catch((error)=>{
               var errorCode = error.code;
               var errorMessage = error.message;
               alert(errorMessage+'\n'+'please try again');
               flag=0;
           }).then(()=>{
+            //1  
               var user=firebase.auth().currentUser.uid;
+              
               if(flag)
               {
-                firebase.database().ref('list').child(user).once('value').then(function(snapshot){
+                //1
+                firebase.database().ref('list').child(user).on('value',snapshot=>{
+                    console.log(this);
+               //0    
               if(snapshot.val().type=='patient')
               {console.log('patient');
               console.log('i am in logi '+snapshot.key);
@@ -69,9 +75,6 @@ class App extends React.PureComponent{
                   isAuthenticated: true,
                   key:snapshot.key
 
-              },()=>{
-                  console.log('fuck bc '+this.state.isAuthenticated);
-                  this.forceUpdate();
               })
 
              
@@ -79,17 +82,12 @@ class App extends React.PureComponent{
               else{
                 console.log('i am in logi doctor');
                 console.log('i am in logi '+snapshot.key);
-                console.log(this);
-                this.setState(prevState=>{
-                    prevState['user']= 'doctor';
-                    prevState['isAuthenticated']= true;
-                    prevState['key']=snapshot.key;
-                    return prevState;
+                //console.log(this.state);
+                this.setState({
+                    user: 'clinic',
+                    isAuthenticated: true,
+                    key:snapshot.key
   
-                },()=>{
-
-                    console.log('fuck bc ');
-                   // this.forceUpdate();
                 })
                 
              

@@ -27,12 +27,12 @@ import Stylee from './Stylee.css'
           <h1 className="t1">Login</h1>
               <br/>
            <FormGroup row>
-           <Label className="email" sm={3}><b>Email:</b></Label>
+           <Label className="email" sm={3}><b>Email:</b></Label> 
            <Col sm={5}>
            <Input type="text" placeholder="Enter Email" name="email" onChange={this.props.handleChage}
             value={this.props.email} required/><hr/>
             </Col>
-           </FormGroup>
+           </FormGroup>  
 
            <FormGroup row>
            <Label className="psw"  sm={3}><b>Password:</b></Label>
@@ -48,7 +48,7 @@ import Stylee from './Stylee.css'
             </div>
             <h5><b>Are you patient?</b> <a className='linking' href="#">Click Here</a> </h5>
            <h5><b>Are you doctor?</b> <a className='linking' href="#">Click Here</a></h5>
-           </form>
+           </form>          
            
            </body>
     )
