@@ -15,6 +15,7 @@ import Currappo from './appoitment-page/currappo';
 import Reviappo from './appoitment-page/reviappo';
 import Profile from './profile/Profile';
 import { CLIENT_RENEG_LIMIT } from 'tls';
+import Signuppage from './public-page/Signupdoc';
 
 export const Context = React.createContext();
 
@@ -69,7 +70,7 @@ class App extends React.PureComponent{
                //0    
               if(snapshot.val().type=='patient')
               {console.log('patient');
-              console.log('i am in logi '+snapshot.key);
+           //   console.log('i am in logi '+snapshot.key);
               this.setState({
                   user: 'patient',
                   isAuthenticated: true,
@@ -80,8 +81,8 @@ class App extends React.PureComponent{
              
             }
               else{
-                console.log('i am in logi doctor');
-                console.log('i am in logi '+snapshot.key);
+                 console.log('i am in logi doctor');
+                // console.log('i am in logi '+snapshot.key);
                 //console.log(this.state);
                 this.setState({
                     user: 'clinic',
@@ -155,7 +156,8 @@ class App extends React.PureComponent{
                         handleChage={this.handleChage}
                         email={this.state.email} password={this.state.password}
                         />
-                   
+                   <AuthorizedRoute permission={this.state.user === 'patient' ? true : true }  path="/signup" exact strict 
+                        component={Signuppage}/>
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path="/slotbook" exact strict 
                         component={Slotbook}/>
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/currappoitment" exact strict 
@@ -163,7 +165,7 @@ class App extends React.PureComponent{
                         <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/reviappoitment" exact strict 
                         component={Reviappo} />
                         <AuthorizedRoute permission={true} path="/reviappoitment" exact strict 
-                        component={Profile} user={this.state.user} />
+                        component={Profile} user={this.state.user} key={this.state.key} />
                         <Route render={() => <Redirect to='/'/>}/>
                    
                     {/* <Route render={() => <Redirect to='/'/>}/> */}

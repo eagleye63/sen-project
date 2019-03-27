@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import firebase from '../../config/configuration';
 import { Col,Button, Form, FormGroup, Label, Input, FormText ,Container} from 'reactstrap';
+import {Link}  from 'react-router-dom';
 
 import Stylee from './Stylee.css'
 
@@ -48,6 +49,12 @@ import Stylee from './Stylee.css'
             </div>
             <h5><b>Are you patient?</b> <a className='linking' href="#">Click Here</a> </h5>
            <h5><b>Are you doctor?</b> <a className='linking' href="#">Click Here</a></h5>
+                  <Link to={'/signup'}>
+                    <button className="btn btn-outline-dark btn-lg">
+                        <span className="mr-2">signup</span>
+                        <i className="fa fa-angle-right"></i>
+                    </button>
+                </Link>
            </form>          
            
            </body>
