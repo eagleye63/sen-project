@@ -8,7 +8,7 @@ function NavLink ({path,text,onClick,className,currPath,icon}){
     if(currPath){
         currPath="./"+currPath.split('/')[1];
     }
-    // console.log('currPath second '+currPath);
+    // console.log('currPath second '+currPath);    
     return(
         <li className={"nav-item"+(currPath==path ? "active" : " ")+" "+className}>
             <Link className="nav-link" onClick={onClick} to={{
@@ -22,6 +22,7 @@ function NavLink ({path,text,onClick,className,currPath,icon}){
 }
 
 class Navigationbar extends PureComponent{
+    
     
 
     render(){

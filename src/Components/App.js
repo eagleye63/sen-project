@@ -24,7 +24,7 @@ class App extends React.PureComponent{
         super(props);
         this.state={
             isAuthenticated: false,
-            user:'patient',
+            user:'',
             // patient or clinic
             key:'',
             email:"",
@@ -70,7 +70,7 @@ class App extends React.PureComponent{
                //0    
               if(snapshot.val().type=='patient')
               {console.log('patient');
-           //   console.log('i am in logi '+snapshot.key);
+                 console.log('i am in logi '+snapshot.key);
               this.setState({
                   user: 'patient',
                   isAuthenticated: true,
@@ -112,6 +112,8 @@ class App extends React.PureComponent{
     render(){
    //     const {isAuthenticated}=this.state;
         console.log('i am in render isauthancated '+this.state.isAuthenticated);
+        console.log('i am in render user '+this.state.user);
+        console.log('i am in render key '+this.state.key);
         // console.log('i am in render '+this.state.key);
         // console.log('i am in render user '+this.state.user);
         if(this.state.isAuthenticated){
@@ -140,7 +142,8 @@ class App extends React.PureComponent{
         return(
             <Context.Provider value={
                 {
-                    user:this.state.user
+                    user:this.state.user,
+                    id:this.state.key
                 }
             }>
 
@@ -164,11 +167,11 @@ class App extends React.PureComponent{
                         component={Currappo} />
                         <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/reviappoitment" exact strict 
                         component={Reviappo} />
-                        <AuthorizedRoute permission={true} path="/reviappoitment" exact strict 
-                        component={Profile} user={this.state.user} key={this.state.key} />
+                        <AuthorizedRoute permission={true} path="/Myprofile" exact strict 
+                        component={Profile} user={this.state.user} id={this.state.key} />
                         <Route render={() => <Redirect to='/'/>}/>
                    
-                    {/* <Route render={() => <Redirect to='/'/>}/> */}
+                    <Route render={() => <Redirect to='/'/>}/>
                     </Switch>
                 </React.Fragment>
              
