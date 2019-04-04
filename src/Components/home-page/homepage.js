@@ -7,6 +7,7 @@ import Datalist from './datalist';
 import Slotbook from '../slots/slotbooking';
 import {BrowserRouter as Router, Redirect, Route, Switch,Link} from "react-router-dom";
 import AuthorizedComponent from '../AuthorizedComponent';
+import Clinicdate from './ClinicDate';
 class Home extends React.Component{
     constructor(props){
         super(props);
@@ -54,18 +55,32 @@ class Home extends React.Component{
             <React.Fragment>
                 <NavigationBar/>
                 <h1>Thsi is home page</h1>
-                <Link to={'/currappoitment'}>
+                {
+                    this.state.user==='Patient' ?
+                    <div>
+                    <Link to={'/currappoitment'}>
                     <button className="btn btn-outline-dark btn-lg">
                         <span className="mr-2">Current Appoitment</span>
                         <i className="fa fa-angle-right"></i>
                     </button>
-                </Link>
-                <Link to={'/reviappoitment'}>
+                      </Link>
+                     <Link to={'/reviappoitment'}>
                     <button className="btn btn-outline-dark btn-lg">
                         <span className="mr-2">Revisit Appoitment</span>
                         <i className="fa fa-angle-right"></i>
                     </button>
-                </Link> 
+                     </Link> 
+                     <AuthorizedComponent   data={this.state.cliniclist}  permission={(this.props.user === 'patient') ? true : false }
+                    component={Datalist}  user={this.props.user} /> 
+                     </div>
+                 : <div>
+                     <AuthorizedComponent    permission={(this.props.user === 'clinic') ? true : false }
+                    component={Clinicdate}  user={this.props.user} id={this.props.id} /> 
+                     
+                 </div>
+                    
+                }
+               
                 
                 {/* <buttton className='btn btn-outline-dark btn-lg' type='button' onClick={this.opencurrapp}>
                 {this.state.iscurrappoitmentopen ? 'close current appointment' : 'open current appointment '}</buttton>
@@ -96,8 +111,7 @@ class Home extends React.Component{
                     : ''
                 } */}
                 
-                <AuthorizedComponent   data={this.state.cliniclist}  permission={(this.props.user === 'patient') ? true : false }
-                 component={Datalist}  user={this.props.user} />       
+                    
                              
 
             </React.Fragment>

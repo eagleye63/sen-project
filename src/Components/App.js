@@ -16,6 +16,7 @@ import Reviappo from './appoitment-page/reviappo';
 import Profile from './profile/Profile';
 import { CLIENT_RENEG_LIMIT } from 'tls';
 import Signuppage from './public-page/Signupdoc';
+import Clinicdate from './home-page/ClinicDate';
 
 export const Context = React.createContext();
 
@@ -158,6 +159,7 @@ class App extends React.PureComponent{
                         submitHandler={this.submitHandler} 
                         handleChage={this.handleChage}
                         email={this.state.email} password={this.state.password}
+                        id={this.state.key}
                         />
                    <AuthorizedRoute permission={this.state.user === 'patient' ? true : true }  path="/signup" exact strict 
                         component={Signuppage}/>
@@ -166,6 +168,8 @@ class App extends React.PureComponent{
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/currappoitment" exact strict 
                         component={Currappo} />
                         <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/reviappoitment" exact strict 
+                        component={Reviappo} />
+                        <AuthorizedRoute permission={this.state.user === 'clinic' ? true : false } path="/reviappoitment" exact strict 
                         component={Reviappo} />
                         <AuthorizedRoute permission={true} path="/Myprofile" exact strict 
                         component={Profile} user={this.state.user} id={this.state.key} />
