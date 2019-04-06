@@ -10,13 +10,14 @@ import 'font-awesome/css/font-awesome.min.css'
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import AuthorizedRoute from './AuthorizedRoute';
 import Home from './home-page/homepage';
-import Slotbook from './slots/slotbooking';
+import Slotbook from './slots/jeettmp';
 import Currappo from './appoitment-page/currappo';
 import Reviappo from './appoitment-page/reviappo';
 import Profile from './profile/Profile';
 import { CLIENT_RENEG_LIMIT } from 'tls';
 import Signuppage from './public-page/Signupdoc';
 import Clinicdate from './home-page/ClinicDate';
+import TempPage from './slots/TempPage';
 
 export const Context = React.createContext();
 
@@ -95,9 +96,6 @@ class App extends React.PureComponent{
              
               }
               
-                
-             
-            
               }
                 )
           }
@@ -112,9 +110,9 @@ class App extends React.PureComponent{
   
     render(){
    //     const {isAuthenticated}=this.state;
-        console.log('i am in render isauthancated '+this.state.isAuthenticated);
-        console.log('i am in render user '+this.state.user);
-        console.log('i am in render key '+this.state.key);
+        // console.log('i am in render isauthancated '+this.state.isAuthenticated);
+        // console.log('i am in render user '+this.state.user);
+        // console.log('i am in render key '+this.state.key);
         // console.log('i am in render '+this.state.key);
         // console.log('i am in render user '+this.state.user);
         if(this.state.isAuthenticated){
@@ -163,8 +161,8 @@ class App extends React.PureComponent{
                         />
                    <AuthorizedRoute permission={this.state.user === 'patient' ? true : true }  path="/signup" exact strict 
                         component={Signuppage}/>
-                    <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path="/slotbook" exact strict 
-                        component={Slotbook}/>
+                    <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path={"/slotbook/:id"}  
+                        component={TempPage} patientId={this.state.key}  />
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/currappoitment" exact strict 
                         component={Currappo} />
                         <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/reviappoitment" exact strict 

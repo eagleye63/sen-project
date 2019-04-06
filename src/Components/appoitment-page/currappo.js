@@ -6,8 +6,7 @@ import firebase from '../../config/configuration';
          super(props);
          this.state={
             clinickey:'',
-            clinicname:'',
-            drname:'',
+            clinicname:'',            
             area:'',
             city:''
             
@@ -30,7 +29,8 @@ import firebase from '../../config/configuration';
             },()=>{
                 let clinicdetail=firebase.database().ref('/clinic').child(this.state.clinickey);
                 clinicdetail.on("value",snapshot=>{
-                    const val2=snapshot.val();  this.setState({
+                    const val2=snapshot.val(); 
+                     this.setState({
                         clinicname : val2.name
                     })
                           
