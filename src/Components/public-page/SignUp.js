@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import firebase from '../../config/configuration';
 import { Col,Button, Form, FormGroup, Label, Input, FormText ,Container} from 'reactstrap';
+import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 
 import Stylee from './Stylee.css'
 export class SignUp extends Component {
@@ -79,6 +80,8 @@ export class SignUp extends Component {
         firebase.database().ref('list').child(user).set({
           type:'patient'
         })
+        alert("Signup completed");
+        this.props.history.push('/');
       }
       }
         )

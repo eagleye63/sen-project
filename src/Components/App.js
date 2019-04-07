@@ -15,7 +15,8 @@ import Currappo from './appoitment-page/currappo';
 import Reviappo from './appoitment-page/reviappo';
 import Profile from './profile/Profile';
 import { CLIENT_RENEG_LIMIT } from 'tls';
-import Signuppage from './public-page/Signupdoc';
+import Signuppagedoc from './public-page/Signupdoc';
+import Signuppagepat from './public-page/SignUp'
 import Clinicdate from './home-page/ClinicDate';
 import TempPage from './slots/TempPage';
 
@@ -159,8 +160,10 @@ class App extends React.PureComponent{
                         email={this.state.email} password={this.state.password}
                         id={this.state.key}
                         />
-                   <AuthorizedRoute permission={this.state.user === 'patient' ? true : true }  path="/signup" exact strict 
-                        component={Signuppage}/>
+                   <AuthorizedRoute permission={true}  path="/signupclinic" exact strict 
+                        component={Signuppagedoc}/>
+                        <AuthorizedRoute permission={true}  path="/signuppatient" exact strict 
+                        component={Signuppagepat}/>
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path={"/slotbook/:id"}  
                         component={TempPage} patientId={this.state.key}  />
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/currappoitment" exact strict 
@@ -171,9 +174,9 @@ class App extends React.PureComponent{
                         component={Reviappo} />
                         <AuthorizedRoute permission={true} path="/Myprofile" exact strict 
                         component={Profile} user={this.state.user} id={this.state.key} />
-                        <Route render={() => <Redirect to='/'/>}/>
-                   
-                    <Route render={() => <Redirect to='/'/>}/>
+
+                    {/* <Route render={() => <Redirect to='/'/>}/>                   
+                    <Route render={() => <Redirect to='/'/>}/> */}
                     </Switch>
                 </React.Fragment>
              

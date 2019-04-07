@@ -47,14 +47,14 @@ import Stylee from './Stylee.css'
             <Button type="submit" className="btn55" color='primary'  >Login</Button>
             <br/><br/><br/>
             </div>
-            <h5><b>Are you patient?</b> <a className='linking' href="#">Click Here</a> </h5>
-           <h5><b>Are you doctor?</b> <a className='linking' href="#">Click Here</a></h5>
-                  <Link to={'/signup'}>
+            <h5><b>Are you Doctor</b> <Link to="/signupclinic"> click here</Link> </h5>
+           <h5><b>Are you Patient?</b>  <Link to="/signuppatient"> click here</Link></h5>
+                  {/* <Link to={'/signup'}>
                     <button className="btn btn-outline-dark btn-lg">
                         <span className="mr-2">signup</span>
                         <i className="fa fa-angle-right"></i>
                     </button>
-                </Link>
+                </Link> */}
            </form>          
            
            </body>

@@ -68,7 +68,7 @@ class TempPage extends Component {
 
 
   render() {
-      console.log(this.state.bookSlot)
+      console.log(this.state.bookSlot);
       console.log(' in temp page doctor key '+  this.props.computedMatch.params.id);
       console.log('in temppage patient key '+this.props.patientId);
     /*  Props of doctorName and other doctor details  will be send by Parent Page */

@@ -100,6 +100,8 @@ export class Signupdoc extends Component {
         firebase.database().ref('list').child(user).set({
           type:'doctor'
         })
+        alert("Signup completed");
+        this.props.history.push('/');
     }
       }
         )
