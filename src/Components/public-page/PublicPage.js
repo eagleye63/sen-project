@@ -1,5 +1,5 @@
 import React ,{PureComponent} from 'react';
-import SignupPage from './SignUpPage';
+//import SignupPage from './SignUpPage';
 import '../../Style/PublicPage.css';
 import Button from 'react-bootstrap/Button';
 import { Form } from 'react-bootstrap';

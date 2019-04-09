@@ -8,7 +8,12 @@ var config = {
     messagingSenderId: "203541944840"
   };
   
-  firebase.initializeApp(config);
-  var db=firebase.firestore();
+  // firebase.initializeApp(config);
+  // var db=firebase.firestore();
   //db.setting({timestampsInSnapshots:true});
-export default firebase;
+
+//   if (!firebase.apps.length) {
+//     firebase.initializeApp({});
+// }
+// export default firebase;
+export default !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
