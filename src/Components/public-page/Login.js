@@ -37,7 +37,7 @@ import Stylee from './Stylee.css'
            <Label className="email" sm={3}><b>Email:</b></Label> 
            <Col sm={5}  >
            <Input type="text" placeholder="Enter Email" name="email" onChange={this.props.handleChage}
-            value={this.props.email} required   style={{marginLeft:1}}/><hr/>
+            value={this.props.email} required   style={{backgroundColor:'white',marginLeft:1}}/><hr/>
             </Col>
            </FormGroup> 
            
@@ -46,7 +46,7 @@ import Stylee from './Stylee.css'
            <Label className="psw"  sm={3}><b>Password:</b></Label>
            <Col sm={5}>
            <Input type="password" placeholder="Enter Password" name="password" onChange={this.props.handleChage}
-            value={this.props.password} style={{marginLeft:3}} required/><hr/>
+            value={this.props.password}  required style={{backgroundColor:'white',marginLeft:3,border: 3 }}/><hr/>
             </Col>
            </FormGroup>
            </div>
