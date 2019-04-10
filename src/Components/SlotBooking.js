@@ -1,14 +1,8 @@
 import React, { Component } from "react";
-
-//import "./DoctorDescription.css";
+import "./DoctorDescription.css";
 import PropTypes from "prop-types";
-import firebase from '../../config/configuration'
-//import firebase from './firebase'
-//import "./SlotBooking.scss";
-
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import firebase from '../config/configuration';
+import "./SlotBooking.scss";
 
 
 class SlotBooking extends Component {
@@ -81,7 +75,7 @@ class SlotBooking extends Component {
         if(isInBreak || alreadyBooked)
         {
             //booked
-            this.rows.push(<button key={i} type="button" className="btn btn-outline-danger" data-key={i} data-id="Booked" onClick={this.giveErrorPrompt}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
+            this.rows.push(<button key={i} className="bookbutton" data-key={i} data-id="Booked" onClick={this.giveErrorPrompt}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
             tempvar++;
             if(tempvar%3==0)
             {
@@ -92,7 +86,7 @@ class SlotBooking extends Component {
         else
         {
             //not booked
-            this.rows.push(<button key={i} type="button" className="btn btn-outline-success" data-key={i} data-id="notBooked" data-value={currentHour+":"+currentMinute +" "+ NextHour+":"+NextMinute} onClick={this.bookThisSlot}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
+            this.rows.push(<button key={i} className="notbookbutton" data-key={i} data-id="notBooked" onClick={this.bookThisSlot}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
             tempvar++;
             if(tempvar%3==0)
             {
@@ -130,8 +124,6 @@ class SlotBooking extends Component {
       if(wantToBook)
       {
           var index=event.target.dataset.key;
-          var timeofbook=event.target.dataset.value;
-          console.log('hello world  time book is '+timeofbook)
           var newString=this.state.slots.substring(0,index)+'1'+this.state.slots.substring(parseInt(index,10)+1);
           this.patient_booking[index]=this.patientId;
           console.log(newString);
@@ -142,45 +134,7 @@ class SlotBooking extends Component {
         const clinic=firebase.database().ref('clinic').child('navkar12 gmail com').child("date").child(this.dateString);
        clinic.update({slot_string:this.state.slots});
        clinic.update({patient_booking:this.patient_booking}); //updates booking info
-
-       //adding clinic details to patient's current appointment
-        const patient=firebase.database().ref('patient').child(this.patientId).child("current_appointment");
-        patient.once("value").then(snapshot=>{
-        const val=snapshot.val();
-          let max1=snapshot.child('max').val();
-          if(!max1)
-          max1=0;
-          max1=parseInt(max1)+1;
-          patient.child(max1).set({
-            clinic:this.props.doctorName,
-            date:this.dateString,
-            slot_time:timeofbook,
-
-          })
-          patient.update({
-            max:max1,
-          })
-
-
-       /*  this.clinicforupdate=val.clinic;
-        this.dateforupdate=val.date;
-        this.slot_numberforupdate=val.slot_number;
-        //promise in firebase to modify only after reading full data
-        console.log(this.clinicforupdate+"  "+this.dateforupdate+"  "+this.slot_numberforupdate);
-        this.clinicforupdate=this.clinicforupdate+this.props.doctorName;
-        this.dateforupdate=this.dateforupdate+this.dateString;
-        this.slot_numberforupdate=this.slot_numberforupdate+""+index;
-        patient.update({clinic:this.clinicforupdate});
-        patient.update({date:this.dateforupdate});
-        patient.update({slot_number:this.slot_numberforupdate+""+index});
-        console.log(this.clinicforupdate+"  "+this.dateforupdate+"  "+this.slot_numberforupdate);*/
-
-        });
-   
-        
-
-
-       // ROUTE TO NEXT PAGE FROM HERE
+       // route to next Page from here
       })
       }
   }
@@ -230,7 +184,7 @@ class SlotBooking extends Component {
     return (
       <div> 
         {/*  Props of doctorName and other doctor details  will be send by Parent Page */}
-        <div >
+        <div class="wrapper">
           <h2 align="center">{this.props.doctorName}</h2>
           <p> Enter the specialities of Doctor here</p>
         </div>
@@ -242,8 +196,8 @@ class SlotBooking extends Component {
           this.rows.map(row=>row)
         }
         </div>
-        <button type="button" className="btn btn-outline-success">Booked</button>
-        <button type="button" className="btn btn-outline-danger">Not Booked</button>
+      <button className="infobook">Booked</button>
+      <button className="infonotbook">Not Booked</button>
       </div>
     );
   }

@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react'
-
-import SlotBooking from './slotbooking';
-
+import SlotBooking from './SlotBooking';
 import TempPage from './TempPage'
-import firebase from '../../config/configuration'
+import firebase from './firebase'
 
  class SendProps extends PureComponent {
 
@@ -26,11 +24,9 @@ import firebase from '../../config/configuration'
            console.log(child.val().area) //will print details of clinic
          })
         });
+
         */
-
-      let patients=firebase.database().ref('/clinic').child(this.props.doctorName+"");
-
-     
+      let patients=firebase.database().ref('/clinic').child("navkar12 gmail com");
     patients.on("value",snapshot=>{
         const val=snapshot.val();
         this.workingtime=val.working_time;
@@ -42,8 +38,7 @@ import firebase from '../../config/configuration'
             });
         });
       console.log(this.dateString);
-
-      patients=firebase.database().ref('/clinic').child(this.props.doctorName+"").child("date").child(this.dateString);
+      patients=firebase.database().ref('/clinic').child("navkar12 gmail com").child("date").child(this.dateString);
       patients.on("value",snapshot=>{
         const val=snapshot.val();
         this.patient_booking=val.patient_booking;

@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-
-//import "./DoctorDescription.css";
+import "./DoctorDescription.css";
 import PropTypes from "prop-types";
-import firebase from '../../config/configuration'
-//import firebase from './firebase'
-//import "./SlotBooking.scss";
-
-
+import firebase from './firebase'
+import "./SlotBooking.scss";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -167,6 +163,7 @@ class SlotBooking extends Component {
         this.slot_numberforupdate=val.slot_number;
         //promise in firebase to modify only after reading full data
         console.log(this.clinicforupdate+"  "+this.dateforupdate+"  "+this.slot_numberforupdate);
+
         this.clinicforupdate=this.clinicforupdate+this.props.doctorName;
         this.dateforupdate=this.dateforupdate+this.dateString;
         this.slot_numberforupdate=this.slot_numberforupdate+""+index;
