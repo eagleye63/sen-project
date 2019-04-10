@@ -66,7 +66,7 @@ export class SignUp extends Component {
             password:this.state.password,
             city:this.state.city,
             area:this.state.area,
-            blood_group:this.state.blood_group,
+            blood_group:this.state.blood_group, 
             gender:this.state.gender,
             pincode:this.state.pincode,
             street:this.state.street,
