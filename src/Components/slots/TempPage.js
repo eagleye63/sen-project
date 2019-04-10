@@ -77,7 +77,11 @@ class TempPage extends Component {
         { !this.state.bookSlot && 
         <div>
         <div>
+
           <h2 align="center">{this.props.computedMatch.params.id}</h2>
+
+   
+
           <p> Enter the specialities of Doctor here</p>
           <br></br>
         </div>
@@ -93,7 +97,11 @@ class TempPage extends Component {
         </div>
         } 
         <div>
+
         { this.state.bookSlot && <SendProps doctorName={this.props.computedMatch.params.id} patientId={this.props.patientId} searchDate={this.state.date}/>}
+
+   
+
         </div>
     </div>
     );

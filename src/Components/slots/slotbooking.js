@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+
 //import "./DoctorDescription.css";
 import PropTypes from "prop-types";
 import firebase from '../../config/configuration'
 //import firebase from './firebase'
 //import "./SlotBooking.scss";
+
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 

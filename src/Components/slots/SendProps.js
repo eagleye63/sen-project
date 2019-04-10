@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react'
+
 import SlotBooking from './slotbooking';
+
 import TempPage from './TempPage'
 import firebase from '../../config/configuration'
 
@@ -25,7 +27,10 @@ import firebase from '../../config/configuration'
          })
         });
         */
+
       let patients=firebase.database().ref('/clinic').child(this.props.doctorName+"");
+
+     
     patients.on("value",snapshot=>{
         const val=snapshot.val();
         this.workingtime=val.working_time;
@@ -37,6 +42,7 @@ import firebase from '../../config/configuration'
             });
         });
       console.log(this.dateString);
+
       patients=firebase.database().ref('/clinic').child(this.props.doctorName+"").child("date").child(this.dateString);
       patients.on("value",snapshot=>{
         const val=snapshot.val();
