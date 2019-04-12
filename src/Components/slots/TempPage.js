@@ -73,22 +73,17 @@ class TempPage extends Component {
       console.log('in temppage patient key '+this.props.patientId);
     /*  Props of doctorName and other doctor details  will be send by Parent Page */
     return (
-      <div className="bodypage"> 
+      <div> 
         { !this.state.bookSlot && 
         <div>
         <div>
-
           <h2 align="center">{this.props.computedMatch.params.id}</h2>
-
-   
-
-          <p> Enter the specialities of Doctor here</p>
           <br></br>
         </div>
 
-        <div className="todaytomorrow">
+        <div>
         <button type="button" className="btn btn-primary" onClick={this.onTodayClick}>Today</button>
-        <button id="b5" type="button" className="btn btn-primary" onClick={this.onTomorrowClick}>Tomorrow</button>
+        <button type="button" className="btn btn-primary" onClick={this.onTomorrowClick}>Tomorrow</button>
         </div>
         <Calendar className="calendar" onChange={this.onChange}/> 
        <br></br>
@@ -97,11 +92,7 @@ class TempPage extends Component {
         </div>
         } 
         <div>
-
         { this.state.bookSlot && <SendProps doctorName={this.props.computedMatch.params.id} patientId={this.props.patientId} searchDate={this.state.date}/>}
-
-   
-
         </div>
     </div>
     );
