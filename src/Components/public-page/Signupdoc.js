@@ -94,6 +94,7 @@ export class Signupdoc extends Component {
             clinicfees:this.state.clinicfees,
             doctor:this.state.doctor,
             workingtime:workingtime1,
+            breaktime:'',
             workingdays:workingdays1
         
         })

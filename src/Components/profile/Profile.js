@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import NavigationBar from '../navigationbar';
 import firebase from '../../config/configuration';
+import Edit from './Edit';
 
 class Profile extends Component{
     constructor(props){
@@ -15,7 +16,11 @@ class Profile extends Component{
             gender:'',
             phone:'',
             street:'',
-            pincode:''
+            pincode:'',
+            slot_time:'',
+            iseditopen:false,
+            alldata:''
+
         }
     }
     componentDidMount(){
@@ -39,16 +44,61 @@ class Profile extends Component{
                 gender:snapshot.val().gender,
                 street:snapshot.val().street,
                 pincode:snapshot.val().pincode,
-                phone:snapshot.val().phone
+                phone:snapshot.val().phone,
+                slot_time : snapshot.val().slot_time,
+                workingtime:snapshot.val().workingtime,
+                breaktime:snapshot.val().breaktime,
+                alldata :snapshot.val()
 
             })
         })
     }
+    openedit=()=>{
+        this.setState({
+            iseditopen :true
+        })
 
+    }
+    closeedit=()=>{
+        this.setState({
+            iseditopen:false
+        })
+    }
+    postedit=(filledform)=>{
+        this.setState({
+            iseditopen :false
+        })
+        console.log('name'+filledform.name);
+        console.log('name'+filledform.email);
+        console.log('name'+filledform.password);
+        let updateprofile=firebase.database().ref('clinic').child(this.props.id).update({
+            //name:filledform.name,
+            email:filledform.email,
+            password:filledform.password,
+            age:filledform.age,
+            phone:filledform.phone,
+            city:filledform.city,
+            pincode:filledform.pincode,
+            area:filledform.area,
+           // blood_group:filledform.blood_group,
+           workingtime:filledform.workingtime,
+           breaktime:filledform.breaktime,
+            street:filledform.street,
+            slot_time:filledform.slot_time
+
+        });
+
+
+
+
+    }
 
     render(){
         const {key}=this.props;
         console.log('i am in profile '+this.props.id.name);
+        console.log(typeof this.state.workingtime);
+        console.log(this.state.workingtime);
+        console.log(this.state);
         return(
             <React.Fragment>
                 <NavigationBar/>
@@ -91,8 +141,16 @@ class Profile extends Component{
                                 <td> <strong>City</strong></td>
                                 <td> {this.state.city} </td>
                             </tr>
+                            {
+                                this.props.user ==='clinic' ? 
+                                <tr>
+                                    <td> <strong>Slot_time</strong></td>
+                                <td> {this.state.slot_time} </td>
+                                </tr>
+                                : ''
+                            }
                             
-                            
+                            <button  onClick={this.openedit} >EDIT</button>
                              
                         </tbody>
                     </table>
@@ -101,6 +159,11 @@ class Profile extends Component{
                         onClick={props.changeIsEdit}>
                         Edit
                     </button> */}
+                    {
+                        this.state.iseditopen &&
+                        <Edit open={this.state.iseditopen} close={this.closeedit}
+                         submitedit={this.postedit} alldata={this.state.alldata}/>
+                    }
                 </div>
             </div>
             

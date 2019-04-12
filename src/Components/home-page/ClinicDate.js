@@ -7,10 +7,11 @@ import { FormControl } from 'react-bootstrap';
 import { Spinner, Col, Button, Form, FormGroup, Label, Input, FormText, Container } from 'reactstrap';
 //import './Clin.css'
 import { CardBody, Card } from 'reactstrap';
-import firebase from '../../config/configuration';
+import firebase from './../../config/configuration';
 import FlipMove from "react-flip-move";
 import Clinic from './Clinic';
 import DatePicker from "react-datepicker";
+import NavigationBar from './../navigationbar';
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -34,36 +35,17 @@ class ClinicDate extends Component {
             actualdate:actualdate,
             refresher:!this.state.refresher
         });
+        
     }
-
-
+    
+    
     render() {
       let propdate = this.state.actualdate;
 
         return (
           <div>
-            <Navbar
-              bg="primary"
-              className="bg-primary justify-content-between"
-              expand="lg"
-              sticky="tops"
-              variant="dark"
-            >
-              <Navbar.Brand href="#home">
-                <h5>Clinic Name</h5>
-              </Navbar.Brand>
-              <Nav className="mr-auto">
-                <Nav.Link href="#home">
-                  <h5>Home</h5>
-                </Nav.Link>
-                <Nav.Link href="#features">
-                  <h5>Features</h5>
-                </Nav.Link>
-                <Nav.Link href="#pricing">
-                  <h5>Pricing</h5>
-                </Nav.Link>
-              </Nav>
-              <form class="form-inline">
+            
+            <form class="form-inline">
                 <input
                   type=""
                   id="email"
@@ -73,19 +55,18 @@ class ClinicDate extends Component {
                 />
                 <button type="submit">Search</button>
               </form>
-            </Navbar>
 
             <h2>List Of Appointments</h2>
-
+           
               <label>
                 <b>DATE: </b>
               </label>
             <DatePicker selected={this.state.startDate}
                         onChange={this.handleChange}/>
+             
+          
 
-
-
-            <Clinic date={propdate} clinic={this.props.id} refresh={this.state.refresher} ></Clinic> 
+            <Clinic date={propdate} clinic={'navkar12 gmail com'} refresh={this.state.refresher} ></Clinic> 
           </div>
         );
     }

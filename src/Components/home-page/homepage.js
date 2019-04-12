@@ -86,8 +86,8 @@ class Home extends React.Component{
 
             <React.Fragment>
                 <NavigationBar/>
-                <h1>Thsi is home page</h1>
-                {
+                <h1>Thsi is home page </h1>
+                {       
                     this.props.user==='patient' ?
                     <div>
                     <Link to={'/currappoitment'}>

@@ -3,6 +3,7 @@ import firebase from '../../config/configuration';
 import { Col,Button, Form, FormGroup, Label, Input, FormText ,Container} from 'reactstrap';
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
+
 import Stylee from './Stylee.css'
 export class SignUp extends Component {
     constructor(props) {
@@ -73,7 +74,7 @@ export class SignUp extends Component {
             label:'patient'
         })
 
-        firebase.database().ref('blood group').child(this.state.blood_group)
+        firebase.database().ref('blood group').child(this.state.blood_group) 
         .child(user).set({
           num:0
         });
@@ -101,175 +102,112 @@ export class SignUp extends Component {
     
   render() {
     return (
-
-      <MDBContainer>
-      <MDBRow>
-        <MDBCol md="10">
-          <form onSubmit={this.Signup} style={{paddingRight:10,paddingLeft:10}} className="container">
-            <p className="h4 text-center mb-4" style={{marginTop:'10%'}}>Sign up for Patient</p>
-            <p className="h5 text-center mb-5">Please fill the sign up details</p>
-            <Label htmlFor="email">Email:</Label>
-            
-            <Input type="text" placeholder="Enter Email" name="email" onChange={this.handleChage}
-             value={this.state.email} required style={{background:'white'}}/><hr/>
-            <Label htmlFor="psw">Password:</Label>
-            <Input type="password" placeholder="Enter Password" name="password" onChange={this.handleChage}
-             value={this.state.password} required style={{background:'white'}}/><hr/>
-             <Label htmlFor="name" >Name:</Label>
-            <Input type="text" placeholder="Enter Name" name="name" onChange={this.handleChage}
-            value={this.state.name} required style={{background:'white'}}/><hr/>
-            <Label htmlFor="age" >Age:</Label>
-            <Input type="number"  name="age" onChange={this.handleChage}
-            value={this.state.age} placeholder="Enter Age" required style={{background:'white',fontSize:12,padding:10,height:30}}/><hr/>
-            <Label htmlFor="street">Street:</Label>
-            <Input type="text" placeholder="Enter Street" name="street" onChange={this.handleChage}
-            value={this.state.street} required style={{background:'white'}}/><hr/>
-            <Label htmlFor="area">Area:</Label>
-            <Input type="text" placeholder="Enter Area" name="area" onChange={this.handleChage} 
-            value={this.state.area} required style={{background:'white'}}/><hr/>
-            <Label htmlFor="city" >City:</Label>
-            <Input type="text" placeholder="Enter City" name="city" onChange={this.handleChage}
-            value={this.state.city} required style={{background:'white'}}/><hr/>
-
-            <Label htmlFor="pincode">Pincode:</Label>
-            <Input type="text" placeholder="Enter Pincode" name="pincode" onChange={this.handleChage}
-            value={this.state.pincode} required style={{background:'white'}}/><hr/>
-            
-            <Label htmlFor="blood_group">Blood Group:</Label>
-            <Input type="text" placeholder="Enter Blood group" name="blood_group" onChange={this.handleChage}
-             value={this.state.blood_group} required style={{background:'white'}}/><hr/>
-             <Label htmlFor="gender">Gender:</Label>
-            <Input type="text" placeholder="Enter Gender" name="gender" onChange={this.handleChage}
-            value={this.state.gender} required style={{background:'white'}}/><hr/>
-            
-            <Label htmlFor="phone">Phone:</Label>
-            <Input type="number" placeholder="Enter Phone Number" name="phone" onChange={this.handleChage}
-            value={this.state.phone} required style={{background:'white',padding:10,height:30,fontSize:12}}/><hr/>
-              <div className="text-center mt-4">
-              <MDBBtn color="primary" type="submit">
-                Register
-              </MDBBtn>
-            </div>
-          </form>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
-
-
-
-
-
-
-
-
-
-
-    //   <div  className="BACK">
-    //    <form  onSubmit={this.Signup}  className='container'>
-    //     {/* <div className="Container" color="red" > */}
-    //     <div>
+      <div  className="BACK">
+       <form  onSubmit={this.Signup}  className='container'>
+        {/* <div className="Container" color="red" > */}
+        <div>
       
-    //         <h1>Sign Up</h1>
-    //         <p>Please fill in this form to create an account.</p>
-    //         <hr/>
-    //         <FormGroup row>
-            // <Label htmlFor="email" sm={1}><b>Email:</b></Label>
-            // <Col sm={8}>
-            // <Input type="text" placeholder="Enter Email" name="email" onChange={this.handleChage}
-            //  value={this.state.email} required/><hr/>
-            //  </Col>
-    //         </FormGroup>
+            <h1>Sign Up</h1>
+            <p>Please fill in this form to create an account.</p>
+            <hr/>
+            <FormGroup row>
+            <Label htmlFor="email" sm={1}><b>Email:</b></Label>
+            <Col sm={8}>
+            <Input type="text" placeholder="Enter Email" name="email" onChange={this.handleChage}
+             value={this.state.email} required/><hr/>
+             </Col>
+            </FormGroup>
 
-    //         <FormGroup row>
-            // <Label htmlFor="psw"  sm={1}><b>Password:</b></Label>
-            // <Col sm={8}>
-            // <Input type="password" placeholder="Enter Password" name="password" onChange={this.handleChage}
-            //  value={this.state.password} required/><hr/>
-    //          </Col>
-    //         </FormGroup>
+            <FormGroup row>
+            <Label htmlFor="psw"  sm={1}><b>Password:</b></Label>
+            <Col sm={8}>
+            <Input type="password" placeholder="Enter Password" name="password" onChange={this.handleChage}
+             value={this.state.password} required/><hr/>
+             </Col>
+            </FormGroup>
 
-    //         <FormGroup row>
-            // <Label htmlFor="name" sm={1}><b>Name:</b></Label>
-            // <Col sm={8}>
-            // <Input type="text" placeholder="Enter Name" name="name" onChange={this.handleChage}
-            // value={this.state.name} required style={{background:'white'}}/><hr/>
-    //         </Col>
-    //         </FormGroup>
+            <FormGroup row>
+            <Label htmlFor="name" sm={1}><b>Name:</b></Label>
+            <Col sm={8}>
+            <Input type="text" placeholder="Enter Name" name="name" onChange={this.handleChage}
+            value={this.state.name} required/><hr/>
+            </Col>
+            </FormGroup>
 
-    //         <FormGroup row>
-            // <Label htmlFor="age" sm={1}><b>Age:</b></Label>
-            // <Col sm={8}>
-            // <Input type="number"  name="age" onChange={this.handleChage}
-            // value={this.state.age} placeholder="age" required style={{background:'white'}}/><hr/>
-    //         </Col>
-    //         </FormGroup>
+            <FormGroup row>
+            <Label htmlFor="age" sm={1}><b>Age:</b></Label>
+            <Col sm={8}>
+            <Input type="number"  name="age" onChange={this.handleChage}
+            value={this.state.age} placeholder="age" required/><hr/>
+            </Col>
+            </FormGroup>
 
-    //         <FormGroup row>
-            // <Label htmlFor="area" sm={1}><b>Area:</b></Label>
-            // <Col sm={8}>
-            // <Input type="text" placeholder="Enter Area" name="area" onChange={this.handleChage} 
-            // value={this.state.area} required style={{background:'white'}}/><hr/>
-    //         </Col>
-    //         </FormGroup>
+            <FormGroup row>
+            <Label htmlFor="area" sm={1}><b>Area:</b></Label>
+            <Col sm={8}>
+            <Input type="text" placeholder="Enter Area" name="area" onChange={this.handleChage} 
+            value={this.state.area} required/><hr/>
+            </Col>
+            </FormGroup>
 
-    //         <FormGroup row>
-            // <Label htmlFor="blood_group" sm={1}><b>Blood Group:</b></Label>
-            // <Col sm={8}>
-            // <Input type="text" placeholder="Enter Blood group" name="blood_group" onChange={this.handleChage}
-            //  value={this.state.blood_group} required style={{background:'white'}}/><hr/>
-    //          </Col>
-    //           </FormGroup>
+            <FormGroup row>
+            <Label htmlFor="blood_group" sm={1}><b>Blood Group:</b></Label>
+            <Col sm={8}>
+            <Input type="text" placeholder="Enter Blood group" name="blood_group" onChange={this.handleChage}
+             value={this.state.blood_group} required/><hr/>
+             </Col>
+              </FormGroup>
 
-    //         <FormGroup row>
-            // <Label htmlFor="city" sm={1}><b>City:</b></Label>
-            // <Col sm={8}>
-            // <Input type="text" placeholder="Enter City" name="city" onChange={this.handleChage}
-            // value={this.state.city} required style={{background:'white'}}/><hr/>
-            // </Col>
-    //         </FormGroup>
+            <FormGroup row>
+            <Label htmlFor="city" sm={1}><b>City:</b></Label>
+            <Col sm={8}>
+            <Input type="text" placeholder="Enter City" name="city" onChange={this.handleChage}
+            value={this.state.city} required/><hr/>
+            </Col>
+            </FormGroup>
 
-    //         <FormGroup row>
-            // <Label htmlFor="gender" sm={1}><b>Gender:</b></Label>
-            // <Col sm={8}>
-            // <Input type="text" placeholder="Enter Gender" name="gender" onChange={this.handleChage}
-            // value={this.state.gender} required style={{background:'white'}}/><hr/>
-    //         </Col>
-    //         </FormGroup>
+            <FormGroup row>
+            <Label htmlFor="gender" sm={1}><b>Gender:</b></Label>
+            <Col sm={8}>
+            <Input type="text" placeholder="Enter Gender" name="gender" onChange={this.handleChage}
+            value={this.state.gender} required/><hr/>
+            </Col>
+            </FormGroup>
 
-    //         <FormGroup row>
-            // <Label htmlFor="phone" sm={1}><b>Phone:</b></Label>
-            // <Col sm={8}>
-            // <Input type="number" placeholder="Enter Phone Number" name="phone" onChange={this.handleChage}
-            // value={this.state.phone} required style={{background:'white'}}/><hr/>
-    //         </Col>
-    //         </FormGroup>
+            <FormGroup row>
+            <Label htmlFor="phone" sm={1}><b>Phone:</b></Label>
+            <Col sm={8}>
+            <Input type="number" placeholder="Enter Phone Number" name="phone" onChange={this.handleChage}
+            value={this.state.phone} required/><hr/>
+            </Col>
+            </FormGroup>
 
-    //         <FormGroup row>
-            // <Label htmlFor="pincode" sm={1}><b>Pincode:</b></Label>
-            // <Col sm={8}>
-            // <Input type="text" placeholder="Enter Pincode" name="pincode" onChange={this.handleChage}
-            // value={this.state.pincode} required style={{background:'white'}}/><hr/>
-    //         </Col>
-    //         </FormGroup>
+            <FormGroup row>
+            <Label htmlFor="pincode" sm={1}><b>Pincode:</b></Label>
+            <Col sm={8}>
+            <Input type="text" placeholder="Enter Pincode" name="pincode" onChange={this.handleChage}
+            value={this.state.pincode} required/><hr/>
+            </Col>
+            </FormGroup>
 
-    //         <FormGroup row>
-            // <Label htmlFor="street" sm={1}><b>Street:</b></Label>
-            // <Col sm={8}>
-            // <Input type="text" placeholder="Enter Street" name="street" onChange={this.handleChage}
-            // value={this.state.street} required style={{background:'white'}}/><hr/>
-    //         </Col>
-    //         </FormGroup>
+            <FormGroup row>
+            <Label htmlFor="street" sm={1}><b>Street:</b></Label>
+            <Col sm={8}>
+            <Input type="text" placeholder="Enter Street" name="street" onChange={this.handleChage}
+            value={this.state.street} required/><hr/>
+            </Col>
+            </FormGroup>
 
-    //        {/* <div className="clearfix">
-    //         {/* <button type="button" class="cancelbtn">Cancel</button> */}
-    //         <Button type="submit" className="btn55" color='primary'   >Sign Up</Button>
-    //         <br/><br/><br/>
+           {/* <div className="clearfix">
+            {/* <button type="button" class="cancelbtn">Cancel</button> */}
+            <Button type="submit" className="btn55" color='primary'   >Sign Up</Button>
+            <br/><br/><br/>
             
             
-    //         </div>
-    // </form>
+            </div>
+    </form>
     
-    //   </div>
+      </div>
     )
   }
 }

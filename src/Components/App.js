@@ -20,6 +20,7 @@ import Signuppagepat from './public-page/SignUp'
 import Clinicdate from './home-page/ClinicDate';
 import TempPage from './slots/TempPage';
 import Precripation from './Precripaton/History';
+import ExeRedirect from './profile/ExeRedirect';
 
 export const Context = React.createContext();
 
@@ -177,6 +178,7 @@ class App extends React.PureComponent{
                         component={Reviappo} />
                         <AuthorizedRoute permission={true} path="/Myprofile" exact strict 
                         component={Profile} user={this.state.user} id={this.state.key} />
+                        
 
                     {/* <Route render={() => <Redirect to='/'/>}/>                   
                     <Route render={() => <Redirect to='/'/>}/> */}

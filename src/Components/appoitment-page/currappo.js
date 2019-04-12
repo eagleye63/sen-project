@@ -39,6 +39,9 @@ import firebase from '../../config/configuration';
                     appointmentlist : arr
     
                 })
+                }else{
+                    // console.log('dsdsdd  '+child1.key);
+                    // console.log('dsdsdd  '+child1.val());
                 }
             })
           
@@ -134,7 +137,7 @@ import firebase from '../../config/configuration';
 
                {/*  <h1>current appoitment{this.state.clinickey} </h1>
                  <h1>current appoitment clinic name   {this.state.clinicname} </h1> */
-         }
+               }
 
              </div>
          )
