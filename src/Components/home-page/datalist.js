@@ -7,6 +7,7 @@ import AuthorizedComponent from '../AuthorizedComponent';
 import AuthorizedRoute from '../AuthorizedRoute';
 import { withRouter } from 'react-router-dom';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
+import { MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
 class Datalist extends  React.PureComponent{
     constructor(props){
         super(props);
@@ -52,6 +53,9 @@ redirect(data){
         // console.log('i am in data list '+ user);
         // co console.log('i am in data list '+ user);
         // console.log('datalist'+this.props.data);
+
+        var link='https://www.google.com/maps/place/Nidhi+Multispeciality+Hospital/@23.0401044,72.5592146,17z/data=!3m1!4b1!4m15!1m7!3m6!1s0x395e84f521640d4b:0x6853ee97a9a2996b!2sNavrangpura,+Ahmedabad,+Gujarat!3b1!8m2!3d23.0365437!4d72.5611395!3m6!1s0x395e848c996426c3:0x915350ab1da7fe78!8m2!3d23.0400999!4d72.5614035!9m1!1b1'
+
         return(
             <div>
                 <div className='list-group'>
@@ -59,24 +63,45 @@ redirect(data){
                         data.length !==0
                         ? _.map(data,(data,i)=>{
                             return(
-                                <div className='list-group' key={data.key}>
-                                <div className='list-group-item'>
-                                <h2 >{data.clinicname}</h2>
-                                <h3>Doctor Name: {data.name}</h3> 
-                                <h3>Specialist: {data.specialist}</h3>
-                                <h3>Gender: {data.gender}</h3>
-                                <h3>Age: {data.doctorkey}</h3>
 
-                                <h4>{data.area}, {data.city}</h4>
+                                <form style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
+                                <div className='list-group' key={data.key} style={{border:"3px solid grey"}}>
+                                <div className='list-group-item' style={{backgroundColor:'#f1f1f1'}}>
+                                <h2 style={{textAlign:"center"}}>{data.clinicname}</h2>
+                                <h4 style={{marginTop:"5%"}}><b>Doctor Name: </b>{data.name}</h4> 
+                                <h4><b>Specialist: </b>{data.specialist}</h4>
+                                <h4><b>Gender: </b>{data.gender}</h4>
+                                <h4><b>Age: </b>{data.doctorkey}</h4>
+
+
+                                <h4><b>Area: </b>{data.area} </h4>
+                                <h4><b>City: </b>{data.city}</h4>
                                 {/* <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path="/slotbook" exact strict 
                                  component={Slotbook} patientId={this.state.key}  />  */}
                                 {/* <AuthorizedComponent
                                     component={Gotoslot} permission={true}  />                                */}
                                  {/* <Link to="/slotbook/john" >go to sloot book</Link>    */}
-                                 <Link to={`/slotbook/${data.doctorkey}`}>go to slot</Link>
+                                <div className="d-flex justify-content-between" style={{marginTop:'5%'}}>
+                                <div className="d-flex justify-content-start">
+                                <form action={link} method="get" target="_blank">
+                                 <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9"}}   >Locate<i style={{marginLeft:'10%'}} className={'fas fa-map-marker-alt'} color="green"/></button>
+                                </form>
+                                 </div>
+                                
+
+                                 <div className="d-flex justify-content-end">
+                                 <Link to={`/slotbook/${data.doctorkey}`} >
+                                    <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>Book an appointment</button>
+                                 </Link>
+                                 </div>
+
+                                 
+
+                                 </div>
                                 
                                 </div>                                
                                 </div>
+                                </form>
                             )
                         })
                         : ''

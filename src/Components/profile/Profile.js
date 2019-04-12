@@ -52,6 +52,7 @@ class Profile extends Component{
         return(
             <React.Fragment>
                 <NavigationBar/>
+                <form className='container'>
             <div className="container">
             <div className="parent">
                 {/* <div className="quick-view" id="avatar_position">
@@ -84,6 +85,10 @@ class Profile extends Component{
                                 <td> {this.state.street} </td>
                             </tr>
                             <tr>
+                                <td> <strong>Blood group</strong></td>
+                                <td> {this.state.boold_group} </td>
+                            </tr>
+                            <tr>
                                 <td> <strong>Area</strong></td>
                                 <td> {this.state.area} </td>
                             </tr>
@@ -96,15 +101,25 @@ class Profile extends Component{
                              
                         </tbody>
                     </table>
+
+                   
+                    
+
                     {/* <button type="button"
                         className="btn btn-outline-primary style-btn"
-                        onClick={props.changeIsEdit}>
+                        onClick={this.props.changeIsEdit}>
                         Edit
                     </button> */}
                 </div>
             </div>
             
         </div>
+        <div className="d-flex justify-content-sm-end" style={{marginTop:'5%'}}>
+                                
+        <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>Edit Profile</button>
+        </div>
+        
+        </form>
         </React.Fragment>
         )
     }
