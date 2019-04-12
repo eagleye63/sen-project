@@ -9,6 +9,9 @@ import {BrowserRouter as Router, Redirect, Route, Switch,Link} from "react-route
 import AuthorizedComponent from '../AuthorizedComponent';
 import Clinicdate from './ClinicDate';
 import { CLIENT_RENEG_LIMIT } from 'tls';
+
+
+import { MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
 class Home extends React.Component{
     constructor(props){
         super(props);
@@ -84,24 +87,51 @@ class Home extends React.Component{
     //    console.log('home-page i am '+user);
         return(
 
-            <React.Fragment>
-                <NavigationBar/>
-                <h1>Thsi is home page </h1>
-                {       
+            <React.Fragment >
+                
+                {
+
                     this.props.user==='patient' ?
-                    <div>
-                    <Link to={'/currappoitment'}>
-                    <button className="btn btn-outline-dark btn-lg">
-                        <span className="mr-2">Current Appoitment</span>
+                    <div >
+
+                    
+                    <NavigationBar/>
+
+
+
+
+                    {/* <div className="h-100 d-inline-block">
+                    
+                    <MDBNav className="nav-pills" color="black">
+                        <MDBNavItem>
+                            <MDBNavLink active to="#!"><i className={"fa fa-home"} style={{marginRight:'5px'}}/>Home</MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBNavLink  to={'/MyProfile'}><i className={"fa fa-user"} style={{marginRight:'5px'}}/>Profile</MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBNavLink to={'/prescription'}><i className={"fa fa-cog"} style={{marginRight:'5px'}}/>Prescription</MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBNavLink disabled to="#!"><i className={"fa fa-logout"} style={{marginRight:'5px'}}/>Logout</MDBNavLink>
+                        </MDBNavItem>
+                        </MDBNav>                
+                    </div> */}
+
+                    <div className="d-flex justify-content-start">
+                    <Link to={'/currappoitment'} style={{marginRight:"3%",marginTop:"2%"}} >
+                    <button className="btn btn-outline-dark btn-lg" style={{color:'white',marginRight:'5%'}}>
+                        <span className="mr-2" >Current Appointment</span>
                         <i className="fa fa-angle-right"></i>
                     </button>
                       </Link>
-                     <Link to={'/reviappoitment'}>
-                    <button className="btn btn-outline-dark btn-lg">
-                        <span className="mr-2">Revisit Appoitment</span>
+                     <Link to={'/reviappoitment'} style={{marginTop:"2%"}}>
+                    <button className="btn btn-outline-dark btn-lg" style={{color:'white'}} >
+                        <span className="mr-2">Revisit Appointment</span>
                         <i className="fa fa-angle-right"></i>
                     </button>
                      </Link> 
+                     </div>
                      <AuthorizedComponent   data={this.state.cliniclist}  refresh={this.state.refresh}
                      permission={(this.props.user === 'patient') ? true : false }
                     component={Datalist}  user={this.props.user} id={this.props.id}  /> 

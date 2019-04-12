@@ -2,6 +2,7 @@ import React,{PureComponent} from 'react';
 import {Context} from "./App";
 import {Link,withRouter} from 'react-router-dom';
 import AuthorizedComponent from './AuthorizedComponent';
+import './nav_stylr.css'
 
 function NavLink ({path,text,onClick,className,currPath,icon}){
     // console.log('currPath'+currPath);
@@ -35,7 +36,7 @@ class Navigationbar extends PureComponent{
                             
                         <nav ref={(input) => {
                                 this.input = input
-                        }} className="navbar navbar-expand-lg navbar-dark bg-dark">
+                        }} className="navbar navbar-expand-lg navbar-dark" color='green' style={{position:'-moz-initial',height:'70%'}}>
                             <button className="navbar-toggler" type="button" data-toggle="collapse"
                                             data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
                                             aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +48,7 @@ class Navigationbar extends PureComponent{
                                                  text={"Home"}
                                                  icon='home'
                                                  currPath={this.props.location.pathname}
-                                                 id="home1"/>
+                                                 id="home1" style={{marginRight:'50%'}}/>
                                   {/* <NavLink path={'/myappointment'}
                                                  text={'My Appointment'}
                                                  icon={'medkit'}

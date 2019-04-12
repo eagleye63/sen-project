@@ -83,3 +83,7 @@ h5{
 .linking:hover {
   color:blue
 }
+
+.nav-pills{
+    height: 505;
+}
