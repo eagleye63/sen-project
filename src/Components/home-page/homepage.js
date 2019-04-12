@@ -88,14 +88,15 @@ class Home extends React.Component{
         return(
 
             <React.Fragment >
+                <NavigationBar/>
                 
                 {
-
+                    
                     this.props.user==='patient' ?
                     <div >
 
                     
-                    <NavigationBar/>
+                    
 
 
 
