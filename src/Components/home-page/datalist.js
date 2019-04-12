@@ -68,12 +68,14 @@ redirect(data){
                                 <div className='list-group' key={data.key} style={{border:"3px solid grey"}}>
                                 <div className='list-group-item' style={{backgroundColor:'#f1f1f1'}}>
                                 <h2 style={{textAlign:"center"}}>{data.clinicname}</h2>
-                                <h4 style={{marginTop:"5%"}}><b>Doctor Name: </b>{data.name}</h4> 
+                                <h4 style={{marginTop:"5%"}}><b>Doctor Name: </b>{data.doctor}</h4> 
                                 <h4><b>Specialist: </b>{data.specialist}</h4>
+                                <h4><b>Degree: </b>{data.degree}</h4>
                                 <h4><b>Gender: </b>{data.gender}</h4>
-                                <h4><b>Age: </b>{data.doctorkey}</h4>
-
-
+                                <h4><b>Age: </b>{data.age}</h4>
+                                <h4><b>Phone: </b>{data.Phone}</h4>                                
+                                <h4><b>Clinicfees: </b>{data.clinicfees}</h4>
+                                <h4><b>Street: </b>{data.street} </h4>
                                 <h4><b>Area: </b>{data.area} </h4>
                                 <h4><b>City: </b>{data.city}</h4>
                                 {/* <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path="/slotbook" exact strict 

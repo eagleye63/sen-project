@@ -90,15 +90,10 @@ class Home extends React.Component{
             <React.Fragment >
                 <NavigationBar/>
                 
-                {
-                    
+                {                   
                     this.props.user==='patient' ?
                     <div >
-
-                    
-                    
-
-
+                
 
 
                     {/* <div className="h-100 d-inline-block">
@@ -126,12 +121,12 @@ class Home extends React.Component{
                         <i className="fa fa-angle-right"></i>
                     </button>
                       </Link>
-                     <Link to={'/reviappoitment'} style={{marginTop:"2%"}}>
+                     {/* <Link to={'/reviappoitment'} style={{marginTop:"2%"}}>
                     <button className="btn btn-outline-dark btn-lg" style={{color:'white'}} >
                         <span className="mr-2">Revisit Appointment</span>
                         <i className="fa fa-angle-right"></i>
                     </button>
-                     </Link> 
+                     </Link>  */}
                      </div>
                      <AuthorizedComponent   data={this.state.cliniclist}  refresh={this.state.refresh}
                      permission={(this.props.user === 'patient') ? true : false }

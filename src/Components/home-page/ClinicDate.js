@@ -66,7 +66,7 @@ class ClinicDate extends Component {
              
           
 
-            <Clinic date={propdate} clinic={'navkar12 gmail com'} refresh={this.state.refresher} ></Clinic> 
+            <Clinic date={propdate} clinic={this.props.id} refresh={this.state.refresher} ></Clinic> 
           </div>
         );
     }

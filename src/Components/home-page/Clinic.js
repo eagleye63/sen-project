@@ -7,6 +7,7 @@ import firebase from "../../config/configuration";
 import FlipMove from "react-flip-move";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import {Input} from "reactstrap";
+import {Link} from 'react-router-dom';
 
 class Clinic extends Component {
   constructor(props) {
@@ -152,7 +153,9 @@ class Clinic extends Component {
   };
 
   //redirect to prescription page
-  historyhandler = () => {};
+  historyhandler = () => {
+    
+  };
 
   uploadhandler = event => {
     event.preventDefault();
@@ -224,7 +227,7 @@ class Clinic extends Component {
       .once("value")
       .then(snapshot => {
         var a = snapshot.val();
-        var workingarray = a.working_time.split(" ");
+        var workingarray = a.workingtime.split(" ");
         var hourandminit = workingarray[0].split(":");
         starthour = hourandminit[0];
         startminit = hourandminit[1];
@@ -399,7 +402,10 @@ class Clinic extends Component {
           </form>
           {pbar}
           <button className="delete" onClick={this.checkouthandler} id={appointment.id}>CheckOut</button>
-          <button className="history" onClick={this.historyhandler} id={appointment.id}> History </button>
+          {/* <button className="history" onClick={this.historyhandler} id={appointment.id}> History </button> */}
+           <Link to={`/prescription/${appointment.id}`} >
+               <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>See History</button>
+           </Link>
         </div>
       );
       

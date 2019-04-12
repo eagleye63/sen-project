@@ -17,7 +17,20 @@ import FlipMove from "react-flip-move";
 
     componentDidMount=()=>{
        // this.setState({isloading:true});
-       let patient=this.props.patientid;
+       console.log(this.props);
+       let patient;
+        //  this.props.user ?
+        //  patient=this.props.patientid
+        //  : patient=this.props.computedMatch.params.id
+         
+         if(this.props.user==='clinic'){
+          patient =this.props.computedMatch.params.id
+         }else{
+          patient=this.props.patientid
+         }
+       
+       console.log('patientid'+patient)
+       
        firebase.database().ref('storage').child(patient).once('value').then(snapshot=>{
          snapshot.forEach(child1=>{
            if(!child1.val().max)

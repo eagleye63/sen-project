@@ -170,12 +170,12 @@ class App extends React.PureComponent{
                         component={TempPage} patientId={this.state.key}  />
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/currappoitment" exact strict 
                         component={Currappo} patientid={this.state.key} />
-                        <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/reviappoitment" exact strict 
-                        component={Reviappo} />
-                        <AuthorizedRoute permission={true}  path="/prescription" exact strict 
-                        component={Precripation}  patientid={this.state.key} />
-                        <AuthorizedRoute permission={this.state.user === 'clinic' ? true : false } path="/reviappoitment" exact strict 
-                        component={Reviappo} />
+                        <AuthorizedRoute permission={this.state.user === 'patient' ? true : false}  path="/prescription" exact strict 
+                        component={Precripation}  patientid={this.state.key} user={this.state.user} />
+                        <AuthorizedRoute permission={this.state.user === 'clinic' ? true : false } path={"/prescription/:id"} exact strict 
+                        component={Precripation}  user={this.state.user}/>                        
+                    <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path={"/slotbook/:id"}  
+                        component={TempPage} patientId={this.state.key}  />
                         <AuthorizedRoute permission={true} path="/Myprofile" exact strict 
                         component={Profile} user={this.state.user} id={this.state.key} />
                         
