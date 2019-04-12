@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-
 //import "./DoctorDescription.css";
 import PropTypes from "prop-types";
 import firebase from '../../config/configuration'
 //import firebase from './firebase'
 //import "./SlotBooking.scss";
-
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -26,6 +23,7 @@ class SlotBooking extends Component {
     this.patientId=this.props.patientId;
     this.dateString=this.props.dateString;
     this.offsetTime=this.props.offsetTime;
+    this.description=this.props.description;
    this.slotInterval=parseInt(this.slotInterval,10);   
     var arrayWorkingtime = this.workingtime.split(" ");
     var startHour = arrayWorkingtime[0].split(":")[0];
@@ -133,7 +131,8 @@ class SlotBooking extends Component {
           var timeofbook=event.target.dataset.value;
           console.log('hello world  time book is '+timeofbook)
           var newString=this.state.slots.substring(0,index)+'1'+this.state.slots.substring(parseInt(index,10)+1);
-          this.patient_booking[index]=this.patientId;
+          console.log(this.patient_booking);
+        //  this.patient_booking[index]=this.patientId;
           console.log(newString);
       this.setState({
         slots:newString
@@ -141,8 +140,7 @@ class SlotBooking extends Component {
 
         const clinic=firebase.database().ref('clinic').child('navkar12 gmail com').child("date").child(this.dateString);
        clinic.update({slot_string:this.state.slots});
-       clinic.update({patient_booking:this.patient_booking}); //updates booking info
-
+       //clinic.update({patient_booking:this.patient_booking}); //updates booking info
        //adding clinic details to patient's current appointment
         const patient=firebase.database().ref('patient').child(this.patientId).child("current_appointment");
         patient.once("value").then(snapshot=>{
@@ -160,6 +158,9 @@ class SlotBooking extends Component {
           patient.update({
             max:max1,
           })
+
+          clinic.child('patient_booking').child(index).set({id:this.patientId,num:max1});
+
 
 
        /*  this.clinicforupdate=val.clinic;
@@ -232,7 +233,7 @@ class SlotBooking extends Component {
         {/*  Props of doctorName and other doctor details  will be send by Parent Page */}
         <div >
           <h2 align="center">{this.props.doctorName}</h2>
-          <p> Enter the specialities of Doctor here</p>
+          <p> {this.description}</p>
         </div>
         <text className="datestring">Slots for {this.dateString} </text>
         <br></br>
