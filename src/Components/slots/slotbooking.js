@@ -24,6 +24,7 @@ class SlotBooking extends Component {
     this.dateString=this.props.dateString;
     this.offsetTime=this.props.offsetTime;
     this.description=this.props.description;
+    this.willWork=this.willWork;
    this.slotInterval=parseInt(this.slotInterval,10);   
     var arrayWorkingtime = this.workingtime.split(" ");
     var startHour = arrayWorkingtime[0].split(":")[0];

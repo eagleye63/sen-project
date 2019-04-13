@@ -109,19 +109,46 @@ import firebase from '../../config/configuration';
 
      
      render(){
-
+        var link='https://www.google.com/maps/place/Nidhi+Multispeciality+Hospital/@23.0401044,72.5592146,17z/data=!3m1!4b1!4m15!1m7!3m6!1s0x395e84f521640d4b:0x6853ee97a9a2996b!2sNavrangpura,+Ahmedabad,+Gujarat!3b1!8m2!3d23.0365437!4d72.5611395!3m6!1s0x395e848c996426c3:0x915350ab1da7fe78!8m2!3d23.0400999!4d72.5614035!9m1!1b1'
         let print= this.state.clinicdetail.map(obj1=>{
             return (
-            <div>
-            <h2>{obj1.clinicname}</h2>
-            <h2>{obj1.doname}</h2>
-            <h2>{obj1.phone}</h2>
-            <h2>{obj1.area}</h2>
-            <h2>{obj1.date}</h2>
-            <h2>{obj1.slot_time}</h2>
+
+                <div className="d-flex justify-content-center" style={{margintop:'5%'}}>
+                <div className="d-flex justify-content-center" style={{width:'50%',marginLeft:'2%'}}>
+                <form  style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
+                <div className='list-group'  style={{border:"3px solid grey"}}>
+                <div className='list-group-item' style={{backgroundColor:'#f1f1f1'}}>
+                <h3 style={{textAlign:'center'}}><b>{obj1.clinicname}</b></h3>
+                <h4 style={{marginTop:'5%'}}><b>Doctor's Name: </b>{obj1.doname}</h4>
+                <h4><b>Phone number: </b>{obj1.phone}</h4>
+                <h4><b>Area: </b>{obj1.area}</h4>
+                <h4><b>Date: </b>{obj1.date}</h4>
+                <h4><b>Slot Time: </b>{obj1.slot_time}</h4>
+                <div className="d-flex justify-content-start" style={{marginTop:"3%"}}>
+                <div className="d-flex justify-content-start">
+                                <form action={link} method="get" target="_blank">
+                                 <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9"}}>Locate<i style={{marginLeft:'10%'}} className={'fas fa-map-marker-alt'} color="green"/></button>
+                </form>
+                </div>
+                </div>
+                </div>
+                </div>
+
+                </form>
+                </div>
+                </div>
+               
+
+            // {/* // <div>
+            // // <h2>{obj1.clinicname}</h2>
+            // // <h2>{obj1.doname}</h2>
+            // // <h2>{obj1.phone}</h2>
+            // // <h2>{obj1.area}</h2>
+            // // <h2>{obj1.date}</h2>
+            // // <h2>{obj1.slot_time}</h2>
             
-            <br></br>
-            </div>
+            // // <br></br>
+            // // </div> */}
             )});
 
         console.log('currappo key  ' +this.state.clinickey) ; 
@@ -131,10 +158,16 @@ import firebase from '../../config/configuration';
          return(
              this.state.flag  && 
              <div>
-                <NavigationBar/> 
-
+                <NavigationBar/>
+                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-start" style={{marginBottom:'1%'}}>
+                <h3><button className="btn btn" style={{backgroundColor:'#116466',height:'100%',width:'100%',marginBottom:'10%',fontSize:'100%',padding:'1%'}}><b>Current Appointment</b></button></h3>
+                </div>
+                </div>
+                <div style={{marginBottom:'3%'}}>
                 {print}
-
+                </div>
+                
                {/*  <h1>current appoitment{this.state.clinickey} </h1>
                  <h1>current appoitment clinic name   {this.state.clinicname} </h1> */
                }
