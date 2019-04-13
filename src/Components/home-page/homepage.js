@@ -118,8 +118,9 @@ class Home extends React.Component{
                         </MDBNavItem>
                         </MDBNav>                
                     </div> */}
-
-                    <div className="d-flex justify-content-start">
+                    
+                <div className="d-flex justify-content-center" >
+                    <div className="d-flex justify-content-start" style={{width:'30%'}}>
                     <Link to={'/currappoitment'} style={{marginRight:"3%",marginTop:"2%"}} >
                     <button className="btn btn-outline-dark btn-lg" style={{color:'white',marginRight:'5%'}}>
                         <span className="mr-2" >Current Appointment</span>
@@ -132,6 +133,7 @@ class Home extends React.Component{
                         <i className="fa fa-angle-right"></i>
                     </button>
                      </Link> 
+                     </div>
                      </div>
                      <AuthorizedComponent   data={this.state.cliniclist}  refresh={this.state.refresh}
                      permission={(this.props.user === 'patient') ? true : false }
