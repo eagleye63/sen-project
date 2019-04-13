@@ -168,11 +168,11 @@ class Profile extends Component{
                         onClick={this.props.changeIsEdit}>
                         Edit
                     </button> */}
-                    {
+                    {/* {
                         this.state.iseditopen &&
                         <Edit open={this.state.iseditopen} close={this.closeedit}
                          submitedit={this.postedit} alldata={this.state.alldata}/>
-                    }
+                    } */}
                 </div>
             </div>
             

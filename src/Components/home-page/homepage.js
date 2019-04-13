@@ -53,6 +53,16 @@ class Home extends React.Component{
                     currentcliniclist.push({
                         'name':snapshot1.val().name,
                         'age':snapshot1.val().age,
+                        'specialist':snapshot1.val().specialist,
+                        'degree':snapshot1.val().degree,
+                        'doctor':snapshot1.val().doctor,
+                        'clinicname':snapshot1.val().clinicname,
+                        'gender':snapshot1.val().gender,
+                        'Phone':snapshot1.val().phone,
+                        'clinicfees':snapshot1.val().clinicfees,
+                        'street':snapshot1.val().street,
+                        'area':snapshot1.val().area,
+                        'city':snapshot1.val().city,
                         'doctorkey':snapshot1.key
                     })
                  //   console.log(currentcliniclist[currentcliniclist.length-1].age)
@@ -113,8 +123,9 @@ class Home extends React.Component{
                         </MDBNavItem>
                         </MDBNav>                
                     </div> */}
-
-                    <div className="d-flex justify-content-start">
+                    
+                <div className="d-flex justify-content-center" >
+                    <div className="d-flex justify-content-start" style={{width:'30%'}}>
                     <Link to={'/currappoitment'} style={{marginRight:"3%",marginTop:"2%"}} >
                     <button className="btn btn-outline-dark btn-lg" style={{color:'white',marginRight:'5%'}}>
                         <span className="mr-2" >Current Appointment</span>
@@ -127,6 +138,7 @@ class Home extends React.Component{
                         <i className="fa fa-angle-right"></i>
                     </button>
                      </Link>  */}
+                     </div>
                      </div>
                      <AuthorizedComponent   data={this.state.cliniclist}  refresh={this.state.refresh}
                      permission={(this.props.user === 'patient') ? true : false }
