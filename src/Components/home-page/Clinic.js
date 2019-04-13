@@ -130,7 +130,7 @@ class Clinic extends Component {
       current:index
     })
     console.log('filename'+temparr[index].file);
-    let uploadTask = firebase.storage().ref(event.target.id).put(temparr[index].file);
+    let uploadTask = firebase.storage().ref(event.target.id).child(temparr[index].file.name).put(temparr[index].file);
     uploadTask.on("state_changed",this.handleProgress,this.handleUploadError,this.handleUploadSuccess);
   }
 
@@ -143,11 +143,15 @@ class Clinic extends Component {
     let index = this.state.appointments.findIndex(function (element) {
       return element.id == id;
     });
+    let filename1 = (this.state.appointments[index].file).name;
+    let description1 = this.state.appointments[index].description;
+    console.log(this.state.appointments);
     temparr.splice(index, 1);
     this.setState(prevState => {
       prevState["appointments"] = temparr;
       return prevState;
     });
+    this.uploadhandler(id,filename1,description1);
     alert('patient succesfully checked out');
 
   };
@@ -157,12 +161,11 @@ class Clinic extends Component {
     
   };
 
-  uploadhandler = event => {
-    event.preventDefault();
-    let clinic1 = this.props.clinic;
-    let patient = event.target.id;
-    let filename1 = this.state.file;
-    let description1 = this.state.description;
+  uploadhandler = (id,filename1,description1) => {
+    //event.preventDefault();
+    let clinic1 = this.props.clinicname;
+    let patient = id;
+    console.log('id:'+id+'  filename:'+filename1+'  description:'+description1+'  clinic:'+clinic1);
     firebase
       .database()
       .ref("storage")
@@ -220,12 +223,16 @@ class Clinic extends Component {
     var starthour, startminit, slottime;
     var flag = 0;
 
-    firebase
+    let db=firebase
       .database()
       .ref("clinic")
-      .child(clinicname)
-      .once("value")
+      .child(clinicname);
+    if(db)
+    {
+      db.once("value")
       .then(snapshot => {
+        if(snapshot.val()==null)
+        this.setState({isloading:false});
         var a = snapshot.val();
         var workingarray = a.workingtime.split(" ");
         var hourandminit = workingarray[0].split(":");
@@ -297,7 +304,8 @@ class Clinic extends Component {
                           id: j2,
                           file: "",
                           fileuploaded: false,
-                          showprogressbar:false
+                          showprogressbar:false,
+                          description:''
                         });
                       })
                       .then(() => {
@@ -320,6 +328,12 @@ class Clinic extends Component {
             }
           });
       });
+    }
+    else
+    {
+      console.log('hiii i am in else')
+      this.setState({isloading:false});
+    }
   };
 
   //componentdid update for checking changed props in parent

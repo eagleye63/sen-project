@@ -23,7 +23,8 @@ class ClinicDate extends Component {
         this.state = {
           date: new Date(),
           actualdate: new Date().getDate() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getFullYear(),
-          refresher:true
+          refresher:true,
+          clinicname:''
         };
     }
 
@@ -36,6 +37,14 @@ class ClinicDate extends Component {
             refresher:!this.state.refresher
         });
         
+    }
+
+    componentDidMount=()=>{
+      firebase.database().ref('clinic').child(this.props.id).once('value').then(snapshot=>{
+        this.setState({
+          clinicname:snapshot.val().clinicname
+        })
+      })
     }
     
     
@@ -66,7 +75,7 @@ class ClinicDate extends Component {
              
           
 
-            <Clinic date={propdate} clinic={this.props.id} refresh={this.state.refresher} ></Clinic> 
+            <Clinic date={propdate} clinic={this.props.id} clinicname={this.state.clinicname} refresh={this.state.refresher} ></Clinic> 
           </div>
         );
     }
