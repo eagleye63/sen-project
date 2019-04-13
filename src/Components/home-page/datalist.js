@@ -66,7 +66,8 @@ redirect(data){
                         ? _.map(data,(data,i)=>{
                             console.log(data);
                             return(
-
+                                <div className="d-flex justify-content-center">
+                                <div className="d-flex justify-content-center" style={{width:'50%'}}>
                                 <form style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
                                 <div className='list-group' key={data.key} style={{border:"3px solid grey"}}>
                                 <div className='list-group-item' style={{backgroundColor:'#f1f1f1'}}>
@@ -107,6 +108,8 @@ redirect(data){
                                 </div>                                
                                 </div>
                                 </form>
+                                </div>
+                                </div>
                             )
                         })
                         : ''
