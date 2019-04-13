@@ -28,8 +28,8 @@ import { isNull } from 'util';
     let patients=firebase.database().ref('/clinic').child(this.props.doctorName+"");
     patients.on("value",snapshot=>{
         const val=snapshot.val();
-        this.workingtime=val.working_time;
-        this.workingdays=val.working_days;
+        this.workingtime=val.workingtime;
+        this.workingdays=val.workingdays;
         this.willWork=(this.workingdays.charAt(this.dayObject[this.day],1)=='1')?true:false;
         console.log(this.workingdays.substring(this.dayObject[this.day],1)+ "  this will work on "+this.willWork);
         this.slotInterval=val.slot_time;
