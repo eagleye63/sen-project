@@ -15,6 +15,8 @@ import { isNull } from 'util';
       this.getDateString();
       this.dayObject={'Mon':0,'Tue':1,'Wed':2,'Thu':3,'Fri':4,'Sat':5,'Sun':6};
       this.willWork=true;
+      this.timeGone=this.props.timeGone;
+      console.log("time gone is "+this.timeGone)
       this.state= {
           isData1Available:true,
           isData2Available:true,
@@ -46,7 +48,7 @@ import { isNull } from 'util';
         console.log(patients);
       patients.once("value").then(snapshot=>{
         const val=snapshot.val();
-        if(isNull(val))
+        if(isNull(val) && !this.timeGone && this.willWork)
         {
           this.patient_booking=[];
           this.temptime=(this.workingtime);
@@ -79,7 +81,7 @@ import { isNull } from 'util';
                 isData2Available:false
             });
         }
-        else
+        else if(!this.timeGone && this.willWork)
         {
         this.patient_booking=val.patient_booking;
         this.slotsDatabase=val.slot_string;
@@ -88,11 +90,19 @@ import { isNull } from 'util';
               isData2Available:false
           });
         }
+        else
+        {
+          this.setState(
+            {
+                isData2Available:false
+            });
+        }
     });
   }
      
    getDateString = ()=>{
       var str=this.props.searchDate.toDateString();
+    console.log("original string is "+str);
       str=str.split(" ");
       console.log("datestring is "+str);
       this.day=str[0];
@@ -119,6 +129,8 @@ import { isNull } from 'util';
         console.log(this.workingtime);
       console.log(this.slotInterval);
       console.log(this.breaktime);
+      if(this.willWork && !this.timeGone)
+      {
       return (
         <div>
           <SlotBooking doctorName={this.props.doctorName} slotsDatabase={this.slotsDatabase} 
@@ -129,6 +141,38 @@ import { isNull } from 'util';
           />
         </div>
       )
+      }
+      else
+      {
+        if(!this.willWork && this.timeGone)
+        {
+         // console.log("working as expected ........................");
+          return(
+            <div>
+            <h1>Doctor is Having Holiday on {this.day}day, Please try booking on other days</h1>
+            <h1>Current day has gone,Please select appropriate day</h1>
+            </div>
+          )
+        }
+        else if(!this.willWork)
+        {
+          return (
+            <div>
+            <h1>Doctor is Having Holiday on {this.day}day, Please try booking on other days</h1>
+            </div>
+          )
+        }
+        else
+        {
+          return (
+            <div>
+            <h1>Current day has gone,Please select appropriate day</h1>
+            </div>
+          )
+        }
+
+        
+      }
     }
     else
     {
