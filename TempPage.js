@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import "./DoctorDescription.css";
+//import "./DoctorDescription.css";
 //import "./todaytomorrow.css";
-import "./TempPage.scss";
+//import "./TempPage.scss";
 import PropTypes from "prop-types";
-import firebase from './firebase'
+import firebase from '../../config/configuration'
 import Calendar from 'react-calendar';
 import Button from 'react-bootstrap/Button'
-import SlotBooking from "./SlotBooking";
+import SlotBooking from "./jeettmp";
 import SendProps from "./SendProps";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -22,10 +22,12 @@ class TempPage extends Component {
         date:new Date(),
         bookSlot:false,
     });
-    
+    this.timeGone=false;
+
     }
 
     onChange = (date) =>{
+        this.timeGone=date < new Date();
         this.setState({
             date:date
         },()=>{
@@ -34,6 +36,7 @@ class TempPage extends Component {
                 this.setState({
                     date:new Date()
                 });
+                this.timeGone=false;
             }
             console.log('new state is '+this.state.date);
         });
@@ -68,21 +71,22 @@ class TempPage extends Component {
 
 
   render() {
-      console.log(this.state.bookSlot)
+      console.log(this.state.bookSlot);
+      console.log(' in temp page doctor key '+  this.props.computedMatch.params.id);
+      console.log('in temppage patient key '+this.props.patientId);
     /*  Props of doctorName and other doctor details  will be send by Parent Page */
     return (
-      <div className="bodypage"> 
+      <div> 
         { !this.state.bookSlot && 
         <div>
         <div>
-          <h2 align="center">{this.props.doctorName}</h2>
-          <p> Enter the specialities of Doctor here</p>
+          <h2 align="center">{this.props.computedMatch.params.id}</h2>
           <br></br>
         </div>
 
-        <div className="todaytomorrow">
+        <div>
         <button type="button" className="btn btn-primary" onClick={this.onTodayClick}>Today</button>
-        <button id="b5" type="button" className="btn btn-primary" onClick={this.onTomorrowClick}>Tomorrow</button>
+        <button type="button" className="btn btn-primary" onClick={this.onTomorrowClick}>Tomorrow</button>
         </div>
         <Calendar className="calendar" onChange={this.onChange}/> 
        <br></br>
@@ -91,7 +95,9 @@ class TempPage extends Component {
         </div>
         } 
         <div>
-        { this.state.bookSlot && <SendProps doctorName={this.props.doctorName} patientId={this.props.patientId} searchDate={this.state.date}/>}
+        { this.state.bookSlot && <SendProps doctorName={this.props.computedMatch.params.id} patientId={this.props.patientId} searchDate={this.state.date}
+            timeGone={this.timeGone}
+        />}
         </div>
     </div>
     );
