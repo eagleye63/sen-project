@@ -22,10 +22,12 @@ class TempPage extends Component {
         date:new Date(),
         bookSlot:false,
     });
-    
+    this.timeGone=false;
+
     }
 
     onChange = (date) =>{
+        this.timeGone=date < new Date();
         this.setState({
             date:date
         },()=>{
@@ -34,6 +36,7 @@ class TempPage extends Component {
                 this.setState({
                     date:new Date()
                 });
+                this.timeGone=false;
             }
             console.log('new state is '+this.state.date);
         });
@@ -92,7 +95,9 @@ class TempPage extends Component {
         </div>
         } 
         <div>
-        { this.state.bookSlot && <SendProps doctorName={this.props.computedMatch.params.id} patientId={this.props.patientId} searchDate={this.state.date}/>}
+        { this.state.bookSlot && <SendProps doctorName={this.props.computedMatch.params.id} patientId={this.props.patientId} searchDate={this.state.date}
+            timeGone={this.timeGone}
+        />}
         </div>
     </div>
     );
