@@ -45,7 +45,7 @@ class ClinicDate extends Component {
         return (
           <div>
             
-            <form class="form-inline">
+            {/* <form class="form-inline">
                 <input
                   type=""
                   id="email"
@@ -54,7 +54,7 @@ class ClinicDate extends Component {
                   onChange={this.handler}
                 />
                 <button type="submit">Search</button>
-              </form>
+              </form> */}
 
             <h2>List Of Appointments</h2>
            

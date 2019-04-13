@@ -176,10 +176,14 @@ class Profile extends Component{
                 </div>
             </div>
             
+        
         </div>
-        <div className="d-flex justify-content-sm-end" style={{marginTop:'5%'}}>
-                                
-        <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>Edit Profile</button>
+
+        <div className="d-flex justify-content-center">
+
+        <div className="d-flex justify-content-center" style={{marginTop:'5%'}}>                               
+        <button className="btn btn" style={{borderRadius:'5%',height:"100%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9",fontSize:'100%'}}>Edit Profile</button>
+        </div>
         </div>
         
         </form>

@@ -125,9 +125,9 @@ class Home extends React.Component{
                     </div> */}
                     
                 <div className="d-flex justify-content-center" >
-                    <div className="d-flex justify-content-start" style={{width:'30%'}}>
+                    <div className="d-flex justify-content-center" style={{width:'30%'}}>
                     <Link to={'/currappoitment'} style={{marginRight:"3%",marginTop:"2%"}} >
-                    <button className="btn btn-outline-dark btn-lg" style={{color:'white',marginRight:'5%'}}>
+                    <button className="btn btn-outline-dark btn-lg" style={{backgroundColor:'#116466',marginRight:'5%'}}>
                         <span className="mr-2" >Current Appointment</span>
                         <i className="fa fa-angle-right"></i>
                     </button>
