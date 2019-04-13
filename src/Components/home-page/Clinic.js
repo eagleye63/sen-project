@@ -378,57 +378,125 @@ class Clinic extends Component {
       index++;
       let pbar = <div />;
       if(this.state.current===index)
-      pbar = (<ProgressBar
+      pbar = (
+      <div className="d-flex justify-content-center">      <div className="d-flex justify-content-center">
+      <ProgressBar
         animated
         varient="success"
         label={this.state.progress}
         now={this.state.progress}
-      /> 
+        
+      />
+      </div> 
+      </div>
+
       );
 
       return (
-        <div href="#" className="list-group-item ">
-          <h4 className="list-group-item-heading"> {appointment.name} </h4>
-          <p className="list-group-item-text">
-            slottime: {appointment.slottime}
-          </p>
-          <p className="list-group-item-text"> gender: {appointment.gender} </p>
-          <p className="list-group-item-text"> age: {appointment.age} </p>
 
-          <label> Description: </label>
-          <Input
-            type="text"
-            placeholder="Description"
-            required
-            id={appointment.id}
-            onChange={this.descriptionhandler}
-          />
+        <div className="d-flex justify-content-center" style={{marginTop:'2%'}}>
+                <div className="d-flex justify-content-center" style={{width:'50%'}}>
+                <form  style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
+                <div className='list-group'  style={{border:"3px solid grey"}}>
+                <div className='list-group-item' style={{backgroundColor:'#f1f1f1'}}>
+                
+                <h4 style={{fontSize:'17px'}}><b>Patient's Name: </b>{appointment.name}</h4>
+                <h4 style={{fontSize:'17px'}}><b>Slot Time: </b>{appointment.slottime}</h4>
+                <h4 style={{fontSize:'17px'}}><b>Gender: </b>{appointment.gender}</h4>
+                <h4 style={{fontSize:'17px'}}><b>Age: </b>{appointment.age}</h4>
+                <h4 style={{fontSize:'17px'}}>
+                  <b style={{marginRight:'2%'}}>Description: </b>
+                  <Input
+                    type="text"
+                    placeholder="Description"
+                    required
+                    id={appointment.id}
+                    onChange={this.descriptionhandler}
+                    style={{backgroundColor:'white'}}
+                    />
+                </h4>
+                <h4 style={{fontSize:'14px'}}>
+                  <b>Prescription File:</b>
+                  <form inline onSubmit={this.uploadhandler} id={appointment.id}>
+                  <Input
+                    type="file"
+                    id={appointment.id}
+                    required
+                    onChange={this.fileChangedHandler}
+                    style={{backgroundColor:'white'}}
+                  />
+                  <button className="upload" style={{marginTop:'1%',border:'3px solid black'}} disabled={this.state.current==''?false:true}>Upload</button>
+                  </form>
+                  
+                </h4>
+                {pbar}
+                <div className="d-flex justify-content-between" style={{marginTop:"3%"}}>
+                <div className="d-flex justify-content-start">
+                    <Link to={`/prescription/${appointment.id}`}>
+                      <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9"}}>Check History</button>
+                    </Link>
+                               
+                </div>
+                <div className="d-flex justify-content-start">
+                    
+                      <button className="btn btn" onClick={this.checkouthandler} style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>CheckOut</button>
+                    
+                               
+                </div>
 
-          <label> Prescription File: &nbsp; &nbsp; &nbsp; </label>
-          <form inline onSubmit={this.fileuploadhandler} id={appointment.id}>
-            <input
-              type="file"
-              id={appointment.id}
-              required
-              onChange={this.fileChangedHandler}
-            />
-            <button className="upload" disabled={this.state.current==''?false:true}>Upload</button>
-          </form>
-          {pbar}
-          <button className="delete" onClick={this.checkouthandler} id={appointment.id}>CheckOut</button>
-          {/* <button className="history" onClick={this.historyhandler} id={appointment.id}> History </button> */}
-           <Link to={`/prescription/${appointment.id}`} >
-               <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>See History</button>
-           </Link>
-        </div>
+                </div>
+                </div>
+                </div>
+                </form>
+                </div>
+                </div>
+
+
+
+        //{/* // <form className="list-group-item " style={{marginTop:'2%'}}>
+        //   <h4 className="list-group-item-heading"> {appointment.name} </h4>
+        //   <p className="list-group-item-text">
+        //     slottime: {appointment.slottime}
+        //   </p>
+        //   <p className="list-group-item-text"> gender: {appointment.gender} </p>
+        //   <p className="list-group-item-text"> age: {appointment.age} </p>
+
+        //   <label> Description: </label>
+        //   <Input */}
+       // {/* //     type="text"
+        //     placeholder="Description"
+        //     required
+        //     id={appointment.id}
+        //     onChange={this.descriptionhandler}
+        //   />
+
+        //   <label> Prescription File: &nbsp; &nbsp; &nbsp; </label>
+        //   <form inline onSubmit={this.fileuploadhandler} id={appointment.id}>
+        //     <input
+        //       type="file"
+        //       id={appointment.id}
+        //       required
+        //       onChange={this.fileChangedHandler}
+        //     />
+        //     <button className="upload" disabled={this.state.current==''?false:true}>Upload</button>
+        //   </form>
+        //   {pbar}
+        //   <button className="delete" onClick={this.checkouthandler} id={appointment.id}>CheckOut</button>
+        //   {/* <button className="history" onClick={this.historyhandler} id={appointment.id}> History </button> */}
+       // {/* //    <Link to={`/prescription/${appointment.id}`} >
+        //        <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>See History</button>
+        //    </Link>
+        // </form> */} */}
       );
       
     });
 
     if (this.state.isloading) {
       return (
-        <div>
+        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center">
           <Spinner color="primary" />
+        </div>
         </div>
       );
     }

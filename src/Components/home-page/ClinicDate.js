@@ -10,7 +10,7 @@ import { CardBody, Card } from 'reactstrap';
 import firebase from './../../config/configuration';
 import FlipMove from "react-flip-move";
 import Clinic from './Clinic';
-import DatePicker from "react-datepicker";
+import DatePicker from "react-custom-date-picker";
 import NavigationBar from './../navigationbar';
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -54,7 +54,7 @@ class ClinicDate extends Component {
         return (
           <div>
             
-            <form class="form-inline">
+            {/* <form class="form-inline">
                 <input
                   type=""
                   id="email"
@@ -63,19 +63,40 @@ class ClinicDate extends Component {
                   onChange={this.handler}
                 />
                 <button type="submit">Search</button>
-              </form>
+              </form> */}
 
-            <h2>List Of Appointments</h2>
+                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-start" style={{marginBottom:'1%'}}>
+                <h3><button className="btn btn" style={{backgroundColor:'#116466',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>List Of Appointments</b></button></h3>
+                </div>
+                </div>
            
-              <label>
+              
+                <div className="d-flex justify-content-center" style={{marginTop:'3%'}}>
+                <div className="d-flex justify-content-center">
+
+                  <form style={{height:'100%'}}>
+                  <h4><b style={{fontSize:'20px'}}>Date: </b><DatePicker date={this.state.startDate}
+                        handleDateChange={this.handleChange} inputStyle={{height:'30px',backgroundColor:'white'}}/></h4>
+                  
+
+                  </form>
+                </div>
+                
+                
+                </div>
+              
+              
+              
+              {/* <label>
                 <b>DATE: </b>
               </label>
             <DatePicker selected={this.state.startDate}
-                        onChange={this.handleChange}/>
+                        onChange={this.handleChange}/> */}
              
           
 
-            <Clinic date={propdate} clinic={this.props.id} clinicname={this.state.clinicname} refresh={this.state.refresher} ></Clinic> 
+            <Clinic date={propdate} clinic={this.props.id} clinicname={this.state.clinicname} refresh={this.state.refresher} style={{marginTop:'2%'}}></Clinic> 
           </div>
         );
     }
