@@ -54,16 +54,21 @@ class ClinicDate extends Component {
         return (
           <div>
             
-            {/* <form class="form-inline">
-                <input
-                  type=""
+            {/* <div className="d-flex justify-content-end">
+            <div className="d-flex justify-content-end" style={{marginTop:'1%'}}>
+            <form class="form-inline">
+                <Input
+                  type="text"
                   id="email"
                   placeholder="Enter blood group"
                   name="bld"
                   onChange={this.handler}
+                  style={{backgroundColor:'white' }}
                 />
                 <button type="submit">Search</button>
-              </form> */}
+              </form>
+              </div>
+              </div> */}
 
                 <div className="d-flex justify-content-center">
                 <div className="d-flex justify-content-start" style={{marginBottom:'1%'}}>

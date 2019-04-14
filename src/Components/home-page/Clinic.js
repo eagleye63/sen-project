@@ -378,18 +378,12 @@ class Clinic extends Component {
       index++;
       let pbar = <div />;
       if(this.state.current===index)
-      pbar = (
-      <div className="d-flex justify-content-center">      <div className="d-flex justify-content-center">
-      <ProgressBar
+      pbar = (<ProgressBar
         animated
         varient="success"
         label={this.state.progress}
         now={this.state.progress}
-        
       />
-      </div> 
-      </div>
-
       );
 
       return (
@@ -417,7 +411,7 @@ class Clinic extends Component {
                 </h4>
                 <h4 style={{fontSize:'14px'}}>
                   <b>Prescription File:</b>
-                  <form inline onSubmit={this.uploadhandler} id={appointment.id}>
+                  <form inline onSubmit={this.fileuploadhandler} id={appointment.id}>
                   <Input
                     type="file"
                     id={appointment.id}
@@ -427,9 +421,9 @@ class Clinic extends Component {
                   />
                   <button className="upload" style={{marginTop:'1%',border:'3px solid black'}} disabled={this.state.current==''?false:true}>Upload</button>
                   </form>
-                  
+                  {pbar}
                 </h4>
-                {pbar}
+                
                 <div className="d-flex justify-content-between" style={{marginTop:"3%"}}>
                 <div className="d-flex justify-content-start">
                     <Link to={`/prescription/${appointment.id}`}>
