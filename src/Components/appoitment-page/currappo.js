@@ -119,15 +119,15 @@ import firebase from '../../config/configuration';
                 <div className='list-group'  style={{border:"3px solid grey"}}>
                 <div className='list-group-item' style={{backgroundColor:'#f1f1f1'}}>
                 <h3 style={{textAlign:'center'}}><b>{obj1.clinicname}</b></h3>
-                <h4 style={{marginTop:'5%'}}><b>Doctor's Name: </b>{obj1.doname}</h4>
-                <h4><b>Phone number: </b>{obj1.phone}</h4>
-                <h4><b>Area: </b>{obj1.area}</h4>
-                <h4><b>Date: </b>{obj1.date}</h4>
-                <h4><b>Slot Time: </b>{obj1.slot_time}</h4>
+                <h4 style={{fontSize:'14px'}}><b>Doctor's Name: </b>{obj1.doname}</h4>
+                <h4 style={{fontSize:'14px'}}><b>Phone number: </b>{obj1.phone}</h4>
+                <h4 style={{fontSize:'14px'}}><b>Area: </b>{obj1.area}</h4>
+                <h4 style={{fontSize:'14px'}}><b>Date: </b>{obj1.date}</h4>
+                <h4 style={{fontSize:'14px'}}><b>Slot Time: </b>{obj1.slot_time}</h4>
                 <div className="d-flex justify-content-start" style={{marginTop:"3%"}}>
                 <div className="d-flex justify-content-start">
                                 <form action={link} method="get" target="_blank">
-                                 <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9"}}>Locate<i style={{marginLeft:'10%'}} className={'fas fa-map-marker-alt'} color="green"/></button>
+                                 <button className="btn btn" style={{borderRadius:'5%',height:"70%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9",fontSize:'70%'}}>Locate<i style={{marginLeft:'10%'}} className={'fas fa-map-marker-alt'} color="green"/></button>
                 </form>
                 </div>
                 </div>
@@ -161,7 +161,10 @@ import firebase from '../../config/configuration';
                 <NavigationBar/>
                 <div className="d-flex justify-content-center">
                 <div className="d-flex justify-content-start" style={{marginBottom:'1%'}}>
-                <h3><button className="btn btn" style={{backgroundColor:'#116466',height:'100%',width:'100%',marginBottom:'10%',fontSize:'100%',padding:'1%'}}><b>Current Appointment</b></button></h3>
+
+                <h3><button className="btn btn" style={{backgroundColor:'#116466',height:'70%',width:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>Current Appointment</b></button></h3>
+
+
                 </div>
                 </div>
                 <div style={{marginBottom:'3%'}}>
