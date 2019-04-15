@@ -12,6 +12,7 @@ import FlipMove from "react-flip-move";
 import Clinic from './Clinic';
 import DatePicker from "react-datepicker";
 import NavigationBar from './../navigationbar';
+import {Redirect} from 'react-router-dom';
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -24,7 +25,9 @@ class ClinicDate extends Component {
           date: new Date(),
           actualdate: new Date().getDate() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getFullYear(),
           refresher:true,
-          clinicname:''
+          clinicname:'',
+          redirect:false,
+          bld:'select'
         };
     }
 
@@ -39,6 +42,27 @@ class ClinicDate extends Component {
         
     }
 
+    handler=(event)=>{
+      this.setState({
+        bld:event.target.value
+      })
+    }
+
+    submithandler=(event)=>{
+      event.preventDefault();
+      if(this.state.bld=='select')
+      {
+        alert('enter blood group');
+      }
+      else
+      {
+          this.setState({
+            redirect:true
+          })
+      }
+     
+    }
+
     componentDidMount=()=>{
       firebase.database().ref('clinic').child(this.props.id).once('value').then(snapshot=>{
         this.setState({
@@ -50,20 +74,37 @@ class ClinicDate extends Component {
     
     render() {
       let propdate = this.state.actualdate;
+      if(this.state.redirect==true)
+      {
+        return (
+        <Redirect push
+          to={{
+            pathname: "/BloodGroup",
+            state: { bloodgroup: this.state.bld }
+          }}
+        />
+        )
+      }
 
         return (
           <div>
             
-            <form class="form-inline">
-                <input
-                  type=""
-                  id="email"
-                  placeholder="Enter blood group"
-                  name="bld"
-                  onChange={this.handler}
-                />
-                <button type="submit">Search</button>
-              </form>
+            <form class="form-inline" onSubmit={this.submithandler}>
+              <select value={this.state.bld} onChange={this.handler} required className="form-control">
+                <option value="select">Select an Option</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+              </select>
+
+
+              <button type="submit">Search</button>
+            </form>
 
             <h2>List Of Appointments</h2>
            

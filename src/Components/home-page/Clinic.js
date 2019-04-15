@@ -210,7 +210,7 @@ class Clinic extends Component {
 
   //fetch data from firebase
   fetchData = (date, clinic) => {
-    var patientdata = [];
+    
     this.setState(prevState => {
       prevState["isloading"] = true;
       return prevState;
@@ -247,84 +247,67 @@ class Clinic extends Component {
           .child(clinicname)
           .child("date")
           .child(today)
+          .child('patient_booking')
           .once("value")
           .then(snapshot => {
             //console.log(snapshot.val());
-            if (
-              snapshot.val() == null ||
-              snapshot.hasChild("patient_booking") == false
-            ) {
+            if (snapshot.val() == null)
+             {
+               console.log('no values');
               this.setState({
                 isloading: false
               });
-            } else {
-              firebase
-                .database()
-                .ref("clinic")
-                .child(clinicname)
-                .child("date")
-                .child(today)
-                .child("patient_booking")
-                .once("value")
-                .then(snapshot => {
-                  var a = snapshot.val();
-                  // console.log('in patient');
-                  for (var i = 0; i < 40; i++) {
-                    if (a[i]) {
-                      arr1.push(a[i]);
-                      arr2.push(i);
-                    }
-                  }
+            } 
+            else
+             {
+              var a = snapshot.val();
+              snapshot.forEach(child=>{
+                console.log(child.key+'       '+child.val());
+                let j1=child.key;
+                let j2=child.val().id;
+                let j3=child.val().num;
+                console.log('id and num  '+ j1+"   "+j2);
+                firebase
+                  .database()
+                  .ref("patient")
+                  .child(j2)
+                  .once("value")
+                  .then(snapshot => {
+                    var a = snapshot.val();
+                    let arrayofslottime = this.calculateslottime(
+                      starthour,
+                      startminit,
+                      slottime,
+                      j1
+                    );
+                    let slotttime = arrayofslottime[0];
+                    let totalminit = arrayofslottime[1];
+                    let patientdata = this.state.appointments;
+                    patientdata.push({
+                      name: a.name,
+                      slottime: slotttime,
+                      totalminit: totalminit,
+                      gender: a.gender,
+                      age: a.age,
+                      id: j2,
+                      num:j3,
+                      file: "",
+                      fileuploaded: false,
+                      showprogressbar: false,
+                      description: ''
+                    });
+                    patientdata.sort(function (a, b) {
+                      return a.totalminit - b.totalminit;
+                    });
 
-                  for (var i = 0; i < arr1.length; i++) {
-                    let j1 = arr2[i];
-                    let j2 = arr1[i];
-                    firebase
-                      .database()
-                      .ref("patient")
-                      .child(arr1[i])
-                      .once("value")
-                      .then(snapshot => {
-                        var a = snapshot.val();
-                        let arrayofslottime = this.calculateslottime(
-                          starthour,
-                          startminit,
-                          slottime,
-                          j1
-                        );
-                        let slotttime = arrayofslottime[0];
-                        let totalminit = arrayofslottime[1];
-
-                        patientdata.push({
-                          name: a.name,
-                          slottime: slotttime,
-                          totalminit: totalminit,
-                          gender: a.gender,
-                          age: a.age,
-                          id: j2,
-                          file: "",
-                          fileuploaded: false,
-                          showprogressbar:false,
-                          description:''
-                        });
-                      })
-                      .then(() => {
-                        flag = flag + 1;
-                        let f1 = true;
-                        f1 = false;
-
-                        patientdata.sort(function(a, b) {
-                          return a.totalminit - b.totalminit;
-                        });
-
-                        this.setState(prevState => {
-                          prevState["appointments"] = patientdata;
-                          prevState["isloading"] = f1;
-                          return prevState;
-                        });
-                      });
-                  }
-                });
+                    this.setState(prevState => {
+                      prevState["appointments"] = patientdata;
+                      prevState["isloading"] = false;
+                      return prevState;
+                    });
+                  })
+                
+              })
             }
           });
       });
