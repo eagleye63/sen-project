@@ -19,7 +19,8 @@ class Profile extends Component{
             pincode:'',
             slot_time:'',
             iseditopen:false,
-            alldata:''
+            alldata:'',
+            flag:false
 
         }
     }
@@ -28,7 +29,7 @@ class Profile extends Component{
     }
     getuserdetail=()=>{
         console.log('fuck'+this.props.id);
-        console.log('fuck'+this.props.user);
+        console.log('fuck'+this.props.user); 
         // id=5ccmc79IJkhutQkKVxlCiQWmeFg1 for nayan parmar patient
         console.log('fuck type'+typeof(this.props.user));
         let userdetail=firebase.database().ref(this.props.user).child(this.props.id);
@@ -48,21 +49,25 @@ class Profile extends Component{
                 slot_time : snapshot.val().slot_time,
                 workingtime:snapshot.val().workingtime,
                 breaktime:snapshot.val().breaktime,
-                alldata :snapshot.val()
+                alldata :snapshot.val(),
+                flag:true
 
             })
         })
     }
-    openedit=()=>{
+    Openedit=()=>{
+        console.log('openedit ' + this.state.iseditopen);
         this.setState({
             iseditopen :true
         })
+        console.log('openedit ' + this.state.iseditopen);
 
     }
     closeedit=()=>{
         this.setState({
             iseditopen:false
         })
+        console.log('cloaseedit '+ this.state.iseditopen);
     }
     postedit=(filledform)=>{
         this.setState({
@@ -71,7 +76,7 @@ class Profile extends Component{
         console.log('name'+filledform.name);
         console.log('name'+filledform.email);
         console.log('name'+filledform.password);
-        let updateprofile=firebase.database().ref('clinic').child(this.props.id).update({
+        let updateprofile=firebase.database().ref(this.props.user).child(this.props.id).update({
             //name:filledform.name,
             email:filledform.email,
             password:filledform.password,
@@ -101,10 +106,15 @@ class Profile extends Component{
         console.log(this.state);
         return(
             <React.Fragment>
+             
+            
                 <NavigationBar/>
                 <form className='container'>
-            <div className="container">
-            <div className="parent">
+                {
+
+                this.state.flag == true ?
+                <div className="container">
+                <div className="parent">
                 {/* <div className="quick-view" id="avatar_position">
                     <Avatar color={getcolor()} round={true} size={120}
                         name={userInfo.user_first_name + (userInfo.user_last_name ? " " + userInfo.user_last_name : "")} />
@@ -155,34 +165,30 @@ class Profile extends Component{
                                 : ''
                             }
                             
-                            <button  onClick={this.openedit} >EDIT</button>
+                            {/* <button  onClick={this.openedit} >EDIT</button> */}
                              
                         </tbody>
                     </table>
 
-                   
-                    
-
-                    {/* <button type="button"
-                        className="btn btn-outline-primary style-btn"
-                        onClick={this.props.changeIsEdit}>
-                        Edit
-                    </button> */}
-                    {/* {
-                        this.state.iseditopen &&
+                    {
+                        this.state.iseditopen === true ?
                         <Edit open={this.state.iseditopen} close={this.closeedit}
                          submitedit={this.postedit} alldata={this.state.alldata}/>
-                    } */}
+                         : ''
+                    }
                 </div>
             </div>
             
         </div>
+        : <div></div>
+        }
         <div className="d-flex justify-content-sm-end" style={{marginTop:'5%'}}>
                                 
-        <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>Edit Profile</button>
+        <button className="btn btn" onClick={this.Openedit} style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>Edit Profile</button>
         </div>
         
         </form>
+        
         </React.Fragment>
         )
     }

@@ -63,6 +63,7 @@ class Edit extends Component {
         
     }
     render(){
+        console.log('i am in edit page');
         return(
             <Modal visible={this.props.open}>
             <form onSubmit={this.handlesubmit}>
