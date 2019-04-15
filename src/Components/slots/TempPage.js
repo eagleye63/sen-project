@@ -31,7 +31,8 @@ class TempPage extends Component {
     onChange = (date) =>{
         this.timeGone=date < new Date();
         this.setState({
-            date:date
+            date:date,
+            
         },()=>{
             if(this.state.date.toDateString()==new Date().toDateString())
             {
@@ -80,13 +81,31 @@ class TempPage extends Component {
     /*  Props of doctorName and other doctor details  will be send by Parent Page */
     return (
 
-        <React.Fragment>
+      <div> 
+        { !this.state.bookSlot && 
+            <React.Fragment>
             <NavigationBar/>
 
+            
             <div className="d-flex justify-content-center">
                 <div  className="d-flex justify-content-center">
                 <h3><button className="btn btn" style={{backgroundColor:'#114466',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>Book a Slot</b></button></h3>
                 </div>
+            </div>
+
+
+
+            <div className="d-flex justify-content-center" style={{marginTop:'3%',marginBottom:'2%'}}>
+                                <div className="d-flex justify-content-start">
+                                  <form style={{height:'100%'}}>
+                                  <h4><b style={{fontSize:'20px'}}>Date: </b><DatePicker date={this.state.date}
+                                            handleDateChange={this.onChange} inputStyle={{height:'30px',backgroundColor:'white'}}/></h4>
+                                </form>
+                                </div>
+                                <div className="d-flex justify-content-center" style={{marginLeft:'1%'}}>
+                                    <button className="btn btn-primary" style={{height:'100%',fontSize:'100%',borderRadius:'5%'}} onClick={this.bookSlot}>Proceed to Slots</button>
+                                </div>
+                                
             </div>
             
             <div className="d-flex justify-content-center">
@@ -126,46 +145,17 @@ class TempPage extends Component {
                 
                
                 </div>
-            </div> 
-
-            <div className="d-flex justify-content-center" style={{marginTop:'3%'}}>
-                                <div className="d-flex justify-content-center">
-                                  <form style={{height:'100%'}}>
-                                  <h4><b style={{fontSize:'20px'}}>Date: </b><DatePicker date={this.state.startDate}
-                                            handleDateChange={this.onChange} inputStyle={{height:'30px',backgroundColor:'white'}}/></h4>
-                                </form>
-                                </div>
-                                </div>           
-
-
-        </React.Fragment>
-
-
-
-    //   <div> 
-    //     { !this.state.bookSlot && 
-    //     <div>
-    //     <div>
-    //       <h2 align="center">{this.props.computedMatch.params.id}</h2>
-    //       <br></br>
-    //     </div>
-
-    //     <div>
-    //     <button type="button" className="btn btn-primary" onClick={this.onTodayClick}>Today</button>
-    //     <button type="button" className="btn btn-primary" onClick={this.onTomorrowClick}>Tomorrow</button>
-    //     </div>
-    //     <Calendar className="calendar" onChange={this.onChange}/> 
-    //    <br></br>
-    //    <br></br>
-    //     <button type="button" className="btn btn-primary btn-lg btn-block" onClick={this.bookSlot}>Proceed for Booking</button>
-    //     </div>
-    //     } 
-    //     <div>
-    //     { this.state.bookSlot && <SendProps doctorName={this.props.computedMatch.params.id} patientId={this.props.patientId} searchDate={this.state.date}
-    //         timeGone={this.timeGone}
-    //     />}
-    //     </div>
-    // </div>
+            </div>
+                                        
+        </React.Fragment>     
+            
+        } 
+        <div>
+        { this.state.bookSlot && <SendProps doctorName={this.props.computedMatch.params.id} patientId={this.props.patientId} searchDate={this.state.date}
+            timeGone={this.timeGone}
+        />}
+        </div>
+    </div>
     );
   }
 }
