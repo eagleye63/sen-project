@@ -89,6 +89,9 @@ class ClinicDate extends Component {
         return (
           <div>
             
+
+           
+
             <form class="form-inline" onSubmit={this.submithandler}>
               <select value={this.state.bld} onChange={this.handler} required className="form-control">
                 <option value="select">Select an Option</option>
@@ -105,6 +108,7 @@ class ClinicDate extends Component {
 
               <button type="submit">Search</button>
             </form>
+
 
             <h2>List Of Appointments</h2>
            
