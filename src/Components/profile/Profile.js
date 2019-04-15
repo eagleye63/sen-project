@@ -105,9 +105,7 @@ class Profile extends Component{
         console.log(this.state.workingtime);
         console.log(this.state);
         return(
-            <React.Fragment>
-             
-            
+            <React.Fragment>            
                 <NavigationBar/>
                 <form className='container'>
                 {
@@ -180,16 +178,10 @@ class Profile extends Component{
             </div>
             
         
-        </div>
-
-        <div className="d-flex justify-content-center">
-
-        <div className="d-flex justify-content-center" style={{marginTop:'5%'}}>                               
-        <button className="btn btn" style={{borderRadius:'5%',height:"100%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9",fontSize:'100%'}}>Edit Profile</button>
-        </div>
-
+        </div> 
         : <div></div>
         }
+        </form>
         <div className="d-flex justify-content-sm-end" style={{marginTop:'5%'}}>
                                 
         <button className="btn btn" onClick={this.Openedit} style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>Edit Profile</button>
@@ -197,7 +189,8 @@ class Profile extends Component{
 
         </div>
         
-        </form>
+        
+        
         
         </React.Fragment>
         )
