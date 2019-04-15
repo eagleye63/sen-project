@@ -4,6 +4,9 @@ import {Link,withRouter} from 'react-router-dom';
 import AuthorizedComponent from './AuthorizedComponent';
 import './nav_stylr.css'
 
+import {Form, FormControl, Button} from 'react-bootstrap'
+
+
 function NavLink ({path,text,onClick,className,currPath,icon}){
     // console.log('currPath'+currPath);
     if(currPath){
@@ -61,6 +64,7 @@ class Navigationbar extends PureComponent{
                                                 text={'Profile'}  
                                                 icon={'user'} 
                                                 currPath={this.props.location.pathname} />
+                                    
                                     <AuthorizedComponent permission={(value.user=='patient') ? true : false}
                                                              path={'/prescription'}
                                                              currPath={this.props.location.pathname}
@@ -83,7 +87,12 @@ class Navigationbar extends PureComponent{
                                                  icon={'sign-out'}
                                                  path={this.props.location.pathname}
                                                  currPath={""}
+
+                                                 
+                                                                     
+
                                                  onClick={value.logOut}/>                                 
+
                             </ul>
 
                             </div>

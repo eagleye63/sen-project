@@ -161,7 +161,10 @@ import firebase from '../../config/configuration';
                 <NavigationBar/>
                 <div className="d-flex justify-content-center">
                 <div className="d-flex justify-content-start" style={{marginBottom:'1%'}}>
-                <h3><button className="btn btn" style={{backgroundColor:'#116466',height:'70%',marginBottom:'7%',fontSize:'70%',padding:'1%'}}><b>Current Appointment</b></button></h3>
+
+                <h3><button className="btn btn" style={{backgroundColor:'#116466',height:'70%',width:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>Current Appointment</b></button></h3>
+
+
                 </div>
                 </div>
                 <div style={{marginBottom:'3%'}}>
