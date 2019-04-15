@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Spinner } from 'reactstrap';
 import firebase from "../../config/configuration";
 import './PatientDisplay.css'
-
+import NavigationBar from '../navigationbar';
 
 class PatientDisplayFromBloodGroup extends Component {
 
@@ -92,6 +92,8 @@ class PatientDisplayFromBloodGroup extends Component {
 
 
         return (
+            
+
             (!this.state.isDataAvailable &&
                 (<div>
                     <Spinner color="primary" />
@@ -99,6 +101,7 @@ class PatientDisplayFromBloodGroup extends Component {
 
             (this.state.isDataAvailable &&
                 (<div>
+                    <NavigationBar/>
                     <h1>Display</h1>
                     <br></br>
                     {
