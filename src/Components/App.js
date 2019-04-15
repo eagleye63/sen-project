@@ -21,6 +21,8 @@ import Clinicdate from './home-page/ClinicDate';
 import TempPage from './slots/TempPage';
 import Precripation from './Precripaton/History';
 import ExeRedirect from './profile/ExeRedirect';
+import PatientDisplayFromBloodGroup from './slots/PatientDisplayFromBloodGroup';
+import ErrorPage from './public-page/ErrorPage'
 
 export const Context = React.createContext();
 
@@ -178,10 +180,13 @@ class App extends React.PureComponent{
                         component={Precripation}  user={this.state.user}/>                        
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path={"/slotbook/:id"}  
                         component={TempPage} patientId={this.state.key}  />
-                        <AuthorizedRoute permission={true} path="/Myprofile" exact strict 
+                    <AuthorizedRoute permission={true} path="/Myprofile" exact strict 
                         component={Profile} user={this.state.user} id={this.state.key} />
-                        
 
+                    <AuthorizedRoute permission={this.state.user=='clinic'} path="/BloodGroup" exact strict
+                        component={PatientDisplayFromBloodGroup} user={this.state.user} id={this.state.key} />
+                        
+                    <Route component={ErrorPage}/>
                     {/* <Route render={() => <Redirect to='/'/>}/>                   
                     <Route render={() => <Redirect to='/'/>}/> */}
                     </Switch>
