@@ -16,7 +16,7 @@ import FlipMove from "react-flip-move";
     }
 
     componentDidMount=()=>{
-       // this.setState({isloading:true});
+        this.setState({isloading:true});
        console.log(this.props);
        let patient;
         //  this.props.user ?
@@ -31,7 +31,13 @@ import FlipMove from "react-flip-move";
        
        console.log('patientid'+patient)
        
-       firebase.database().ref('storage').child(patient).once('value').then(snapshot=>{
+       let db=firebase.database().ref('storage').child(patient);
+       console.log(db);
+       if(db)
+       {
+       db.once('value').then(snapshot=>{
+         if(snapshot.val()==null)
+         this.setState({isloading:false});
          snapshot.forEach(child1=>{
            if(!child1.val().max)
            {
@@ -60,8 +66,15 @@ import FlipMove from "react-flip-move";
           }
          })
         
-       })
-
+        
+       }).catch(()=>{console.log('i am in catch')});
+      
+      }
+      else
+      {
+        console.log('i am in null')
+        this.setState({isloading:false});
+      }
        
 
     }
@@ -87,7 +100,7 @@ import FlipMove from "react-flip-move";
               </h4>
               <p className="list-group-item-text">
                 <text style={{color:'blue'}}> Time:&nbsp; &nbsp; &nbsp;  </text>
-                {new Date(prescription.time).toGMTString()}
+                {new Date(prescription.time).toString()}
               </p>
               <p className="list-group-item-text">
                 <text style={{ color: 'blue' }}>Description:&nbsp; &nbsp; &nbsp;</text>

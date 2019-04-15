@@ -45,36 +45,36 @@ class Home extends React.Component{
            // console.log('hiiiiiiiiiiiiiiiiiii');
             snapshot.forEach(child1=>{
               //  console.log('child key '+child1.key);
-                let l2=firebase.database().ref('/clinic').child(child1.key).once("value").then(snapshot1=>{
+              //  let l2=firebase.database().ref('/clinic').child(child1.key).once("value").then(snapshot1=>{
                  //   console.log()
+                 let snapshot1=child1;
                     let currentcliniclist=this.state.cliniclist;
                     //currentcliniclist.push(snapshot1.val());
                //     console.log('parent key'+snapshot1.key)
                     currentcliniclist.push({
-                        'name':snapshot1.val().name,
-                        'age':snapshot1.val().age,
-                        'specialist':snapshot1.val().specialist,
-                        'degree':snapshot1.val().degree,
-                        'doctor':snapshot1.val().doctor,
-                        'clinicname':snapshot1.val().clinicname,
-                        'gender':snapshot1.val().gender,
-                        'Phone':snapshot1.val().phone,
-                        'clinicfees':snapshot1.val().clinicfees,
-                        'street':snapshot1.val().street,
-                        'area':snapshot1.val().area,
-                        'city':snapshot1.val().city,
-                        'doctorkey':snapshot1.key
+                        clinicname:snapshot1.val().clinicname,
+                        doctor:snapshot1.val().doctor,
+                        age:snapshot1.val().age,
+                        doctorkey:snapshot1.key,
+                        degree:snapshot1.val().degree,
+                        specialist: snapshot1.val().specialist,
+                        gender: snapshot1.val().gender,
+                        phone: snapshot1.val().phone,
+                        clinicfees: snapshot1.val().clinicfees,
+                        street: snapshot1.val().street,
+                        city: snapshot1.val().city,
+                        area: snapshot1.val().area
+                       
+
                     })
                  //   console.log(currentcliniclist[currentcliniclist.length-1].age)
                     this.setState({
                         cliniclist : currentcliniclist,
                         refresh:!this.state.refresh
-                    },()=>{ //console.log('clinic lsit data')
-                        }
-                    )
+                    })
                 })
             })
-        })
+        
     }
     opencurrapp=()=>{
         console.log('open currappoitment ');
