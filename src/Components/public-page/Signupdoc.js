@@ -14,7 +14,8 @@ export class Signupdoc extends Component {
          age:"",
          city:"",
          area:"",
-         breaktime:"",
+         breaktime:"Required to set  Ex:     12:00 to 13:00,14:00 to 20:01",
+         slot_time:'Required to set  Ex: 15  for 15 minites',
          clinicfees:"",
          degree:"",
          doctor:"",
@@ -93,6 +94,7 @@ export class Signupdoc extends Component {
             specialist:this.state.specialist,
             clinicfees:this.state.clinicfees,
             doctor:this.state.doctor,
+            slot_time:this.state.slot_time,
             workingtime:workingtime1,
             breaktime:'',
             workingdays:workingdays1

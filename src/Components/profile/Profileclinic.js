@@ -1,23 +1,25 @@
 import React,{Component} from 'react';
 import NavigationBar from '../navigationbar';
 import firebase from '../../config/configuration';
-import Edit from './Edit';
+import Edit from './Editclinic';
 
-class Profile extends Component{
+class Profileclinic extends Component{
     constructor(props){
         super(props);
         this.state={
-            name:'',
+            doctor:'',
             age:'',
             area:'',
-            boold_group:'',
+            blood_group:'',
             city:'',
             email:'',
             gender:'',
             phone:'',
             street:'',
             pincode:'',
-            slot_time:'',
+            slot_time:'Required to set  Ex: 15  for 15 minites',
+            breaktime:'Required to set  Ex:     12:00 to 13:00,14:00 to 20:01',
+            workingtime:'',
             iseditopen:false,
             alldata:'',
             flag:false
@@ -36,12 +38,17 @@ class Profile extends Component{
         userdetail.on("value",snapshot=>{
             console.log('i am in profile '+snapshot.val().name);
             this.setState({
-                name: snapshot.val().name,
-                age: snapshot.val().age,
+                doctor: snapshot.val().doctor,
+                clinicname:snapshot.val().clinicname,
+                clinicfees:snapshot.val().clinicfees,
+                degree:snapshot.val().degree,
+                specialist:snapshot.val().specialist,
+                 age: snapshot.val().age,
+                 
                 area:snapshot.val().area,
-                blood_group:snapshot.val().blood_group,
+                // blood_group:snapshot.val().blood_group,
                 city:snapshot.val().city,
-                email:snapshot.val().email,
+                // email:snapshot.val().email,
                 gender:snapshot.val().gender,
                 street:snapshot.val().street,
                 pincode:snapshot.val().pincode,
@@ -77,18 +84,26 @@ class Profile extends Component{
         console.log('name'+filledform.email);
         console.log('name'+filledform.password);
         let updateprofile=firebase.database().ref(this.props.user).child(this.props.id).update({
-            //name:filledform.name,
+            name:filledform.name,
             email:filledform.email,
             password:filledform.password,
+            doctor:filledform.doctor,
+            clinicname:filledform.clinicname,
+            clinicfees:filledform.clinicfees,
+            degree:filledform.degree,
+            specialist:filledform.specialist,
             age:filledform.age,
             phone:filledform.phone,
+            street:filledform.street,
+            area:filledform.area,
             city:filledform.city,
             pincode:filledform.pincode,
-            area:filledform.area,
+            gender:filledform.gender,
+            
            // blood_group:filledform.blood_group,
            workingtime:filledform.workingtime,
            breaktime:filledform.breaktime,
-            street:filledform.street,
+           
             slot_time:filledform.slot_time
 
         });
@@ -127,29 +142,43 @@ class Profile extends Component{
                         <tbody>
                             <tr>
                                 <td> <strong>Name</strong></td>
-                                <td> {this.state.name} </td>
+                                <td> {this.state.doctor} </td>
+                            </tr>
+                            <tr>
+                                <td> <strong>Age </strong></td>
+                                <td> {this.state.age} </td>
                             </tr>
                             
                             <tr>
-                                <td> <strong>Primary Email</strong></td>
-                                <td> {this.state.email} </td>
+                                <td> <strong>Clinic Name </strong></td>
+                                <td> {this.state.clinicname} </td>
                             </tr>
                             <tr>
-                                <td> <strong>Contact No</strong></td>
-                                <td> {this.state.phone} </td>
+                                <td> <strong>Dgree </strong></td>
+                                <td> {this.state.degree} </td>
+                            </tr>
+                            <tr>
+                                <td> <strong>Specialist </strong></td>
+                                <td> {this.state.specialist} </td>
                             </tr>
                             <tr>
                                 <td> <strong>Gender</strong></td>
                                 <td> {this.state.gender} </td>
                             </tr>
                             <tr>
+                                <td> <strong>Visit Fee </strong></td>
+                                <td> {this.state.clinicfees} </td>
+                            </tr>
+                            <tr>
+                                <td> <strong>Contact No</strong></td>
+                                <td> {this.state.phone} </td>
+                            </tr>
+                           
+                            <tr>
                                 <td> <strong>Street</strong></td>
                                 <td> {this.state.street} </td>
                             </tr>
-                            <tr>
-                                <td> <strong>Blood group</strong></td>
-                                <td> {this.state.boold_group} </td>
-                            </tr>
+                           
                             <tr>
                                 <td> <strong>Area</strong></td>
                                 <td> {this.state.area} </td>
@@ -158,14 +187,23 @@ class Profile extends Component{
                                 <td> <strong>City</strong></td>
                                 <td> {this.state.city} </td>
                             </tr>
-                            {
-                                this.props.user ==='clinic' ? 
-                                <tr>
-                                    <td> <strong>Slot_time</strong></td>
-                                <td> {this.state.slot_time} </td>
-                                </tr>
-                                : ''
-                            }
+                            
+                               
+                            <tr>
+                                <td> <strong>Avarage one patient visit time  </strong></td>
+                            <td> {this.state.slot_time} </td>
+                            </tr>
+                            <tr>
+                                <td> <strong>Working time of a day </strong></td>
+                                <td> {this.state.workingtime} </td>
+                            </tr>
+                            <tr>
+                                <td> <strong>Brake time during working hours </strong></td>
+                                <td> {this.state.breaktime} </td>
+                            </tr>
+
+                               
+                            
                             
                             {/* <button  onClick={this.openedit} >EDIT</button> */}
                              
@@ -200,4 +238,4 @@ class Profile extends Component{
     }
 }
 
-export default Profile;
+export default Profileclinic;

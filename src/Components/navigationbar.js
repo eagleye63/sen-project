@@ -60,11 +60,18 @@ class Navigationbar extends PureComponent{
                                                  icon={(value.user=='isdoctor') ? 'list-ul' : 'shopping-basket'}
                                                  path={'/order'}
                                                  currPath={this.props.location.pathname}/> */}
-                                    <NavLink path={'./Myprofile'} 
-                                                text={'Profile'}  
+                                    <AuthorizedComponent permission={(value.user=='patient') ? true : false}
+                                                 path={'./Myprofilep'} 
+                                                text={'Profile'} 
+                                                component={NavLink} 
                                                 icon={'user'} 
                                                 currPath={this.props.location.pathname} />
-                                    
+                                    <AuthorizedComponent permission={(value.user=='clinic') ? true : false}
+                                                 path={'./Myprofilec'} 
+                                                text={'Profile'}  
+                                                component={NavLink}
+                                                icon={'user'} 
+                                                currPath={this.props.location.pathname} />
                                     <AuthorizedComponent permission={(value.user=='patient') ? true : false}
                                                              path={'/prescription'}
                                                              currPath={this.props.location.pathname}

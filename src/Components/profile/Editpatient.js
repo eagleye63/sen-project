@@ -16,10 +16,8 @@ class Edit extends Component {
             area:this.props.alldata.area,
             blood_group:this.props.alldata.blood_group,
            // gender:'m',
-            street:this.props.alldata.street,
-            workingtime:this.props.alldata.workingtime,
-            breaktime:this.props.alldata.breaktime,
-            slot_time:this.props.alldata.slot_time
+            street:this.props.alldata.street
+          
 
            
         }
@@ -42,10 +40,9 @@ class Edit extends Component {
             area:this.state.area,
             blood_group:this.state.blood_group,
             //gender:this.state.gender,            
-            workingtime:this.state.workingtime,
-            breaktime:this.state.breaktime,
+           
             street:this.state.street,
-            slot_time:this.state.slot_time
+          
         };
         console.log('getdetail');
         return filledform;
@@ -80,6 +77,14 @@ class Edit extends Component {
                 <label>Age:</label>
                 <input name="age"
                         value={this.state.age}
+                        onChange={this.handleChange}
+                        
+                        className={'form-control'} type={'text'}/>
+            </div>
+            <div className={'form-group'} >
+                <label>Blood Group:</label>
+                <input name="blood_group"
+                        value={this.state.blood_group}
                         onChange={this.handleChange}
                         
                         className={'form-control'} type={'text'}/>
@@ -124,32 +129,7 @@ class Edit extends Component {
                         
                         className={'form-control'} type={'text'}/>
             </div>
-            <div className={'form-group'} >
-                <label>Slot_time:</label>
-                <input name="slot_time"
-                        value={this.state.slot_time}
-                        onChange={this.handleChange}
-                        
-                        className={'form-control'} type={'text'}/>
-            </div>
-            <div className={'form-group'} >
-                <label>Work_time:</label>
-                <input name="workingtime"
-                        value={this.state.workingtime}
-                        onChange={this.handleChange}
-                        
-                        className={'form-control'} type={'text'}/>
-            </div>
-            <div className={'form-group'} >
-                <label>Break_time:</label>
-                <input name="breaktime" 
-                        value={this.state.breaktime}
-                        onChange={this.handleChange}
-                        //placeholder='write in formate 12:00 to 13:00,14:00 to 15:00'
-                        className={'form-control'} type={'text'}/>
-            </div>
-
-                    
+           
                         
             </div>
             <div className="modal-footer">
