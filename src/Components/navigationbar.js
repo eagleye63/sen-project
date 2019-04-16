@@ -70,13 +70,13 @@ class Navigationbar extends PureComponent{
                                                              currPath={this.props.location.pathname}
                                                              component={NavLink}
                                                              icon={'cog'}
-                                                             text={"prescription"}/>
-                                    <AuthorizedComponent permission={(value.user=='patient') ? true : false}
+                                                             text={"Prescription"}/>
+                                    {/* <AuthorizedComponent permission={(value.user=='patient') ? true : false}
                                                              path={'/currprescription'}
                                                              currPath={this.props.location.pathname}
                                                              component={NavLink}
                                                              icon={'cog'}
-                                                             text={"Current prescription"}/>                                             
+                                                             text={"Current prescription"}/>                                              */}
                                      <AuthorizedComponent permission={(value.user=='clinic') ? true : false}
                                                              path={'/slotsettng'}
                                                              currPath={this.props.location.pathname}

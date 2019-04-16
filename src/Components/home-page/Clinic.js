@@ -371,7 +371,7 @@ class Clinic extends Component {
 
       return (
 
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center" style={{marginTop:'2%'}}>
                 <div className="d-flex justify-content-center" style={{width:'50%'}}>
                 <form  style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
                 <div className='list-group'  style={{border:"3px solid grey"}}>
