@@ -5,6 +5,7 @@ import firebase from '../../config/configuration'
 //import firebase from './firebase'
 //import "./SlotBooking.scss";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NavigationBar from '.././navigationbar'
 
 
 
@@ -52,6 +53,7 @@ class SlotBooking extends Component {
     let tempvar=0;
     let cnt=0;
     let temp=0;
+    console.log("Slot db:",this.slotsDatabase.length);
     for (let i = 0; i < this.slotsDatabase.length; i++) {
         if(cnt==4){
           cnt=0;
@@ -96,7 +98,7 @@ class SlotBooking extends Component {
         {
             //booked
             cnt++;
-            this.rows.push(<button key={i} type="button" className="btn btn-outline-danger" style={{width:'20%',height:'20%',fontSize:'14px'}} data-key={i} data-id="Booked" onClick={this.giveErrorPrompt}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
+            this.rows.push(<button key={i} type="button" className="btn btn-outline-danger" style={{width:'23%',height:'13%',fontSize:'11px',paddingBottom:'5%'}} data-key={i} data-id="Booked" onClick={this.giveErrorPrompt}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
             tempvar++;
             if(tempvar%4==0)
             {
@@ -108,7 +110,7 @@ class SlotBooking extends Component {
         {
             //not booked
             cnt++;
-            this.rows.push(<button key={i} type="button" className="btn btn-outline-success" style={{width:'20%',height:'20%',fontSize:'14px'}} data-key={i} data-id="notBooked" data-value={currentHour+":"+currentMinute +" "+ NextHour+":"+NextMinute} onClick={this.bookThisSlot}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
+            this.rows.push(<button key={i} type="button" className="btn btn-outline-success" style={{width:'23%',height:'13%',fontSize:'11px',paddingBottom:'5%'}} data-key={i} data-id="notBooked" data-value={currentHour+":"+currentMinute +" "+ NextHour+":"+NextMinute} onClick={this.bookThisSlot}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
             tempvar++;
             if(tempvar%4==0)
             {
@@ -121,6 +123,7 @@ class SlotBooking extends Component {
         currentHour=parseInt(currentHour,10);
         currentMinute=parseInt(currentMinute,10);
     }
+    this.columns.push(this.rows);
     console.log("Hello slot: columns",this.columns.length);
 
     this.state = {
@@ -247,24 +250,88 @@ class SlotBooking extends Component {
   }
 
   render() {
+    var link='https://www.paytm.com'
     return (
-      <div> 
-        {/*  Props of doctorName and other doctor details  will be send by Parent Page */}
-        <div >
-          <h2 align="center">{this.props.doctorName}</h2>
-          <p> {this.description}</p>
-        </div>
-        <text className="datestring">Slots for {this.dateString} </text>
-        <br></br>
-        <br></br>
-        <div>
-        {
-          this.columns.map(columns=>columns)
-        }
-        </div>
-        <button type="button" className="btn btn-outline-success">Booked</button>
-        <button type="button" className="btn btn-outline-danger">Not Booked</button>
-      </div>
+
+      <React.Fragment>
+
+        <NavigationBar/>
+          <div className="d-flex justify-content-center" style={{marginTop:'1%'}}>
+          <div  className="d-flex justify-content-center">
+          <h3><button className="btn btn" style={{backgroundColor:'#254e58',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>Book a Slot</b></button></h3>
+          </div>
+          </div>
+          <form  style={{marginLeft:'13%',marginTop:'3%',marginRight:'13%',paddingBottom:'1%'}}>
+            <div className="d-flex justify-content-between"  style={{marginLeft:'2%',marginTop:'3%'}}>
+              <div className="d-flex justify-content-start" style={{marginTop:'10%'}}>
+              <form>
+              <h4 inline style={{fontSize:'14px'}}><b>Your Name: </b>
+                
+              </h4>
+              <h4 style={{fontSize:'14px',marginTop:'3%'}}><b>Clinic's Name: </b></h4>
+              <h4 style={{fontSize:'14px',marginTop:'3%'}}><b>Doctor's Name: </b></h4>
+              <h4 style={{fontSize:'14px',marginTop:'3%'}}><b>Clinic Fees: </b></h4>
+              <h4 style={{fontSize:'14px',marginTop:'3%'}}><b>Slot Time: </b></h4>
+              </form>
+              </div>
+              
+              <div className="d-flex justify-content-center" style={{marginTop:'10%'}}>
+              <form>
+              <h4 inline style={{fontSize:'14px'}}>
+                Nayan Parmar
+              </h4>
+              <h4 style={{fontSize:'14px',marginTop:'3%'}}>Apollo Clinic</h4>
+              <h4 style={{fontSize:'14px',marginTop:'3%'}}>def</h4>
+              <h4 style={{fontSize:'14px',marginTop:'3%'}}>500</h4>
+              <h4 style={{fontSize:'14px',marginTop:'3%'}}>12:00 to 12:30</h4>
+              
+              
+                
+              </form>
+              
+              </div>
+              <div className="d-flex justify-content-end">
+              <div style={{width:'1px',backgroundColor:'grey',height:'80%'}}>
+                </div>
+                 <form style={{marginLeft:'2%'}}> 
+                  {this.columns.map(columns=>columns)}
+                  </form>
+              </div>
+              
+              
+
+            </div>
+
+            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center">
+            <form action={link} method="get" target="_blank">
+                                 <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9",fontSize:'90%'}}>Confirm Booking</button>
+            </form>
+            </div>
+            </div>
+
+          </form>
+      </React.Fragment>
+
+
+
+      // <div> 
+      //   {/*  Props of doctorName and other doctor details  will be send by Parent Page */}
+      //   <div >
+      //     <h2 align="center">{this.props.doctorName}</h2>
+      //     <p> {this.description}</p>
+      //   </div>
+      //   <text className="datestring">Slots for {this.dateString} </text>
+      //   <br></br>
+      //   <br></br>
+      //   <div>
+      //   {
+      //     this.columns.map(columns=>columns)
+      //   }
+      //   </div>
+      //   <button type="button" className="btn btn-outline-success">Booked</button>
+      //   <button type="button" className="btn btn-outline-danger">Not Booked</button>
+      // </div>
     );
   }
 }

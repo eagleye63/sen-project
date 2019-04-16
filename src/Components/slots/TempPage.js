@@ -143,7 +143,7 @@ class TempPage extends Component {
             </div>
             
             <div className="d-flex justify-content-center">
-                <div className="d-flex justify-content-center" style={{width:'50%'}}>
+                <div className="d-flex justify-content-center">
                 <form style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
                 <div className='list-group' style={{border:"3px solid grey"}}>
                 <div className='list-group-item' style={{backgroundColor:'#f1f1f1'}}>
