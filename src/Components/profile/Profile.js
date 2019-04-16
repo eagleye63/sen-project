@@ -105,7 +105,11 @@ class Profile extends Component{
         console.log(this.state.workingtime);
         console.log(this.state);
         return(
-            <React.Fragment>
+
+
+
+            <React.Fragment>            
+
                 <NavigationBar/>
                 <form className='container'>
                 {
@@ -177,10 +181,9 @@ class Profile extends Component{
                 </div>
             </div>
             
-        
-        </div>   
+        </div> 
         : <div></div>
-         }
+        }
         </form>
         <div className="d-flex justify-content-sm-end" style={{marginTop:'5%'}}>
                                 
@@ -188,6 +191,7 @@ class Profile extends Component{
 
 
         </div>
+        
         
         
         
