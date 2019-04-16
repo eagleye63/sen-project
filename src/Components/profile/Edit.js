@@ -134,7 +134,7 @@ class Edit extends Component {
             </div>
             <div className={'form-group'} >
                 <label>Work_time:</label>
-                <input name="Work_time"
+                <input name="workingtime"
                         value={this.state.workingtime}
                         onChange={this.handleChange}
                         
@@ -142,7 +142,7 @@ class Edit extends Component {
             </div>
             <div className={'form-group'} >
                 <label>Break_time:</label>
-                <input name="Break_time" 
+                <input name="breaktime" 
                         value={this.state.breaktime}
                         onChange={this.handleChange}
                         //placeholder='write in formate 12:00 to 13:00,14:00 to 15:00'

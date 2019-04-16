@@ -71,26 +71,12 @@ class Navigationbar extends PureComponent{
                                                              component={NavLink}
                                                              icon={'cog'}
                                                              text={"prescription"}/>
-                                    <AuthorizedComponent permission={(value.user=='patient') ? true : false}
-                                                             path={'/currprescription'}
-                                                             currPath={this.props.location.pathname}
-                                                             component={NavLink}
-                                                             icon={'cog'}
-                                                             text={"Current prescription"}/>                                             
-                                     <AuthorizedComponent permission={(value.user=='clinic') ? true : false}
-                                                             path={'/slotsettng'}
-                                                             currPath={this.props.location.pathname}
-                                                             component={NavLink}
-                                                             icon={'cog'}
-                                                             text={"Slot Setting"}/>
+                                    
+                                     
                                           <NavLink text={'Logout'}
                                                  icon={'sign-out'}
                                                  path={this.props.location.pathname}
-                                                 currPath={""}
-
-                                                 
-                                                                     
-
+                                                 currPath={""}  
                                                  onClick={value.logOut}/>                                 
 
                             </ul>
