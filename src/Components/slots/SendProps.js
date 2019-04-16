@@ -4,6 +4,7 @@ import TempPage from './TempPage'
 import firebase from '../../config/configuration'
 import { Spinner } from 'reactstrap';
 import { isNull } from 'util';
+import {Redirect} from 'react-router-dom';
 
  class SendProps extends PureComponent {
 
@@ -131,16 +132,36 @@ import { isNull } from 'util';
       console.log(this.breaktime);
       if(this.willWork && !this.timeGone)
       {
-      return (
-        <div>
-          <SlotBooking doctorName={this.props.doctorName} slotsDatabase={this.slotsDatabase} 
-              workingtime={this.workingtime} slotInterval={this.slotInterval} 
-              breaktime={this.breaktime} patient_booking={this.patient_booking} 
-              patientId={this.props.patientId} 
-              dateString={this.dateString} offsetTime={this.offsetTime} description={this.description}
-          />
-        </div>
-      )
+        return (
+          <div>
+          <h1>Hello</h1>
+          <Redirect push to={{
+              pathname: `/slotbook2/${this.props.patientId}`,
+              state: { 
+                doctorName: this.props.doctorName,
+                    slotsDatabase: this.slotsDatabase,
+                    workingtime:this.workingtime,
+                    slotInterval:this.slotInterval,
+                    breaktime:this.breaktime,
+                    patient_booking:this.patient_booking,
+                    patientId:this.props.patientId,
+                    dateString:this.dateString,
+                    offsetTime:this.offsetTime,
+                    description:this.description,
+                    doctor:this.props.doctor,
+                    clinicfees:this.props.clinicfees,
+                    clinicname:this.props.clinicname,
+               }
+          }} />
+  
+            {/* <SlotBooking doctorName={this.props.doctorName} slotsDatabase={this.slotsDatabase} 
+                workingtime={this.workingtime} slotInterval={this.slotInterval} 
+                breaktime={this.breaktime} patient_booking={this.patient_booking} 
+                patientId={this.props.patientId} 
+                dateString={this.dateString} offsetTime={this.offsetTime} description={this.description} */}
+  
+          </div>
+        )
       }
       else
       {
