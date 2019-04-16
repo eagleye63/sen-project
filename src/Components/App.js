@@ -19,6 +19,11 @@ import Signuppagedoc from './public-page/Signupdoc';
 import Signuppagepat from './public-page/SignUp'
 import Clinicdate from './home-page/ClinicDate';
 import TempPage from './slots/TempPage';
+import Precripation from './Precripaton/History';
+import ExeRedirect from './profile/ExeRedirect';
+import PatientDisplayFromBloodGroup from './slots/PatientDisplayFromBloodGroup';
+import ErrorPage from './public-page/ErrorPage'
+import SlotBooking from './slots/slotbooking';
 
 export const Context = React.createContext();
 
@@ -50,6 +55,8 @@ class App extends React.PureComponent{
           return  prevState;
        })
     }
+
+    
    
     submitHandler=(event)=>{
         event.preventDefault();
@@ -66,7 +73,7 @@ class App extends React.PureComponent{
               var user=firebase.auth().currentUser.uid;
               
               if(flag)
-              {
+              { 
                 //1
                 firebase.database().ref('list').child(user).on('value',snapshot=>{
                     console.log(this);
@@ -166,15 +173,23 @@ class App extends React.PureComponent{
                         component={Signuppagepat}/>
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path={"/slotbook/:id"}  
                         component={TempPage} patientId={this.state.key}  />
+                    <AuthorizedRoute permission={this.state.user==='patient' ? true : false} path={"/slotbook2/:id"}
+                        component={SlotBooking}/>
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/currappoitment" exact strict 
-                        component={Currappo} />
-                        <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/reviappoitment" exact strict 
-                        component={Reviappo} />
-                        <AuthorizedRoute permission={this.state.user === 'clinic' ? true : false } path="/reviappoitment" exact strict 
-                        component={Reviappo} />
-                        <AuthorizedRoute permission={true} path="/Myprofile" exact strict 
+                        component={Currappo} patientid={this.state.key} />
+                        <AuthorizedRoute permission={this.state.user === 'patient' ? true : false}  path="/prescription" exact strict 
+                        component={Precripation}  patientid={this.state.key} user={this.state.user} />
+                        <AuthorizedRoute permission={this.state.user === 'clinic' ? true : false } path={"/prescription/:id"} exact strict 
+                        component={Precripation}  user={this.state.user}/>                        
+                    <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path={"/slotbook/:id"}  
+                        component={TempPage} patientId={this.state.key}  />
+                    <AuthorizedRoute permission={true} path="/Myprofile" exact strict 
                         component={Profile} user={this.state.user} id={this.state.key} />
 
+                    <AuthorizedRoute permission={this.state.user=='clinic'} path="/BloodGroup" exact strict
+                        component={PatientDisplayFromBloodGroup} user={this.state.user} id={this.state.key} />
+                        
+                    <Route component={ErrorPage}/>
                     {/* <Route render={() => <Redirect to='/'/>}/>                   
                     <Route render={() => <Redirect to='/'/>}/> */}
                     </Switch>
