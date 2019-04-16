@@ -167,27 +167,50 @@ class App extends React.PureComponent{
                         email={this.state.email} password={this.state.password}
                         id={this.state.key}
                         />
+                        {
+                                !this.state.isAuthenticated ? 
+                                <Redirect to='/'></Redirect>
+                                :''
+
+                        }
                    <AuthorizedRoute permission={true}  path="/signupclinic" exact strict 
                         component={Signuppagedoc}/>
                         <AuthorizedRoute permission={true}  path="/signuppatient" exact strict 
                         component={Signuppagepat}/>
-                    
+                    {this.state.user==='patient'?
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/currappoitment" exact strict 
                         component={Currappo} patientid={this.state.key} />
+                        :' '}
+                    {this.state.user === 'patient' ?
                         <AuthorizedRoute permission={this.state.user === 'patient' ? true : false}  path="/prescription" exact strict 
                         component={Precripation}  patientid={this.state.key} user={this.state.user} />
+                       :'' 
+                    }
+                    {this.state.user==='clinic'?
                         <AuthorizedRoute permission={this.state.user === 'clinic' ? true : false } path={"/prescription/:id"} exact strict 
-                        component={Precripation}  user={this.state.user}/>                        
-                    <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path={"/slotbook/:id"}  
+                        component={Precripation}  user={this.state.user}/> 
+                        :''
+                    }
+                    {this.state.user === 'patient' ?
+                        <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path={"/slotbook/:id"}  
                         component={TempPage} patientId={this.state.key}  />
+                        :''
+                    }
+                    {this.state.user === 'patient' ?
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false} path="/Myprofilep" exact strict 
                         component={Profilepatient} user={this.state.user} id={this.state.key} />
+                        :''
+                    }
+                    {this.state.user==='clinic'?
                         <AuthorizedRoute permission={this.state.user === 'clinic' ? true : false} path="/Myprofilec" exact strict 
                         component={Profileclinic} user={this.state.user} id={this.state.key} />
-
+                        :''
+                    }
+                    {this.state.user==='clinic'?
                     <AuthorizedRoute permission={this.state.user=='clinic'} path="/BloodGroup" exact strict
                         component={PatientDisplayFromBloodGroup} user={this.state.user} id={this.state.key} />
-                        
+                        :''
+                    }  
                     <Route component={ErrorPage}/>
                     {/* <Route render={() => <Redirect to='/'/>}/>                   
                     <Route render={() => <Redirect to='/'/>}/> */}
