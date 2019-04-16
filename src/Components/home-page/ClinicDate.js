@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Collapse, NavbarToggler, NavbarBrand } from 'react-bootstrap';
 import { NavDropdown, Navbar, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'react-bootstrap';
 import { FormControl } from 'react-bootstrap';
-import { Spinner, Col, Button, Form, FormGroup, Label, Input, FormText, Container } from 'reactstrap';
+import { Spinner, Col, Button, Form, FormGroup, h3, Input, FormText, Container } from 'reactstrap';
 //import './Clin.css'
 import { CardBody, Card } from 'reactstrap';
 import firebase from './../../config/configuration';
@@ -89,10 +89,15 @@ class ClinicDate extends Component {
         return (
           <div>
       
-
-            <form class="form-inline" onSubmit={this.submithandler}>
-              <select value={this.state.bld} onChange={this.handler} required className="form-control">
-                <option value="select">Select an Option</option>
+      <div className="d-flex justify-content-end" >
+                <div className="d-flex justify-content-end" style={{backgroundColor:'#f1f1f1',marginTop:'0.5%',marginBottom:'2%',marginRight:'4%'}}>
+            
+            <form className="form-inline" onSubmit={this.submithandler} >
+            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center" style={{marginRight:'2%'}}>
+           
+              <select value={this.state.bld} onChange={this.handler} required className="form-control" style={{height:'120%',fontSize:'120%'}}>
+                <option value="select">Select a blood group</option>
                 <option value="A+">A+</option>
                 <option value="A-">A-</option>
                 <option value="B+">B+</option>
@@ -103,20 +108,29 @@ class ClinicDate extends Component {
                 <option value="AB-">AB-</option>
               </select>
 
+              </div>
+              </div>
+              </form>
+              
 
-              <button type="submit">Search</button>
-            </form>
+              <button className="btn btn" type="submit" style={{borderRadius:'5%',backgroundColor:'green',height:'89%',fontSize:'89%'}} onClick={this.submithandler}>Search</button>
+
+
+              
+            
+            </div>
+            </div>
 
 
 
                 <div className="d-flex justify-content-center">
-                <div className="d-flex justify-content-start" style={{marginBottom:'1%'}}>
+                <div className="d-flex justify-content-start" style={{marginBottom:'0%'}}>
                 <h3><button className="btn btn" style={{backgroundColor:'#116466',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>List Of Appointments</b></button></h3>
                 </div>
                 </div>
            
               
-                <div className="d-flex justify-content-center" style={{marginTop:'3%'}}>
+                <div className="d-flex justify-content-center" >
                 <div className="d-flex justify-content-center">
 
                   <form style={{height:'100%'}}>
@@ -132,9 +146,9 @@ class ClinicDate extends Component {
               
               
               
-              {/* <label>
+              {/* <h3>
                 <b>DATE: </b>
-              </label>
+              </h3>
             <DatePicker selected={this.state.startDate}
                         onChange={this.handleChange}/> */}
              

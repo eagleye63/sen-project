@@ -83,6 +83,8 @@ class Navigationbar extends PureComponent{
                                                              component={NavLink}
                                                              icon={'cog'}
                                                              text={"Slot Setting"}/>
+
+                                                
                                           <NavLink text={'Logout'}
                                                  icon={'sign-out'}
                                                  path={this.props.location.pathname}
@@ -91,7 +93,10 @@ class Navigationbar extends PureComponent{
                                                  
                                                                      
 
-                                                 onClick={value.logOut}/>                                 
+                                                 onClick={value.logOut}/>
+                                           
+                                                             
+                                                                                              
 
                             </ul>
 
