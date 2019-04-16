@@ -46,10 +46,25 @@ class SlotBooking extends Component {
 
     //rows is an Array which contains all the rows that are to be printed for slots
     this.rows = [];
+    this.columns=[];
     var currentHour=parseInt(startHour,10);
     var currentMinute=parseInt(startMinute,10);
     let tempvar=0;
+    let cnt=0;
+    let temp=0;
     for (let i = 0; i < this.slotsDatabase.length; i++) {
+        if(cnt==4){
+          cnt=0;
+          console.log("Hello slot ",temp)
+          console.log("Hello slot: rows",this.rows.length);
+
+          this.columns.push(this.rows);
+
+
+
+          this.rows=[];
+          temp++;
+        }
         if(currentMinute>=60)
         {
             
@@ -80,9 +95,10 @@ class SlotBooking extends Component {
         if(isInBreak || alreadyBooked)
         {
             //booked
-            this.rows.push(<button key={i} type="button" className="btn btn-outline-danger" data-key={i} data-id="Booked" onClick={this.giveErrorPrompt}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
+            cnt++;
+            this.rows.push(<button key={i} type="button" className="btn btn-outline-danger" style={{width:'20%',height:'20%',fontSize:'14px'}} data-key={i} data-id="Booked" onClick={this.giveErrorPrompt}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
             tempvar++;
-            if(tempvar%3==0)
+            if(tempvar%4==0)
             {
               this.rows.push(<br></br>);
               this.rows.push(<br></br>);
@@ -91,9 +107,10 @@ class SlotBooking extends Component {
         else
         {
             //not booked
-            this.rows.push(<button key={i} type="button" className="btn btn-outline-success" data-key={i} data-id="notBooked" data-value={currentHour+":"+currentMinute +" "+ NextHour+":"+NextMinute} onClick={this.bookThisSlot}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
+            cnt++;
+            this.rows.push(<button key={i} type="button" className="btn btn-outline-success" style={{width:'20%',height:'20%',fontSize:'14px'}} data-key={i} data-id="notBooked" data-value={currentHour+":"+currentMinute +" "+ NextHour+":"+NextMinute} onClick={this.bookThisSlot}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
             tempvar++;
-            if(tempvar%3==0)
+            if(tempvar%4==0)
             {
               this.rows.push(<br></br>);
               this.rows.push(<br></br>);
@@ -104,6 +121,7 @@ class SlotBooking extends Component {
         currentHour=parseInt(currentHour,10);
         currentMinute=parseInt(currentMinute,10);
     }
+    console.log("Hello slot: columns",this.columns.length);
 
     this.state = {
       slots:  this.slotsDatabase 
@@ -139,7 +157,7 @@ class SlotBooking extends Component {
         slots:newString
       },()=>{
 
-        const clinic=firebase.database().ref('clinic').child('navkar12 gmail com').child("date").child(this.dateString);
+        const clinic=firebase.database().ref('clinic').child(this.props.doctorName).child("date").child(this.dateString);
        clinic.update({slot_string:this.state.slots});
        //clinic.update({patient_booking:this.patient_booking}); //updates booking info
        //adding clinic details to patient's current appointment
@@ -241,7 +259,7 @@ class SlotBooking extends Component {
         <br></br>
         <div>
         {
-          this.rows.map(row=>row)
+          this.columns.map(columns=>columns)
         }
         </div>
         <button type="button" className="btn btn-outline-success">Booked</button>
