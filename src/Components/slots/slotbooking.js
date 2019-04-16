@@ -5,6 +5,7 @@ import firebase from '../../config/configuration'
 //import firebase from './firebase'
 //import "./SlotBooking.scss";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NavigationBar from '.././navigationbar'
 
 
 
@@ -15,16 +16,19 @@ class SlotBooking extends Component {
     constructor(props) {
     super(props);
     console.log('I am in SlotBooking')
-    this.slotsDatabase=this.props.slotsDatabase;
-    this.workingtime=this.props.workingtime;
-    this.slotInterval=this.props.slotInterval;
-    this.breaktime=this.props.breaktime;
-    this.patient_booking=this.props.patient_booking;
-    this.patientId=this.props.patientId;
-    this.dateString=this.props.dateString;
-    this.offsetTime=this.props.offsetTime;
-    this.description=this.props.description;
+    this.slotsDatabase=this.props.location.state.slotsDatabase;
+    this.workingtime=this.props.location.state.workingtime;
+    this.slotInterval=this.props.location.state.slotInterval;
+    this.breaktime=this.props.location.state.breaktime;
+    this.patient_booking=this.props.location.state.patient_booking;
+    this.patientId=this.props.location.state.patientId;
+    this.dateString=this.props.location.state.dateString;
+    this.offsetTime=this.props.location.state.offsetTime;
+    this.description=this.props.location.state.description;
     this.willWork=this.willWork;
+    this.doctor=this.props.location.doctor;
+    this.clinicfees=this.props.location.clinicfees;
+    this.clinicname=this.props.location.clinicname;
    this.slotInterval=parseInt(this.slotInterval,10);   
     var arrayWorkingtime = this.workingtime.split(" ");
     var startHour = arrayWorkingtime[0].split(":")[0];
@@ -33,6 +37,7 @@ class SlotBooking extends Component {
     var endMinute = arrayWorkingtime[2].split(":")[1];
       this.breaktime=this.breaktime.split(",");
        this.breakArray = [];
+       this.buttonclick="";
     for (let i = 0; i < this.breaktime.length; i++) {
       let tempObj = this.breaktime[i].split(" ");
       this.breakArray.push({
@@ -46,10 +51,26 @@ class SlotBooking extends Component {
 
     //rows is an Array which contains all the rows that are to be printed for slots
     this.rows = [];
+    this.columns=[];
     var currentHour=parseInt(startHour,10);
     var currentMinute=parseInt(startMinute,10);
     let tempvar=0;
+    let cnt=0;
+    let temp=0;
+    console.log("Slot db:",this.slotsDatabase.length);
     for (let i = 0; i < this.slotsDatabase.length; i++) {
+        if(cnt==4){
+          cnt=0;
+          console.log("Hello slot ",temp)
+          console.log("Hello slot: rows",this.rows.length);
+
+          this.columns.push(this.rows);
+
+
+
+          this.rows=[];
+          temp++;
+        }
         if(currentMinute>=60)
         {
             
@@ -80,9 +101,10 @@ class SlotBooking extends Component {
         if(isInBreak || alreadyBooked)
         {
             //booked
-            this.rows.push(<button key={i} type="button" className="btn btn-outline-danger" data-key={i} data-id="Booked" onClick={this.giveErrorPrompt}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
+            cnt++;
+            this.rows.push(<button key={i} type="button" className="btn btn-outline-danger" style={{width:'23%',height:'13%',fontSize:'11px',paddingBottom:'5%'}} data-key={i} data-id="Booked" onClick={this.giveErrorPrompt}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
             tempvar++;
-            if(tempvar%3==0)
+            if(tempvar%4==0)
             {
               this.rows.push(<br></br>);
               this.rows.push(<br></br>);
@@ -91,9 +113,10 @@ class SlotBooking extends Component {
         else
         {
             //not booked
-            this.rows.push(<button key={i} type="button" className="btn btn-outline-success" data-key={i} data-id="notBooked" data-value={currentHour+":"+currentMinute +" "+ NextHour+":"+NextMinute} onClick={this.bookThisSlot}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
+            cnt++;
+            this.rows.push(<button key={i} type="button" className="btn btn-outline-success" style={{width:'23%',height:'13%',fontSize:'11px',paddingBottom:'5%'}} data-key={i} data-id="notBooked" data-value={currentHour+":"+currentMinute +" "+ NextHour+":"+NextMinute} onClick={this.bookThisSlot}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
             tempvar++;
-            if(tempvar%3==0)
+            if(tempvar%4==0)
             {
               this.rows.push(<br></br>);
               this.rows.push(<br></br>);
@@ -104,6 +127,8 @@ class SlotBooking extends Component {
         currentHour=parseInt(currentHour,10);
         currentMinute=parseInt(currentMinute,10);
     }
+    this.columns.push(this.rows);
+    console.log("Hello slot: columns",this.columns.length);
 
     this.state = {
       slots:  this.slotsDatabase 
@@ -128,6 +153,7 @@ class SlotBooking extends Component {
       var wantToBook=window.confirm('Are you Sure you want to book this appointment?');
       if(wantToBook)
       {
+        this.buttonclick=event.target.dataset.value;
           var index=event.target.dataset.key;
           var timeofbook=event.target.dataset.value;
           console.log('hello world  time book is '+timeofbook)
@@ -139,7 +165,7 @@ class SlotBooking extends Component {
         slots:newString
       },()=>{
 
-        const clinic=firebase.database().ref('clinic').child('navkar12 gmail com').child("date").child(this.dateString);
+        const clinic=firebase.database().ref('clinic').child(this.props.location.state.doctorName).child("date").child(this.dateString);
        clinic.update({slot_string:this.state.slots});
        //clinic.update({patient_booking:this.patient_booking}); //updates booking info
        //adding clinic details to patient's current appointment
@@ -151,7 +177,7 @@ class SlotBooking extends Component {
           max1=0;
           max1=parseInt(max1)+1;
           patient.child(max1).set({
-            clinic:this.props.doctorName,
+            clinic:this.props.location.state.doctorName,
             date:this.dateString,
             slot_time:timeofbook,
 
@@ -169,7 +195,7 @@ class SlotBooking extends Component {
         this.slot_numberforupdate=val.slot_number;
         //promise in firebase to modify only after reading full data
         console.log(this.clinicforupdate+"  "+this.dateforupdate+"  "+this.slot_numberforupdate);
-        this.clinicforupdate=this.clinicforupdate+this.props.doctorName;
+        this.clinicforupdate=this.clinicforupdate+this.props.location.state.doctorName;
         this.dateforupdate=this.dateforupdate+this.dateString;
         this.slot_numberforupdate=this.slot_numberforupdate+""+index;
         patient.update({clinic:this.clinicforupdate});
@@ -229,24 +255,91 @@ class SlotBooking extends Component {
   }
 
   render() {
+
+    console.log("printing in slotbooking "+this.clinicname);
+
+    var link='https://www.paytm.com'
     return (
-      <div> 
-        {/*  Props of doctorName and other doctor details  will be send by Parent Page */}
-        <div >
-          <h2 align="center">{this.props.doctorName}</h2>
-          <p> {this.description}</p>
-        </div>
-        <text className="datestring">Slots for {this.dateString} </text>
-        <br></br>
-        <br></br>
-        <div>
-        {
-          this.rows.map(row=>row)
-        }
-        </div>
-        <button type="button" className="btn btn-outline-success">Booked</button>
-        <button type="button" className="btn btn-outline-danger">Not Booked</button>
-      </div>
+
+      <React.Fragment>
+
+        <NavigationBar/>
+          <div className="d-flex justify-content-center" style={{marginTop:'1%'}}>
+          <div  className="d-flex justify-content-center">
+          <h3><button className="btn btn" style={{backgroundColor:'#254e58',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>Book a Slot</b></button></h3>
+          </div>
+          </div>
+          <form  style={{marginLeft:'13%',marginTop:'3%',marginRight:'13%',paddingBottom:'1%'}}>
+            <div className="d-flex justify-content-between"  style={{marginLeft:'2%',marginTop:'3%'}}>
+              <div className="d-flex justify-content-start" style={{marginTop:'10%'}}>
+              <form>
+              <h4 inline style={{fontSize:'14px'}}><b>Your Name: </b>
+                
+              </h4>
+              <h4 style={{fontSize:'14px',marginTop:'3%'}}><b>Clinic's Name: </b></h4>
+              <h4 style={{fontSize:'14px',marginTop:'3%'}}><b>Doctor's Name: </b></h4>
+              <h4 style={{fontSize:'14px',marginTop:'3%'}}><b>Clinic Fees: </b></h4>
+              <h4 style={{fontSize:'14px',marginTop:'3%'}}><b>Slot Time: </b></h4>
+              </form>
+              </div>
+              
+              <div className="d-flex justify-content-center" style={{marginTop:'10%'}}>
+              <form>
+              <h4 inline style={{fontSize:'14px'}}>
+                Nayan Parmar
+              </h4>
+              <h4 inline style={{fontSize:'14px',marginTop:'3%'}}>{this.clinicname}</h4>
+              <h4 style={{fontSize:'14px',marginTop:'3%'}}>{this.doctor}</h4>
+              <h4 style={{fontSize:'14px',marginTop:'3%'}}>{this.clinicfees}</h4>
+              <h4 style={{fontSize:'14px',marginTop:'3%'}}>{this.buttonclick}</h4>
+              
+              
+                
+              </form>
+              
+              </div>
+              <div className="d-flex justify-content-end">
+              <div style={{width:'1px',backgroundColor:'grey',height:'80%'}}>
+                </div>
+                 <form style={{marginLeft:'2%'}}> 
+                  {this.columns.map(columns=>columns)}
+                  </form>
+              </div>
+              
+              
+
+            </div>
+
+            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center">
+            <form action={link} method="get" target="_blank">
+                                 <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9",fontSize:'90%'}}>Confirm Booking</button>
+            </form>
+            </div>
+            </div>
+
+          </form>
+      </React.Fragment>
+
+
+
+      // <div> 
+      //   {/*  Props of doctorName and other doctor details  will be send by Parent Page */}
+      //   <div >
+      //     <h2 align="center">{this.props.location.state.doctorName}</h2>
+      //     <p> {this.description}</p>
+      //   </div>
+      //   <text className="datestring">Slots for {this.dateString} </text>
+      //   <br></br>
+      //   <br></br>
+      //   <div>
+      //   {
+      //     this.columns.map(columns=>columns)
+      //   }
+      //   </div>
+      //   <button type="button" className="btn btn-outline-success">Booked</button>
+      //   <button type="button" className="btn btn-outline-danger">Not Booked</button>
+      // </div>
     );
   }
 }
