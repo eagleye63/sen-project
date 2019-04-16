@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import firebase from '../../config/configuration';
 import { CustomInput,Col,Button, Form, FormGroup, Label, Input, FormText ,Container} from 'reactstrap';
+import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 
-import Stylee from './Stylee.css'
 export class Signupdoc extends Component {
     constructor(props) {
       super(props)
@@ -14,7 +14,8 @@ export class Signupdoc extends Component {
          age:"",
          city:"",
          area:"",
-         breaktime:"",
+         breaktime:"Required to set  Ex:     12:00 to 13:00,14:00 to 20:01",
+         slot_time:'Required to set  Ex: 15  for 15 minites',
          clinicfees:"",
          degree:"",
          doctor:"",
@@ -93,7 +94,9 @@ export class Signupdoc extends Component {
             specialist:this.state.specialist,
             clinicfees:this.state.clinicfees,
             doctor:this.state.doctor,
+            slot_time:this.state.slot_time,
             workingtime:workingtime1,
+            breaktime:'',
             workingdays:workingdays1
         
         })
@@ -135,213 +138,345 @@ export class Signupdoc extends Component {
     
   render() {
     return (
-      <div  className="BACK">
-       <form  onSubmit={this.Signup} className="container" >
-        {/* <div className="Container" color="red" > */}
-        <div>
-        <Container bg="dark">
-            <h1>Sign Up</h1>
-            <p>Please fill in this form to create an account.</p>
-            <hr/>
-            <FormGroup row>
-            <Label htmlFor="email" sm={1}><b>Email:</b></Label>
-            <Col sm={7}>
-            <Input type="text" placeholder="Enter Email" name="email" onChange={this.handleChage}
-             value={this.state.email} required/><hr/>
-             </Col>
-            </FormGroup>
-
-
-            <FormGroup row>
-            <Label htmlFor="psw"  sm={1}><b>Password:</b></Label>
-            <Col sm={7}>
+      <MDBContainer>
+      <MDBRow>
+        <MDBCol md="10">
+          <form onSubmit={this.Signup} className="container" >
+            <p className="h4 text-center mb-4" style={{marginTop:'5%'}} >Sign up Doctor</p>
+            
+            <p className="h5 text-center mb-5">Please fill the sign up details</p>
+            <div style={{marginLeft:'5%',marginRight:'5%'}}>
+            <label htmlFor="defaultFormRegisterNameEx">
+              Email
+            </label>
+            <Input type="email" placeholder="Enter Email" name="email" onChange={this.handleChage}
+                 value={this.state.email} required style={{backgroundColor:'white'}}/><hr/>
+            
+            <label htmlFor="psw">
+              Password
+            </label>
             <Input type="password" placeholder="Enter Password" name="password" onChange={this.handleChage}
-             value={this.state.password} required/><hr/>
-             </Col>
-            </FormGroup>
-
-
-            <FormGroup row>
-            <Label htmlFor="clinicname" sm={1}><b>Clinic Name:</b></Label>
-            <Col sm={7}>
-            <Input type="text" placeholder="Enter Clinic Name" name="clinicname" onChange={this.handleChage}
-            value={this.state.clinicname} required/><hr/>
-            </Col>
-            </FormGroup>
-
-
-            <FormGroup row>
-            <Label htmlFor="doctor" sm={1}><b>Doctor Name:</b></Label>
-            <Col sm={7}>
+                value={this.state.password} required style={{backgroundColor:'white'}}/><hr/>
+            <label
+              htmlFor="clinicname"
+              
+            >
+              Clinic Name
+            </label>
+            <Input className="form-control" type="text" placeholder="Enter Clinic Name" name="clinicname" onChange={this.handleChage}
+                 value={this.state.clinicname} required style={{backgroundColor:'white'}} /><hr/>
+            
+            <label
+              htmlFor="doctor"
+              
+            >
+              Doctor Name
+            </label>
             <Input type="text" placeholder="Enter Doctor Name" name="doctor" onChange={this.handleChage}
-            value={this.state.doctor} required/><hr/>
-            </Col>
-            </FormGroup>
-
-
-            <FormGroup row>
-            <Label htmlFor="gender" sm={1}><b>Gender:</b></Label>
-            <Col sm={7}>
+                 value={this.state.doctor} required style={{backgroundColor:'white'}}/><hr/>
+            <label htmlFor="gender">
+                Gender
+            </label>
             <Input type="text" placeholder="Enter Gender" name="gender" onChange={this.handleChage}
-            value={this.state.gender} required/><hr/>
-            </Col>
-            </FormGroup>
-
-
-            <FormGroup row>
-            <Label htmlFor="degree" sm={1}><b>Degree:</b></Label>
-            <Col sm={7}>
+                   value={this.state.gender} required style={{backgroundColor:'white'}}/><hr/>
+            <label htmlFor="degree">Doctor's Degree</label>
             <Input type="text" placeholder="Enter Degree" name="degree" onChange={this.handleChage}
-            value={this.state.degree} required/><hr/>
-            </Col>
-            </FormGroup>
-
-
-            <FormGroup row>
-            <Label htmlFor="specialist" sm={1}><b>speciality:</b></Label>
-            <Col sm={7}>
+                 value={this.state.degree} required style={{backgroundColor:'white'}}/><hr/>
+            <label htmlFor="specialist">Specialist</label>
             <Input type="text" placeholder="Enter speciality" name="specialist" onChange={this.handleChage}
-             value={this.state.specialist} required/><hr/>
-             </Col>
-              </FormGroup>
-
-
-            <FormGroup row>
-            <Label htmlFor="age" sm={1}><b>Age:</b></Label>
-            <Col sm={7}>
-            <Input type="number"  name="age" onChange={this.handleChage}
-            value={this.state.age} placeholder="Doctor's age" required/><hr/>
-            </Col>
-            </FormGroup>
-
-
-            <FormGroup row>
-            <Label htmlFor="phone" sm={1}><b>Phone:</b></Label>
-            <Col sm={7}>
+                 value={this.state.specialist} required style={{backgroundColor:'white'}}/><hr/>
+            <label htmlFor="age">Age</label>
+            <Input type="number"  name="age" placeholder="Enter Age" onChange={this.handleChage} min="1"
+                 value={this.state.age}  required style={{backgroundColor:'white',fontSize:12,height:50}}/><hr/>
+            <Label htmlFor="phone">Phone</Label>
             <Input type="number" placeholder="Enter Phone Number" name="phone" onChange={this.handleChage}
-            value={this.state.phone} required/><hr/>
-            </Col>
-            </FormGroup>
-
-
-            <FormGroup row>
-            <Label htmlFor="clinicfees" sm={1}><b>Clinic Fees:</b></Label>
-            <Col sm={7}>
+                value={this.state.phone} required style={{backgroundColor:'white',fontSize:12,padding:10}}/><hr/>
+            <Label htmlFor="clinicfees" >Clinic Fees:</Label>
             <Input type="number" placeholder="Enter clinicfees" name="clinicfees" onChange={this.handleChage}
-             value={this.state.clinicfees} required/><hr/>
-             </Col>
-              </FormGroup>
-
-
-            <FormGroup row>
-            <Label htmlFor="area" sm={1}><b>Area:</b></Label>
-            <Col sm={7}>
+                value={this.state.clinicfees} required style={{backgroundColor:'white',fontSize:12,padding:10}}/><hr/>
+            <Label htmlFor="area" >Area:</Label>
             <Input type="text" placeholder="Enter Area" name="area" onChange={this.handleChage} 
-            value={this.state.area} required/><hr/>
-            </Col>
-            </FormGroup>
-
-
-            <FormGroup row>
-            <Label htmlFor="city" sm={1}><b>City:</b></Label>
-            <Col sm={7}>
+                value={this.state.area} required style={{backgroundColor:'white'}}/><hr/>
+            <Label htmlFor="city">City:</Label>
             <Input type="text" placeholder="Enter City" name="city" onChange={this.handleChage}
-            value={this.state.city} required/><hr/>
-            </Col>
-            </FormGroup>
-
-
-            <FormGroup row>
-            <Label htmlFor="street" sm={1}><b>Street:</b></Label>
-            <Col sm={7}>
+                value={this.state.city} required style={{backgroundColor:'white'}}/><hr/>
+            <Label htmlFor="street" >Street:</Label>
             <Input type="text" placeholder="Enter Street" name="street" onChange={this.handleChage}
-            value={this.state.street} required/><hr/>
-            </Col>
-            </FormGroup>
-
-
-            <FormGroup row>
-            <Label htmlFor="pincode" sm={1}><b>Pincode:</b></Label>
-            <Col sm={7}>
+               value={this.state.street} required style={{backgroundColor:'white'}}/><hr/>
+            <Label htmlFor="pincode">Pincode:</Label>
             <Input type="text" placeholder="Enter Pincode" name="pincode" onChange={this.handleChage}
-            value={this.state.pincode} required/><hr/>
-            </Col>
-            </FormGroup>
-           
-
-            <FormGroup row>
-            <Label htmlFor="starttime" sm={1}><b>Start time:</b></Label>
-            <Col sm={7}>
+                value={this.state.pincode} required style={{backgroundColor:'white'}}/><hr/>
+            <Label htmlFor="starttime" >Start time:</Label>
             <Input type="time" placeholder="" name="starttime" value="10:00" 
-            onChange={this.handleChage} value={this.state.starttime} required/><hr/>
-            </Col>
-            </FormGroup>
-
-            <FormGroup row>
-            <Label htmlFor="endtime" sm={1}><b>End time:</b></Label>
-            <Col sm={7}>
+                onChange={this.handleChage} value={this.state.starttime} required style={{backgroundColor:'white',padding:10,height:35}}/><hr/>
+            <Label htmlFor="endtime">End time:</Label>
             <Input type="time" placeholder="" name="endtime" value="15:00" 
-            onChange={this.handleChage} value={this.state.endtime} required/><hr/>
-            </Col>
-            </FormGroup>
-            
+                onChange={this.handleChage} value={this.state.endtime} required style={{backgroundColor:'white',padding:10,height:35}}/><hr/>
             <FormGroup row>
-            <Label for="exampleCheckbox"><b>Select Working days from below:</b></Label>
-            </FormGroup>
-            <FormGroup check inline>
-                <Label check>
-                    <Input type="checkbox" id="monday" name="monday" value={this.state.monday} onClick={this.handleClick} /><b>Monday  </b>
-                </Label>
-            </FormGroup>
+                <Label for="exampleCheckbox"><b>Select Working days from below:</b></Label>
+                </FormGroup>
+                <FormGroup check inline>
+                    <Label check>
+                        <Input type="checkbox" id="monday" name="monday" value={this.state.monday} onClick={this.handleClick} /><b>Monday  </b>
+                    </Label>
+                </FormGroup>
+                
+
+                <FormGroup check inline>
+                    <Label check>
+                        <Input type="checkbox" id="tuesday" name="tuesday" value={this.state.thuesday} onClick={this.handleClick} /><b>Tuesday  </b>
+                    </Label>
+                </FormGroup>
+
+                <FormGroup check inline>
+                    <Label check>
+                        <Input type="checkbox" id="wednesday" name="wednesday" value={this.state.wednesday} onClick={this.handleClick} /><b>Wednesday  </b>
+                    </Label>
+                </FormGroup>
+
+                <FormGroup check inline>
+                    <Label check>
+                        <Input type="checkbox" id="thursday" name="thursday" value={this.state.thursday} onClick={this.handleClick} /><b>Thursday  </b>
+                    </Label>
+                </FormGroup>
+
+                <FormGroup check inline>
+                    <Label check>
+                        <Input type="checkbox" id="friday" name="friday" value={this.state.friday} onClick={this.handleClick} /><b>Friday  </b>
+                    </Label>
+                </FormGroup>
+
+                <FormGroup check inline>
+                    <Label check>
+                        <Input type="checkbox" id="saturday" name="saturday" value={this.state.saturday} onClick={this.handleClick} /><b>Saturday  </b>
+                    </Label>
+                </FormGroup>
+
+                <FormGroup check inline>
+                    <Label check>
+                        <Input type="checkbox" id="sunday" name="sunday" value={this.state.sunday} onClick={this.handleClick} /><b>Sunday  </b>
+                    </Label>
+                </FormGroup>
+              
+                <div className="clearfix">
+                {/* <button type="button" class="cancelbtn">Cancel</button> */}
+                <Button type="submit" className="btn" color='primary'  >Sign Up</Button>
+                <br/><br/><br/>
+              </div>
+            </div>
+          </form>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
+
+
+
+        
+        // <MDBContainer bg="dark">
+        //   <MDBRow>
+        //     <MDBCol md="6">
+        //       <form>
+        //         <p className="h4-text-center mb-4">Sign up</p>
+        //         <Label htmlFor="email" sm={1}><b>Email:</b></Label>
+        //         <Col sm={7}>
+        //         <Input type="text" placeholder="Enter Email" name="email" onChange={this.handleChage}
+        //         value={this.state.email} required/><hr/>
+        //         </Col>
+                
+
+
+        //         <FormGroup row>
+        //         <Label htmlFor="psw"  sm={1}><b>Password:</b></Label>
+        //         <Col sm={7}>
+        //         <Input type="password" placeholder="Enter Password" name="password" onChange={this.handleChage}
+        //         value={this.state.password} required/><hr/>
+        //         </Col>
+        //         </FormGroup>
+
+
+        //         <FormGroup row>
+        //         <Label htmlFor="clinicname" sm={1}><b>Clinic Name:</b></Label>
+        //         <Col sm={7}>
+        //         <Input type="text" placeholder="Enter Clinic Name" name="clinicname" onChange={this.handleChage}
+        //         value={this.state.clinicname} required/><hr/>
+        //         </Col>
+        //         </FormGroup>
+
+
+        //         <FormGroup row>
+        //         <Label htmlFor="doctor" sm={1}><b>Doctor Name:</b></Label>
+        //         <Col sm={7}>
+        //         <Input type="text" placeholder="Enter Doctor Name" name="doctor" onChange={this.handleChage}
+        //         value={this.state.doctor} required/><hr/>
+        //         </Col>
+        //         </FormGroup>
+
+
+        //         <FormGroup row>
+        //         <Label htmlFor="gender" sm={1}><b>Gender:</b></Label>
+        //         <Col sm={7}>
+        //         <Input type="text" placeholder="Enter Gender" name="gender" onChange={this.handleChage}
+        //         value={this.state.gender} required/><hr/>
+        //         </Col>
+        //         </FormGroup>
+
+
+        //         <FormGroup row>
+        //         <Label htmlFor="degree" sm={1}><b>Degree:</b></Label>
+        //         <Col sm={7}>
+        //         <Input type="text" placeholder="Enter Degree" name="degree" onChange={this.handleChage}
+        //         value={this.state.degree} required/><hr/>
+        //         </Col>
+        //         </FormGroup>
+
+
+        //         <FormGroup row>
+        //         <Label htmlFor="specialist" sm={1}><b>speciality:</b></Label>
+        //         <Col sm={7}>
+        //         <Input type="text" placeholder="Enter speciality" name="specialist" onChange={this.handleChage}
+        //         value={this.state.specialist} required/><hr/>
+        //         </Col>
+        //           </FormGroup>
+
+
+        //         <FormGroup row>
+        //         <Label htmlFor="age" sm={1}><b>Age:</b></Label>
+        //         <Col sm={7}>
+        //         <Input type="number"  name="age" onChange={this.handleChage}
+        //         value={this.state.age} placeholder="Doctor's age" required style={{backgroundColor:'white'}}/><hr/>
+        //         </Col>
+        //         </FormGroup>
+
+
+        //         <FormGroup row>
+                // <Label htmlFor="phone" sm={1}><b>Phone:</b></Label>
+                // <Col sm={7}>
+                // <Input type="number" placeholder="Enter Phone Number" name="phone" onChange={this.handleChage}
+                // value={this.state.phone} required/><hr/>
+        //         </Col>
+        //         </FormGroup>
+
+
+        //         <FormGroup row>
+                // <Label htmlFor="clinicfees" sm={1}><b>Clinic Fees:</b></Label>
+                // <Col sm={7}>
+                // <Input type="number" placeholder="Enter clinicfees" name="clinicfees" onChange={this.handleChage}
+                // value={this.state.clinicfees} required/><hr/>
+        //         </Col>
+        //           </FormGroup>
+
+
+        //         <FormGroup row>
+                // <Label htmlFor="area" sm={1}><b>Area:</b></Label>
+                // <Col sm={7}>
+                // <Input type="text" placeholder="Enter Area" name="area" onChange={this.handleChage} 
+                // value={this.state.area} required/><hr/>
+        //         </Col>
+        //         </FormGroup>
+
+
+        //         <FormGroup row>
+                // <Label htmlFor="city" sm={1}><b>City:</b></Label>
+                // <Col sm={7}>
+                // <Input type="text" placeholder="Enter City" name="city" onChange={this.handleChage}
+                // value={this.state.city} required/><hr/>
+        //         </Col>
+        //         </FormGroup>
+
+
+        //         <FormGroup row>
+        //         <Label htmlFor="street" sm={1}><b>Street:</b></Label>
+        //         <Col sm={7}>
+        //         <Input type="text" placeholder="Enter Street" name="street" onChange={this.handleChage}
+        //         value={this.state.street} required/><hr/>
+        //         </Col>
+        //         </FormGroup>
+
+
+        //         <FormGroup row>
+                // <Label htmlFor="pincode" sm={1}><b>Pincode:</b></Label>
+                // <Col sm={7}>
+                // <Input type="text" placeholder="Enter Pincode" name="pincode" onChange={this.handleChage}
+                // value={this.state.pincode} required style={{backgroundColor:'white'}}/><hr/>
+        //         </Col>
+        //         </FormGroup>
+              
+
+        //         <FormGroup row>
+                // <Label htmlFor="starttime" sm={1}><b>Start time:</b></Label>
+                // <Col sm={7}>
+                // <Input type="time" placeholder="" name="starttime" value="10:00" 
+                // onChange={this.handleChage} value={this.state.starttime} required style={{backgroundColor:'white'}}/><hr/>
+        //         </Col>
+        //         </FormGroup>
+
+        //         <FormGroup row>
+                // <Label htmlFor="endtime" sm={1}><b>End time:</b></Label>
+                // <Col sm={7}>
+                // <Input type="time" placeholder="" name="endtime" value="15:00" 
+                // onChange={this.handleChage} value={this.state.endtime} required style={{backgroundColor:'white'}}/><hr/>
+        //         </Col>
+        //         </FormGroup>
+                
+                // <FormGroup row>
+                // <Label for="exampleCheckbox"><b>Select Working days from below:</b></Label>
+                // </FormGroup>
+                // <FormGroup check inline>
+                //     <Label check>
+                //         <Input type="checkbox" id="monday" name="monday" value={this.state.monday} onClick={this.handleClick} /><b>Monday  </b>
+                //     </Label>
+                // </FormGroup>
+                
+
+                // <FormGroup check inline>
+                //     <Label check>
+                //         <Input type="checkbox" id="tuesday" name="tuesday" value={this.state.thuesday} onClick={this.handleClick} /><b>Tuesday  </b>
+                //     </Label>
+                // </FormGroup>
+
+                // <FormGroup check inline>
+                //     <Label check>
+                //         <Input type="checkbox" id="wednesday" name="wednesday" value={this.state.wednesday} onClick={this.handleClick} /><b>Wednesday  </b>
+                //     </Label>
+                // </FormGroup>
+
+                // <FormGroup check inline>
+                //     <Label check>
+                //         <Input type="checkbox" id="thursday" name="thursday" value={this.state.thursday} onClick={this.handleClick} /><b>Thursday  </b>
+                //     </Label>
+                // </FormGroup>
+
+                // <FormGroup check inline>
+                //     <Label check>
+                //         <Input type="checkbox" id="friday" name="friday" value={this.state.friday} onClick={this.handleClick} /><b>Friday  </b>
+                //     </Label>
+                // </FormGroup>
+
+                // <FormGroup check inline>
+                //     <Label check>
+                //         <Input type="checkbox" id="saturday" name="saturday" value={this.state.saturday} onClick={this.handleClick} /><b>Saturday  </b>
+                //     </Label>
+                // </FormGroup>
+
+                // <FormGroup check inline>
+                //     <Label check>
+                //         <Input type="checkbox" id="sunday" name="sunday" value={this.state.sunday} onClick={this.handleClick} /><b>Sunday  </b>
+                //     </Label>
+                // </FormGroup>
+        //         <br/><br/><br/>
+
+        //         <div className="clearfix">
+        //         {/* <button type="button" class="cancelbtn">Cancel</button> */}
+        //         <Button type="submit" className="btn" color='primary'  >Sign Up</Button>
+        //         <br/><br/><br/>
+        // //        </div>
+        //        </form>
+        //     </MDBCol>
+        //     </MDBRow>
+        //     </MDBContainer>
             
-
-            <FormGroup check inline>
-                <Label check>
-                    <Input type="checkbox" id="tuesday" name="tuesday" value={this.state.thuesday} onClick={this.handleClick} /><b>Tuesday  </b>
-                </Label>
-            </FormGroup>
-
-            <FormGroup check inline>
-                <Label check>
-                    <Input type="checkbox" id="wednesday" name="wednesday" value={this.state.wednesday} onClick={this.handleClick} /><b>Wednesday  </b>
-                </Label>
-            </FormGroup>
-
-            <FormGroup check inline>
-                <Label check>
-                    <Input type="checkbox" id="thursday" name="thursday" value={this.state.thursday} onClick={this.handleClick} /><b>Thursday  </b>
-                </Label>
-            </FormGroup>
-
-            <FormGroup check inline>
-                <Label check>
-                    <Input type="checkbox" id="friday" name="friday" value={this.state.friday} onClick={this.handleClick} /><b>Friday  </b>
-                </Label>
-            </FormGroup>
-
-            <FormGroup check inline>
-                <Label check>
-                    <Input type="checkbox" id="saturday" name="saturday" value={this.state.saturday} onClick={this.handleClick} /><b>Saturday  </b>
-                </Label>
-            </FormGroup>
-
-            <FormGroup check inline>
-                <Label check>
-                    <Input type="checkbox" id="sunday" name="sunday" value={this.state.sunday} onClick={this.handleClick} /><b>Sunday  </b>
-                </Label>
-            </FormGroup>
-            <br/><br/><br/>
-
-            <div className="clearfix">
-            {/* <button type="button" class="cancelbtn">Cancel</button> */}
-            <Button type="submit" className="btn" color='primary'  >Sign Up</Button>
-            <br/><br/><br/>
-            </div>
-            </Container>
-            </div>
-    </form>
     
-      </div>
+     
     )
   }
 }

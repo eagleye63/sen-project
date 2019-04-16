@@ -13,7 +13,8 @@ import Home from './home-page/homepage';
 import Slotbook from './slots/jeettmp';
 import Currappo from './appoitment-page/currappo';
 import Reviappo from './appoitment-page/reviappo';
-import Profile from './profile/Profile';
+import Profilepatient from './profile/Profilepatient';
+import Profileclinic from './profile/Profileclinic';
 import { CLIENT_RENEG_LIMIT } from 'tls';
 import Signuppagedoc from './public-page/Signupdoc';
 import Signuppagepat from './public-page/SignUp'
@@ -23,7 +24,9 @@ import Precripation from './Precripaton/History';
 import ExeRedirect from './profile/ExeRedirect';
 import PatientDisplayFromBloodGroup from './slots/PatientDisplayFromBloodGroup';
 import ErrorPage from './public-page/ErrorPage'
+
 import SlotBooking from './slots/slotbooking';
+
 
 export const Context = React.createContext();
 
@@ -171,10 +174,7 @@ class App extends React.PureComponent{
                         component={Signuppagedoc}/>
                         <AuthorizedRoute permission={true}  path="/signuppatient" exact strict 
                         component={Signuppagepat}/>
-                    <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path={"/slotbook/:id"}  
-                        component={TempPage} patientId={this.state.key}  />
-                    <AuthorizedRoute permission={this.state.user==='patient' ? true : false} path={"/slotbook2/:id"}
-                        component={SlotBooking}/>
+                    
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/currappoitment" exact strict 
                         component={Currappo} patientid={this.state.key} />
                         <AuthorizedRoute permission={this.state.user === 'patient' ? true : false}  path="/prescription" exact strict 
@@ -183,8 +183,16 @@ class App extends React.PureComponent{
                         component={Precripation}  user={this.state.user}/>                        
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path={"/slotbook/:id"}  
                         component={TempPage} patientId={this.state.key}  />
-                    <AuthorizedRoute permission={true} path="/Myprofile" exact strict 
-                        component={Profile} user={this.state.user} id={this.state.key} />
+
+                    <AuthorizedRoute permission={this.state.user==='patient' ? true : false} path={"/slotbook2/:id"}
+                        component={SlotBooking}/>
+                                                                                           
+                    
+                    <AuthorizedRoute permission={this.state.user === 'patient' ? true : false} path="/Myprofilep" exact strict 
+                        component={Profilepatient} user={this.state.user} id={this.state.key} />
+                        <AuthorizedRoute permission={this.state.user === 'clinic' ? true : false} path="/Myprofilec" exact strict 
+                        component={Profileclinic} user={this.state.user} id={this.state.key} />
+
 
                     <AuthorizedRoute permission={this.state.user=='clinic'} path="/BloodGroup" exact strict
                         component={PatientDisplayFromBloodGroup} user={this.state.user} id={this.state.key} />

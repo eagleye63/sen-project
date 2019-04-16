@@ -9,6 +9,9 @@ import {BrowserRouter as Router, Redirect, Route, Switch,Link} from "react-route
 import AuthorizedComponent from '../AuthorizedComponent';
 import Clinicdate from './ClinicDate';
 import { CLIENT_RENEG_LIMIT } from 'tls';
+
+
+import { MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
 class Home extends React.Component{
     constructor(props){
         super(props);
@@ -42,26 +45,36 @@ class Home extends React.Component{
            // console.log('hiiiiiiiiiiiiiiiiiii');
             snapshot.forEach(child1=>{
               //  console.log('child key '+child1.key);
-                let l2=firebase.database().ref('/clinic').child(child1.key).once("value").then(snapshot1=>{
+              //  let l2=firebase.database().ref('/clinic').child(child1.key).once("value").then(snapshot1=>{
                  //   console.log()
+                 let snapshot1=child1;
                     let currentcliniclist=this.state.cliniclist;
                     //currentcliniclist.push(snapshot1.val());
                //     console.log('parent key'+snapshot1.key)
                     currentcliniclist.push({
-                        'name':snapshot1.val().name,
-                        'age':snapshot1.val().age,
-                        'doctorkey':snapshot1.key
+                        clinicname:snapshot1.val().clinicname,
+                        doctor:snapshot1.val().doctor,
+                        age:snapshot1.val().age,
+                        doctorkey:snapshot1.key,
+                        degree:snapshot1.val().degree,
+                        specialist: snapshot1.val().specialist,
+                        gender: snapshot1.val().gender,
+                        phone: snapshot1.val().phone,
+                        clinicfees: snapshot1.val().clinicfees,
+                        street: snapshot1.val().street,
+                        city: snapshot1.val().city,
+                        area: snapshot1.val().area
+                       
+
                     })
                  //   console.log(currentcliniclist[currentcliniclist.length-1].age)
                     this.setState({
                         cliniclist : currentcliniclist,
                         refresh:!this.state.refresh
-                    },()=>{ //console.log('clinic lsit data')
-                        }
-                    )
+                    })
                 })
             })
-        })
+        
     }
     opencurrapp=()=>{
         console.log('open currappoitment ');
@@ -84,24 +97,49 @@ class Home extends React.Component{
     //    console.log('home-page i am '+user);
         return(
 
-            <React.Fragment>
+            <React.Fragment >
                 <NavigationBar/>
-                <h1>Thsi is home page</h1>
-                {
+                
+                {                   
                     this.props.user==='patient' ?
-                    <div>
-                    <Link to={'/currappoitment'}>
-                    <button className="btn btn-outline-dark btn-lg">
-                        <span className="mr-2">Current Appoitment</span>
+                    <div >
+                
+
+
+                    {/* <div className="h-100 d-inline-block">
+                    
+                    <MDBNav className="nav-pills" color="black">
+                        <MDBNavItem>
+                            <MDBNavLink active to="#!"><i className={"fa fa-home"} style={{marginRight:'5px'}}/>Home</MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBNavLink  to={'/MyProfile'}><i className={"fa fa-user"} style={{marginRight:'5px'}}/>Profile</MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBNavLink to={'/prescription'}><i className={"fa fa-cog"} style={{marginRight:'5px'}}/>Prescription</MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBNavLink disabled to="#!"><i className={"fa fa-logout"} style={{marginRight:'5px'}}/>Logout</MDBNavLink>
+                        </MDBNavItem>
+                        </MDBNav>                
+                    </div> */}
+                    
+                <div className="d-flex justify-content-center" >
+                    <div className="d-flex justify-content-center" style={{width:'30%'}}>
+                    <Link to={'/currappoitment'} style={{marginRight:"3%",marginTop:"2%"}} >
+                    <button className="btn btn-outline-dark btn-lg" style={{backgroundColor:'#116466',marginRight:'5%'}}>
+                        <span className="mr-2" >Current Appointment</span>
                         <i className="fa fa-angle-right"></i>
                     </button>
                       </Link>
-                     <Link to={'/reviappoitment'}>
-                    <button className="btn btn-outline-dark btn-lg">
-                        <span className="mr-2">Revisit Appoitment</span>
+                     {/* <Link to={'/reviappoitment'} style={{marginTop:"2%"}}>
+                    <button className="btn btn-outline-dark btn-lg" style={{color:'white'}} >
+                        <span className="mr-2">Revisit Appointment</span>
                         <i className="fa fa-angle-right"></i>
                     </button>
-                     </Link> 
+                     </Link>  */}
+                     </div>
+                     </div>
                      <AuthorizedComponent   data={this.state.cliniclist}  refresh={this.state.refresh}
                      permission={(this.props.user === 'patient') ? true : false }
                     component={Datalist}  user={this.props.user} id={this.props.id}  /> 

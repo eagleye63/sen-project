@@ -52,7 +52,7 @@
   background: #dddada;
 }
 
-input[type=text]:focus, input[type=password]:focus,input[type=number]:focus,input[type=time]:focus {
+input[type=email]:focus,input[type=number]:focus,input[type=time]:focus {
   background-color: lightblue;
   outline: none;
 }
@@ -82,4 +82,8 @@ h5{
 }
 .linking:hover {
   color:blue
+}
+
+.nav-pills{
+    height: 505;
 }

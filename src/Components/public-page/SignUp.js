@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import firebase from '../../config/configuration';
 import { Col,Button, Form, FormGroup, Label, Input, FormText ,Container} from 'reactstrap';
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
+import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 
 import Stylee from './Stylee.css'
 export class SignUp extends Component {
@@ -66,14 +67,14 @@ export class SignUp extends Component {
             password:this.state.password,
             city:this.state.city,
             area:this.state.area,
-            blood_group:this.state.blood_group,
+            blood_group:this.state.blood_group, 
             gender:this.state.gender,
             pincode:this.state.pincode,
             street:this.state.street,
             label:'patient'
         })
 
-        firebase.database().ref('blood group').child(this.state.blood_group)
+        firebase.database().ref('blood group').child(this.state.blood_group) 
         .child(user).set({
           num:0
         });
