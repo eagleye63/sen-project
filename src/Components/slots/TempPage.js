@@ -109,7 +109,10 @@ class TempPage extends Component {
 
         return(
             <SendProps doctorName={this.props.computedMatch.params.id} patientId={this.props.patientId} searchDate={this.state.date}
-            timeGone={this.timeGone}
+
+             doctor={this.doctor} clinicfees={this.clinicfees} clinicname={this.clinicname} timeGone={this.timeGone}
+
+            
         />
         )
     }
@@ -142,8 +145,12 @@ class TempPage extends Component {
                                 
             </div>
             
-            <div className="d-flex justify-content-center">
+            
+
+                
+
                 <div className="d-flex justify-content-center" style={{width:'50%'}}>
+
                 <form style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
                 <div className='list-group' style={{border:"3px solid grey"}}>
                 <div className='list-group-item' style={{backgroundColor:'#f1f1f1'}}>

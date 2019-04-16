@@ -25,6 +25,7 @@ import ExeRedirect from './profile/ExeRedirect';
 import PatientDisplayFromBloodGroup from './slots/PatientDisplayFromBloodGroup';
 import ErrorPage from './public-page/ErrorPage'
 
+
 export const Context = React.createContext();
 
 class App extends React.PureComponent{
