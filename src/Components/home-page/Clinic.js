@@ -416,7 +416,7 @@ class Clinic extends Component {
                 </div>
                 <div className="d-flex justify-content-start">
                     
-                      <button className="btn btn" onClick={this.checkouthandler} style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>CheckOut</button>
+                      <button className="btn btn" id={appointment.id} onClick={this.checkouthandler} style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>CheckOut</button>
                     
                                
                 </div>
