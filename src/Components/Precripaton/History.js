@@ -97,8 +97,8 @@ import FlipMove from "react-flip-move";
 
 
             <div className="d-flex justify-content-center">
-            <div  style={{width:'50%'}}>
-            <form style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
+            <div  style={{width:'50%'}}   style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
+            {/* <form style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}> */}
             <div className='list-group'  style={{border:"3px solid grey"}}>
             <div className='list-group-item' style={{backgroundColor:'#f1f1f1'}}>
             <h2 style={{textAlign:"center"}}>{prescription.clinic}</h2>
@@ -109,15 +109,23 @@ import FlipMove from "react-flip-move";
             
             <div className="d-flex justify-content-between" style={{marginTop:'2%'}}>
             <div className="d-flex justify-content-start">
-            <form action={prescription.link} method="get" target="_blank">
-             <button className="btn btn" style={{borderRadius:'5%',height:"70%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9"}}   >Download<i style={{marginLeft:'10%'}} className={'fas fa-download'} color="green"/></button>
-            </form>
+
+            <a href={prescription.link}  target="_blank">
+             <button className="btn btn" style={{color:'white' ,borderRadius:'5%',height:"70%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9"}}   >Download<i style={{marginLeft:'10%'}} className={'fas fa-download'} color="green"/></button>
+            </a>
+            {/* <a
+                 href={prescription.link}
+                 className="list-group-item-text"
+                 target="_blank"
+               >
+                 <button className="download">Download</button>
+               </a> */}
              </div>
              </div>
             
             </div>                                
             </div>
-            </form>
+            {/* </form> */}
             </div>
             </div>
 
@@ -151,7 +159,7 @@ import FlipMove from "react-flip-move";
       <div>
         <div className="d-flex justify-content-center">
                 <div  className="d-flex justify-content-center" style={{marginTop:'1%'}}>
-                <h3><button className="btn btn" style={{backgroundColor:'#116466',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%',marginTop:'2%'}}><b>Prescription</b></button></h3>
+                <h3><button className="btn btn" style={{color:'white',backgroundColor:'#116466',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%',marginTop:'2%'}}><b>Prescription</b></button></h3>
                 </div>
             </div>
         <FlipMove duration={500} easing="cubic-bezier(0,0,1,1)">
