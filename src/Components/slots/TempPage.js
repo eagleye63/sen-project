@@ -143,8 +143,8 @@ class TempPage extends Component {
             </div>
             
             <div className="d-flex justify-content-center">
-                <div className="d-flex justify-content-center">
-                <form style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
+                <div className="d-flex justify-content-center" >
+                <form style={{width:'550px',border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
                 <div className='list-group' style={{border:"3px solid grey"}}>
                 <div className='list-group-item' style={{backgroundColor:'#f1f1f1'}}>
                 <h2 style={{textAlign:"center"}}>Clinic Details</h2>
@@ -166,7 +166,7 @@ class TempPage extends Component {
                                 <div className="d-flex justify-content-between" style={{marginTop:'2%'}}>
                                 <div className="d-flex justify-content-start">
                                 <form action={link} method="get" target="_blank">
-                                 <button className="btn btn" style={{borderRadius:'5%',height:"70%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9",fontSize:'70%'}}   >Locate<i style={{marginLeft:'10%'}} className={'fas fa-map-marker-alt'} color="green"/></button>
+                                 <button className="btn btn" style={{color:'white',borderRadius:'5%',height:"70%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9",fontSize:'70%'}}   >Locate<i style={{marginLeft:'10%'}} className={'fas fa-map-marker-alt'} color="green"/></button>
                                 </form>
                                  </div>
                                 </div>

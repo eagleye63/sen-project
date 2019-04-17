@@ -1,9 +1,8 @@
 form{
     border: 3px solid #f1f1f1;
     background-color: #f1f1f1;
-    
-    border-radius: 3%
-    
+    width:100%,;
+    border-radius:3%;    
     /* height: 100vh;
     display: flex;
     justify-content: center;
