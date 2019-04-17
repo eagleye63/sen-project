@@ -3,7 +3,7 @@ import {Context} from "./App";
 import {Link,withRouter} from 'react-router-dom';
 import AuthorizedComponent from './AuthorizedComponent';
 import './nav_stylr.css'
-
+import firebase from '../config/configuration'
 import {Form, FormControl, Button} from 'react-bootstrap'
 
 
@@ -27,7 +27,11 @@ function NavLink ({path,text,onClick,className,currPath,icon}){
 
 class Navigationbar extends PureComponent{
     
-    
+    logout=()=>{
+        console.log('in logout');
+        firebase.auth().signOut();
+
+    }
 
     render(){
         return(
@@ -84,7 +88,7 @@ class Navigationbar extends PureComponent{
                                                  icon={'sign-out'}
                                                  path={this.props.location.pathname}
                                                  currPath={""}  
-                                                 onClick={value.logOut}/>                                 
+                                                 onClick={value.logout}/>                                 
 
                             </ul>
 

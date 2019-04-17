@@ -8,6 +8,7 @@ import AuthorizedRoute from '../AuthorizedRoute';
 import { withRouter } from 'react-router-dom';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import { MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
+import cookie from 'react-cookies';
 class Datalist extends  React.PureComponent{
     constructor(props){
         super(props);
@@ -39,6 +40,17 @@ class Datalist extends  React.PureComponent{
 
     // }
 
+    setcookie=(event)=>{
+        let d = new Date();
+        d.setTime(d.getTime() + (5 * 60 * 1000));
+        let expires1 = d;
+        console.log('in setcookie'+event.target.dataset.name);
+        cookie.save('clinicid',event.target.dataset.name,{path:'/',expires:expires1});
+        this.props.history.push({
+            pathname: "/slotbook"
+        });
+
+    }
 
 
 redirect(data){
@@ -64,7 +76,7 @@ redirect(data){
                     {
                         data.length !==0
                         ? _.map(data,(data,i)=>{
-                            console.log(data);
+                            //console.log(data);
                             return(
                                 <div className="d-flex justify-content-center">
                                 <div  style={{width:'50%'}}>
@@ -97,9 +109,9 @@ redirect(data){
                                 
 
                                  <div className="d-flex justify-content-end">
-                                 <Link to={`/slotbook/${data.doctorkey}`} clinicname={data.clinicname} >
-                                    <button className="btn btn" style={{borderRadius:'5%',height:"70%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>Book an appointment</button>
-                                 </Link>
+                                 {/* <Link to={'/slotbook'}  > */}
+                                    <button className="btn btn" data-name={data.doctorkey} style={{borderRadius:'5%',height:"70%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}} onClick={this.setcookie}>Book an appointment</button>
+                                 {/* </Link> */}
                                  </div>
 
                                  

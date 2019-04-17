@@ -12,6 +12,7 @@ import { CLIENT_RENEG_LIMIT } from 'tls';
 
 
 import { MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
+import cookie from 'react-cookies';
 class Home extends React.Component{
     constructor(props){
         super(props);
@@ -88,6 +89,9 @@ class Home extends React.Component{
             isrevisappoitmentopen: !this.state.isrevisappoitmentopen
         });
     }
+    componentWillMount=()=>{
+       // cookie.remove('clinicid',{path:'/'});
+    }
     render(){
         if(this.state.isloading)
         {
@@ -140,10 +144,12 @@ class Home extends React.Component{
                      </Link>  */}
                      </div>
                      </div>
+                     
                      <AuthorizedComponent   data={this.state.cliniclist}  refresh={this.state.refresh}
                      permission={(this.props.user === 'patient') ? true : false }
                     component={Datalist}  user={this.props.user} id={this.props.id}  /> 
                      </div> 
+                     
                  : <div>
                      <AuthorizedComponent    permission={(this.props.user === 'clinic') ? true : false }
                     component={Clinicdate}  user={this.props.user} id={this.props.id} /> 

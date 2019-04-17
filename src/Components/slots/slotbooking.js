@@ -6,8 +6,8 @@ import firebase from '../../config/configuration'
 //import "./SlotBooking.scss";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from '.././navigationbar'
-
-
+import cookie from 'react-cookies'
+import {Redirect} from 'react-router-dom';
 
 class SlotBooking extends Component {
 
@@ -16,37 +16,60 @@ class SlotBooking extends Component {
     constructor(props) {
     super(props);
     console.log('I am in SlotBooking')
-    this.slotsDatabase=this.props.location.state.slotsDatabase;
-    this.workingtime=this.props.location.state.workingtime;
-    this.slotInterval=this.props.location.state.slotInterval;
-    this.breaktime=this.props.location.state.breaktime;
-    this.patient_booking=this.props.location.state.patient_booking;
-    this.patientId=this.props.location.state.patientId;
-    this.dateString=this.props.location.state.dateString;
-    this.offsetTime=this.props.location.state.offsetTime;
-    this.description=this.props.location.state.description;
-    this.willWork=this.willWork;
-    this.doctor=this.props.location.doctor;
-    this.clinicfees=this.props.location.clinicfees;
-    this.clinicname=this.props.location.clinicname;
-   this.slotInterval=parseInt(this.slotInterval,10);   
-    var arrayWorkingtime = this.workingtime.split(" ");
-    var startHour = arrayWorkingtime[0].split(":")[0];
-    var startMinute = arrayWorkingtime[0].split(":")[1];
-    var endHour = arrayWorkingtime[2].split(":")[0];
-    var endMinute = arrayWorkingtime[2].split(":")[1];
-      this.breaktime=this.breaktime.split(",");
-       this.breakArray = [];
-       this.buttonclick="";
-    for (let i = 0; i < this.breaktime.length; i++) {
-      let tempObj = this.breaktime[i].split(" ");
-      this.breakArray.push({
-        startHour: tempObj[0].split(":")[0],
-        startMinute: tempObj[0].split(":")[1],
-        endHour: tempObj[2].split(":")[0],
-        endMinute: tempObj[2].split(":")[1]
-      });
+   // console.log(this.props.location.state.workingtime);
+
+
+
+      // cookie.load('doctorName')
+      // cookie.load('slotsDatabase') 
+      // cookie.load('workingtime') 
+      // cookie.load('slotInterval')
+      // cookie.load('breaktime') 
+      // cookie.load('patient_booking') 
+      // cookie.load('patientId')
+      // cookie.load('dateString') 
+      // cookie.load('offsetTime')
+      // cookie.load('description') 
+      // cookie.load('doctor')
+      // cookie.load('clinicfees') 
+      // cookie.load('clinicname')
+
+
+      this.slotsDatabase = cookie.load('slotsDatabase') ;
+      this.workingtime = cookie.load('workingtime') ;
+      this.slotInterval = cookie.load('slotInterval');
+      this.breaktime = cookie.load('breaktime') ;
+      this.patient_booking = cookie.load('patient_booking');
+      this.patientId = cookie.load('patientId');
+      this.dateString = cookie.load('dateString');
+      this.offsetTime = cookie.load('offsetTime');
+      this.description = cookie.load('description');
+    
+      this.doctor = cookie.load('doctor');
+      this.clinicfees = cookie.load('clinicfees') ;
+      this.clinicname = cookie.load('clinicname');
+      //console.log(this.workingtime);
+      if(this.workingtime)
+      {
+      this.slotInterval=parseInt(this.slotInterval,10);   
+        var arrayWorkingtime = this.workingtime.split(" ");
+        var startHour = arrayWorkingtime[0].split(":")[0];
+        var startMinute = arrayWorkingtime[0].split(":")[1];
+        var endHour = arrayWorkingtime[2].split(":")[0];
+        var endMinute = arrayWorkingtime[2].split(":")[1];
+          this.breaktime=this.breaktime.split(",");
+          this.breakArray = [];
+          this.buttonclick="";
+        for (let i = 0; i < this.breaktime.length; i++) {
+          let tempObj = this.breaktime[i].split(" ");
+          this.breakArray.push({
+            startHour: tempObj[0].split(":")[0],
+            startMinute: tempObj[0].split(":")[1],
+            endHour: tempObj[2].split(":")[0],
+            endMinute: tempObj[2].split(":")[1]
+          });
     }
+    
      
 
     //rows is an Array which contains all the rows that are to be printed for slots
@@ -134,6 +157,7 @@ class SlotBooking extends Component {
       slots:  this.slotsDatabase 
     };
   }
+}
 
   /////// Function to give error prompt for selecting booked Slot ///////
   giveErrorPrompt = () =>
@@ -161,6 +185,7 @@ class SlotBooking extends Component {
           console.log(this.patient_booking);
         //  this.patient_booking[index]=this.patientId;
           console.log(newString);
+        cookie.save('slotsDatabase',newString,{path:'/'});
       this.setState({
         slots:newString
       },()=>{
@@ -188,7 +213,21 @@ class SlotBooking extends Component {
 
           clinic.child('patient_booking').child(index).set({id:this.patientId,num:max1});
 
-
+          cookie.remove('doctorName',{ path: '/'  })
+          cookie.remove('slotsDatabase', { path: '/' })
+          cookie.remove('workingtime',  { path: '/' })
+          cookie.remove('slotInterval', { path: '/' })
+          cookie.remove('breaktime',{ path: '/' })
+          cookie.remove('patient_booking', { path: '/' })
+          cookie.remove('patientId',{ path: '/'})
+          cookie.remove('dateString', { path: '/' })
+          cookie.remove('offsetTime', { path: '/' })
+          cookie.remove('description', { path: '/' })
+          cookie.remove('doctor', { path: '/' })
+          cookie.remove('clinicfees', { path: '/' })
+          cookie.remove('clinicname', { path: '/' })
+          alert('succesfully booked ');
+          this.props.history.push('/');
 
        /*  this.clinicforupdate=val.clinic;
         this.dateforupdate=val.date;
@@ -257,6 +296,10 @@ class SlotBooking extends Component {
   render() {
 
     console.log("printing in slotbooking "+this.clinicname);
+      if(!this.dateString || !this.clinicname)
+      {
+        return (<Redirect  to='/'> </Redirect>)
+      }
 
     var link='https://www.paytm.com'
     return (
@@ -313,7 +356,7 @@ class SlotBooking extends Component {
             <div className="d-flex justify-content-center">
             <div className="d-flex justify-content-center">
             <form action={link} method="get" target="_blank">
-                                 <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9",fontSize:'90%'}}>Confirm Booking</button>
+             <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9",fontSize:'90%'}}>Confirm Booking</button>
             </form>
             </div>
             </div>

@@ -15,6 +15,7 @@ import NavigationBar from './../navigationbar';
 import {Redirect} from 'react-router-dom';
 
 import "react-datepicker/dist/react-datepicker.css";
+import cookie from 'react-cookies';
 
 
 class ClinicDate extends Component {
@@ -64,7 +65,7 @@ class ClinicDate extends Component {
     }
 
     componentDidMount=()=>{
-      firebase.database().ref('clinic').child(this.props.id).once('value').then(snapshot=>{
+      firebase.database().ref('clinic').child(cookie.load('uid')).once('value').then(snapshot=>{
         this.setState({
           clinicname:snapshot.val().clinicname
         })
