@@ -10,8 +10,8 @@ const AuthorizedRoute = ({component: Component,  permission,...rest}) => {
                 <Component {...props} {...rest}/>
             ) : (
                 <Redirect to={{
-                    pathname:rest.location.pathname,
-                    state: rest.location.pathname
+                    pathname:'/',
+                    state: ''
                 }}/>
             )
         }

@@ -24,6 +24,8 @@ import Precripation from './Precripaton/History';
 import ExeRedirect from './profile/ExeRedirect';
 import PatientDisplayFromBloodGroup from './slots/PatientDisplayFromBloodGroup';
 import ErrorPage from './public-page/ErrorPage'
+import SlotBooking from './slots/slotbooking';
+import cookie from "react-cookies";
 
 export const Context = React.createContext();
 
@@ -31,10 +33,10 @@ class App extends React.PureComponent{
     constructor(props){
         super(props);
         this.state={
-            isAuthenticated: false,
-            user:'',
+            isAuthenticated: cookie.load('isAuthenticated'),
+            user:cookie.load('user'),
             // patient or clinic
-            key:'',
+            key:cookie.load('uid'),
             email:"",
             password:""
          }
@@ -53,6 +55,7 @@ class App extends React.PureComponent{
           prevState[name] = value;
           //console.log(prevState);
           return  prevState;
+          
        })
     }
 
@@ -81,17 +84,34 @@ class App extends React.PureComponent{
               if(snapshot.val().type=='patient')
               {console.log('patient');
                  console.log('i am in logi '+snapshot.key);
+                  let d = new Date();
+                  d.setTime(d.getTime() + (5 * 60 * 1000));
+                  let expires1 = d;
+                  cookie.save('uid', firebase.auth().currentUser.uid, { path: '/', expires: expires1 });
+                  cookie.save('user', 'patient', { path: '/', expires: expires1 });
+                  cookie.save('isAuthenticated', true, { path: '/', expires: expires1 });
+                  console.log('hiii:  ' + cookie.load('uid') + '    ');
+                  console.log(user);
+
               this.setState({
                   user: 'patient',
                   isAuthenticated: true,
                   key:snapshot.key
-
               })
-
+                 
              
             }
               else{
                  console.log('i am in logi doctor');
+                  let d = new Date();
+                  d.setTime(d.getTime() + (5 * 60 * 1000));
+                  let expires1 = d;
+                  cookie.save('uid', firebase.auth().currentUser.uid, { path: '/', expires: expires1 });
+                  cookie.save('user', 'clinic', { path: '/', expires: expires1 });
+                  cookie.save('isAuthenticated', true, { path: '/', expires: expires1 });
+                  console.log('hiii:  ' + cookie.load('uid') + '    ');
+                  console.log();
+
                 // console.log('i am in logi '+snapshot.key);
                 //console.log(this.state);
                 this.setState({
@@ -100,7 +120,7 @@ class App extends React.PureComponent{
                     key:snapshot.key
   
                 })
-                
+                  
              
               }
               
@@ -110,8 +130,62 @@ class App extends React.PureComponent{
         })
         
       }
+      componentDidMount=()=>{
+          console.log('componetnt mounted');
+        //   firebase.auth().onAuthStateChanged(user=>{
+        //       console.log('state is changed')
+        //       if(user)
+        //       {
+        //         //   let d = new Date();
+        //         //   d.setTime(d.getTime() + ( 5* 60 * 1000));
+        //         //   let expires1=d ;
+        //         // cookie.save('uid',user.uid,{path:'/',expires:expires1});
+        //         //   cookie.save('user', 'patient', { path: '/', expires: expires1});
+        //         //   cookie.save('isAuthenticated', true, { path: '/', expires: expires1});
+        //         //   console.log('hiii:  '+cookie.load('uid')+'    ');
+        //         //   console.log(user);
+        //       }
+        //       else
+        //       {
+        //           cookie.remove('uid', { path: '/' })
+        //           cookie.remove('user', { path: '/' })
+        //           cookie.remove('isAuthenticated', { path: '/' })
+        //           console.log('user logout');
+        //           this.setState({
+        //               isAuthenticated:false,
+        //               user:'',
+        //               key:''
+        //           })
+        //       }
+        //   })
+      }
 
     logout=()=>{
+        console.log('in logout');
+        firebase.auth().signOut().then(()=>{
+            cookie.remove('uid', { path: '/' })
+            cookie.remove('user', { path: '/' })
+            cookie.remove('isAuthenticated', { path: '/' })
+            console.log('user logout');
+            this.setState({
+                isAuthenticated: false,
+                user: '',
+                key: ''
+            })
+            cookie.remove('doctorName', { path: '/' })
+            cookie.remove('slotsDatabase', { path: '/' })
+            cookie.remove('workingtime', { path: '/' })
+            cookie.remove('slotInterval', { path: '/' })
+            cookie.remove('breaktime', { path: '/' })
+            cookie.remove('patient_booking', { path: '/' })
+            cookie.remove('patientId', { path: '/' })
+            cookie.remove('dateString', { path: '/' })
+            cookie.remove('offsetTime', { path: '/' })
+            cookie.remove('description', { path: '/' })
+            cookie.remove('doctor', { path: '/' })
+            cookie.remove('clinicfees', { path: '/' })
+            cookie.remove('clinicname', { path: '/' })
+        });
 
     }
     
@@ -150,7 +224,8 @@ class App extends React.PureComponent{
             <Context.Provider value={
                 {
                     user:this.state.user,
-                    id:this.state.key
+                    id:this.state.key,
+                    logout:this.logout
                 }
             }>
 
@@ -167,27 +242,55 @@ class App extends React.PureComponent{
                         email={this.state.email} password={this.state.password}
                         id={this.state.key}
                         />
+                        {
+                                !this.state.isAuthenticated ? 
+                                <Redirect to='/'></Redirect>
+                                :''
+
+                        }
                    <AuthorizedRoute permission={true}  path="/signupclinic" exact strict 
                         component={Signuppagedoc}/>
                         <AuthorizedRoute permission={true}  path="/signuppatient" exact strict 
                         component={Signuppagepat}/>
-                    
+                    {this.state.user==='patient'?
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/currappoitment" exact strict 
                         component={Currappo} patientid={this.state.key} />
+                        :' '}
+                    {this.state.user === 'patient' ?
                         <AuthorizedRoute permission={this.state.user === 'patient' ? true : false}  path="/prescription" exact strict 
                         component={Precripation}  patientid={this.state.key} user={this.state.user} />
+                       :'' 
+                    }
+                    {this.state.user==='clinic'?
                         <AuthorizedRoute permission={this.state.user === 'clinic' ? true : false } path={"/prescription/:id"} exact strict 
-                        component={Precripation}  user={this.state.user}/>                        
-                    <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path={"/slotbook/:id"}  
+                        component={Precripation}  user={this.state.user}/> 
+                        :''
+                    }
+                    {this.state.user === 'patient' ?
+                        <AuthorizedRoute permission={this.state.user === 'patient' ? true : false }  path={"/slotbook"}  exact strict
                         component={TempPage} patientId={this.state.key}  />
+                        :''
+                    }
+                    {this.state.user === 'patient' ?
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false} path="/Myprofilep" exact strict 
                         component={Profilepatient} user={this.state.user} id={this.state.key} />
+                        :''
+                    }
+                    {this.state.user==='clinic'?
                         <AuthorizedRoute permission={this.state.user === 'clinic' ? true : false} path="/Myprofilec" exact strict 
                         component={Profileclinic} user={this.state.user} id={this.state.key} />
-
+                        :''
+                    }
+                    {this.state.user==='clinic'?
                     <AuthorizedRoute permission={this.state.user=='clinic'} path="/BloodGroup" exact strict
                         component={PatientDisplayFromBloodGroup} user={this.state.user} id={this.state.key} />
-                        
+                        :''
+                    }
+                    {this.state.user==='patient'?
+                    <AuthorizedRoute permission={this.state.user === 'patient' ? true : false} path={"/slotbook2"} exact strict
+                                component={SlotBooking} />
+                                :''  
+                    }
                     <Route component={ErrorPage}/>
                     {/* <Route render={() => <Redirect to='/'/>}/>                   
                     <Route render={() => <Redirect to='/'/>}/> */}

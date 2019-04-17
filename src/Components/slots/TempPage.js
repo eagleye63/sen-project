@@ -13,10 +13,7 @@ import NavigationBar from '../navigationbar'
 import DatePicker from 'react-custom-date-picker'
 import {Spinner} from 'reactstrap'
 import { CLIENT_RENEG_LIMIT } from "tls";
-
-
-
-
+import cookie from 'react-cookies';
 ////// WARNING : PASS ALL THE PROPS RECEIVED IN THIS COMPONENT TO SLOT BOOKING PAGE OTHERWISE IT WILL NOT WORK/////
 
 class TempPage extends Component {
@@ -33,7 +30,9 @@ class TempPage extends Component {
     }
 
     componentDidMount=()=>{
-        let doctor=firebase.database().ref('/clinic').child(this.props.computedMatch.params.id+"");
+        console.log('in temppage'+cookie.load('clinicid'));
+        let doctor=firebase.database().ref('/clinic').child(cookie.load('clinicid'));
+        
         doctor.once("value").then(snapshot=>{
             const val =snapshot.val();
             this.clinicname=val.clinicname;
@@ -100,17 +99,21 @@ class TempPage extends Component {
 
   render() {
       console.log(this.state.dataAvailable+"   statedataavilable ");
-      console.log(' in temp page doctor key '+  this.props.computedMatch.params.id);
-      console.log('in temppage patient key '+this.props.patientId);
+     // console.log(' in temp page doctor key '+  this.props.computedMatch.params.id);
+     // console.log('in temppage patient key '+this.props.patientId);
       var link='https://www.google.com/maps/place/Nidhi+Multispeciality+Hospital/@23.0401044,72.5592146,17z/data=!3m1!4b1!4m15!1m7!3m6!1s0x395e84f521440d4b:0x6853ee97a9a2996b!2sNavrangpura,+Ahmedabad,+Gujarat!3b1!8m2!3d23.0365437!4d72.5611395!3m6!1s0x395e848c996426c3:0x915350ab1da7fe78!8m2!3d23.0400999!4d72.5614035!9m1!1b1'
     /*  Props of doctorName and other doctor details  will be send by Parent Page */
 
     if(this.state.bookSlot){
 
         return(
-            <SendProps doctorName={this.props.computedMatch.params.id} patientId={this.props.patientId} searchDate={this.state.date}
-            timeGone={this.timeGone}
-        />
+            // <SendProps doctorName={this.props.computedMatch.params.id} patientId={this.props.patientId} searchDate={this.state.date}
+
+            //  doctor={this.doctor} clinicfees={this.clinicfees} clinicname={this.clinicname} timeGone={this.timeGone}/>
+
+            <SendProps doctorName={cookie.load('clinicid')} patientId={cookie.load('uid')} searchDate={this.state.date}
+
+                doctor={this.doctor} clinicfees={this.clinicfees} clinicname={this.clinicname} timeGone={this.timeGone} />
         )
     }
     else if(this.state.dataAvailable){
@@ -142,8 +145,14 @@ class TempPage extends Component {
                                 
             </div>
             
-            <div className="d-flex justify-content-center">
-                <div className="d-flex justify-content-center">
+
+            
+            <div>                
+
+                <div className="d-flex justify-content-center" style={{width:'50%'}}>
+
+
+
                 <form style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
                 <div className='list-group' style={{border:"3px solid grey"}}>
                 <div className='list-group-item' style={{backgroundColor:'#f1f1f1'}}>

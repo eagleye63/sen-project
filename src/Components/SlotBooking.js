@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./DoctorDescription.css";
 import PropTypes from "prop-types";
 import firebase from '../config/configuration';
-import "./SlotBooking.scss";
+//import "./SlotBooking.scss";
 
 
 class SlotBooking extends Component {
