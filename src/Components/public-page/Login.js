@@ -69,7 +69,7 @@ import Stylee from './Stylee.css'
             <div style={{marginLeft:60}}>
             <h5 ><b>Are you Doctor?     </b> <Link to="/signupclinic"> click here</Link> </h5>
            <h5><b>Are you Patient?</b>  <Link to="/signuppatient"> click here</Link></h5>
-           </div>
+           </div>                                 
                   {/* <Link to={'/signup'}>
                     <button className="btn btn-outline-dark btn-lg">
                         <span className="mr-2">signup</span>

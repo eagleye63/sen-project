@@ -14,8 +14,8 @@ export class Signupdoc extends Component {
          age:"",
          city:"",
          area:"",
-         breaktime:"Required to set  Ex:     12:00 to 13:00,14:00 to 20:01",
-         slot_time:'Required to set  Ex: 15  for 15 minites',
+         breaktime:"",
+         slot_time:"",
          clinicfees:"",
          degree:"",
          doctor:"",
@@ -32,7 +32,8 @@ export class Signupdoc extends Component {
          wednesday:0,
          thursday:0,
          friday:0,
-         saturday:0
+         saturday:0,
+         link :''
 
       }
     }
@@ -95,9 +96,11 @@ export class Signupdoc extends Component {
             clinicfees:this.state.clinicfees,
             doctor:this.state.doctor,
             slot_time:this.state.slot_time,
+            link:this.state.link,
             workingtime:workingtime1,
             breaktime:'',
-            workingdays:workingdays1
+            workingdays:workingdays1,
+            
         
         })
         firebase.database().ref('list').child(user).set({
@@ -194,18 +197,34 @@ export class Signupdoc extends Component {
             <Label htmlFor="clinicfees" >Clinic Fees:</Label>
             <Input type="number" placeholder="Enter clinicfees" name="clinicfees" onChange={this.handleChage}
                 value={this.state.clinicfees} required style={{backgroundColor:'white',fontSize:12,padding:10}}/><hr/>
+                 <Label htmlFor="street" >Street:</Label>
+            <Input type="text" placeholder="Enter Street" name="street" onChange={this.handleChage}
+               value={this.state.street} required style={{backgroundColor:'white'}}/><hr/>
             <Label htmlFor="area" >Area:</Label>
             <Input type="text" placeholder="Enter Area" name="area" onChange={this.handleChage} 
                 value={this.state.area} required style={{backgroundColor:'white'}}/><hr/>
             <Label htmlFor="city">City:</Label>
             <Input type="text" placeholder="Enter City" name="city" onChange={this.handleChage}
                 value={this.state.city} required style={{backgroundColor:'white'}}/><hr/>
-            <Label htmlFor="street" >Street:</Label>
-            <Input type="text" placeholder="Enter Street" name="street" onChange={this.handleChage}
-               value={this.state.street} required style={{backgroundColor:'white'}}/><hr/>
+           
             <Label htmlFor="pincode">Pincode:</Label>
             <Input type="text" placeholder="Enter Pincode" name="pincode" onChange={this.handleChage}
                 value={this.state.pincode} required style={{backgroundColor:'white'}}/><hr/>
+
+            <Label htmlFor="link" >Address google map link:</Label>
+            <Input type="text" placeholder="Paste link here " name="link" onChange={this.handleChage}
+               value={this.state.link} required style={{backgroundColor:'white'}}/><hr/>
+
+            <Label htmlFor="pincode">Slot time length :</Label>
+            <Input type="text" placeholder="Required to set  Ex: 15  for 15 minites" name="slot_time" onChange={this.handleChage}
+                value={this.state.slot_time} required style={{backgroundColor:'white'}}/><hr/>
+
+          <Label htmlFor="pincode">Break time :</Label>
+            <Input type="text" placeholder="Required to set  Ex:  12:00 to 13:00,14:00 to 20:01" name="breaktime" onChange={this.handleChage}
+                value={this.state.breaktime} required style={{backgroundColor:'white'}}/><hr/>
+
+
+
             <Label htmlFor="starttime" >Start time:</Label>
             <Input type="time" placeholder="" name="starttime" value="10:00" 
                 onChange={this.handleChage} value={this.state.starttime} required style={{backgroundColor:'white',padding:10,height:35}}/><hr/>

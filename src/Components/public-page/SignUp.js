@@ -101,6 +101,7 @@ export class SignUp extends Component {
    }
     
   render() {
+    console.log('bsdk');
     return (
       <div  className="BACK">
        <form  onSubmit={this.Signup}  className='container'>

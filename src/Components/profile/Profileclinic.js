@@ -36,7 +36,8 @@ class Profileclinic extends Component{
         console.log('fuck type'+typeof(this.props.user));
         let userdetail=firebase.database().ref(this.props.user).child(this.props.id);
         userdetail.on("value",snapshot=>{
-            console.log('i am in profile '+snapshot.val().name);
+           // console.log('i am in profile '+snapshot.val().name);
+           console.log(this.props.id+' props id');
             this.setState({
                 doctor: snapshot.val().doctor,
                 clinicname:snapshot.val().clinicname,
@@ -84,7 +85,7 @@ class Profileclinic extends Component{
         console.log('name'+filledform.email);
         console.log('name'+filledform.password);
         let updateprofile=firebase.database().ref(this.props.user).child(this.props.id).update({
-            name:filledform.name,
+           // name:filledform.name,
             email:filledform.email,
             password:filledform.password,
             doctor:filledform.doctor,
@@ -115,9 +116,10 @@ class Profileclinic extends Component{
 
     render(){
         const {key}=this.props;
-        console.log('i am in profile '+this.props.id.name);
-        console.log(typeof this.state.workingtime);
-        console.log(this.state.workingtime);
+       // console.log('i am in profile '+this.props.id.name);
+      //  console.log(typeof this.state.workingtime);
+       // console.log(this.state.workingtime);
+       console.log('i am in profile of clinic');
         console.log(this.state);
         return(
 
