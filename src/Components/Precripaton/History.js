@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from '../../config/configuration';
 import {Spinner} from 'reactstrap';
 import FlipMove from "react-flip-move";
-
+import NavigationBar from './../navigationbar';
 
  class History extends Component {
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 //import { MenuElementKind } from 'react-navbar'
-import { Collapse, NavbarToggler, NavbarBrand } from 'react-bootstrap';
+import { Collapse, NavbarToggler, NavbarBrand } from 'react-bootstrap'; 
 import { NavDropdown, Navbar, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'react-bootstrap';
 import { FormControl } from 'react-bootstrap';
 import { Spinner, Col, Button, Form, FormGroup, h3, Input, FormText, Container } from 'reactstrap';

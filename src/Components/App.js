@@ -198,7 +198,7 @@ class App extends React.PureComponent{
         // console.log('i am in render '+this.state.key);
         // console.log('i am in render user '+this.state.user);
         if(this.state.isAuthenticated){
-            document.body.style.background = "#ffffff";
+            document.body.style.background = "#ffffff"; 
             console.log('fuck you');
         }
         else{
