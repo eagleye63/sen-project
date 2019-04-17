@@ -410,13 +410,15 @@ class Clinic extends Component {
                 <div className="d-flex justify-content-between" style={{marginTop:"3%"}}>
                 <div className="d-flex justify-content-start">
                     <Link to={`/prescription/${appointment.id}`}>
-                      <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9"}}>Check History</button>
+                      <button className="btn btn" style={{color:'white',borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9"}}>Check History</button>
                     </Link>
                                
                 </div>
                 <div className="d-flex justify-content-start">
                     
+
                       <button className="btn btn" id={appointment.id} onClick={this.checkouthandler} style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>CheckOut</button>
+
                     
                                
                 </div>
