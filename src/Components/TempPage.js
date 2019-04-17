@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./DoctorDescription.css";
 //import "./todaytomorrow.css";
-import "./TempPage.scss";
+//import "./TempPage.scss";
 import PropTypes from "prop-types";
 import firebase from '../config/configuration';
 import Calendar from 'react-calendar';

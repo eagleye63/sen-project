@@ -12,6 +12,7 @@ import { CLIENT_RENEG_LIMIT } from 'tls';
 
 
 import { MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
+import cookie from 'react-cookies';
 class Home extends React.Component{
     constructor(props){
         super(props);
@@ -45,36 +46,36 @@ class Home extends React.Component{
            // console.log('hiiiiiiiiiiiiiiiiiii');
             snapshot.forEach(child1=>{
               //  console.log('child key '+child1.key);
-                let l2=firebase.database().ref('/clinic').child(child1.key).once("value").then(snapshot1=>{
+              //  let l2=firebase.database().ref('/clinic').child(child1.key).once("value").then(snapshot1=>{
                  //   console.log()
+                 let snapshot1=child1;
                     let currentcliniclist=this.state.cliniclist;
                     //currentcliniclist.push(snapshot1.val());
                //     console.log('parent key'+snapshot1.key)
                     currentcliniclist.push({
-                        'name':snapshot1.val().name,
-                        'age':snapshot1.val().age,
-                        'specialist':snapshot1.val().specialist,
-                        'degree':snapshot1.val().degree,
-                        'doctor':snapshot1.val().doctor,
-                        'clinicname':snapshot1.val().clinicname,
-                        'gender':snapshot1.val().gender,
-                        'Phone':snapshot1.val().phone,
-                        'clinicfees':snapshot1.val().clinicfees,
-                        'street':snapshot1.val().street,
-                        'area':snapshot1.val().area,
-                        'city':snapshot1.val().city,
-                        'doctorkey':snapshot1.key
+                        clinicname:snapshot1.val().clinicname,
+                        doctor:snapshot1.val().doctor,
+                        age:snapshot1.val().age,
+                        doctorkey:snapshot1.key,
+                        degree:snapshot1.val().degree,
+                        specialist: snapshot1.val().specialist,
+                        gender: snapshot1.val().gender,
+                        phone: snapshot1.val().phone,
+                        clinicfees: snapshot1.val().clinicfees,
+                        street: snapshot1.val().street,
+                        city: snapshot1.val().city,
+                        area: snapshot1.val().area
+                       
+
                     })
                  //   console.log(currentcliniclist[currentcliniclist.length-1].age)
                     this.setState({
                         cliniclist : currentcliniclist,
                         refresh:!this.state.refresh
-                    },()=>{ //console.log('clinic lsit data')
-                        }
-                    )
+                    })
                 })
             })
-        })
+        
     }
     opencurrapp=()=>{
         console.log('open currappoitment ');
@@ -87,6 +88,9 @@ class Home extends React.Component{
         this.setState({
             isrevisappoitmentopen: !this.state.isrevisappoitmentopen
         });
+    }
+    componentWillMount=()=>{
+       // cookie.remove('clinicid',{path:'/'});
     }
     render(){
         if(this.state.isloading)
@@ -125,9 +129,9 @@ class Home extends React.Component{
                     </div> */}
                     
                 <div className="d-flex justify-content-center" >
-                    <div className="d-flex justify-content-start" style={{width:'30%'}}>
+                    <div className="d-flex justify-content-center" style={{width:'30%'}}>
                     <Link to={'/currappoitment'} style={{marginRight:"3%",marginTop:"2%"}} >
-                    <button className="btn btn-outline-dark btn-lg" style={{color:'white',marginRight:'5%'}}>
+                    <button className="btn btn-outline-dark btn-lg" style={{backgroundColor:'#116466',marginRight:'5%'}}>
                         <span className="mr-2" >Current Appointment</span>
                         <i className="fa fa-angle-right"></i>
                     </button>
@@ -140,10 +144,12 @@ class Home extends React.Component{
                      </Link>  */}
                      </div>
                      </div>
+                     
                      <AuthorizedComponent   data={this.state.cliniclist}  refresh={this.state.refresh}
                      permission={(this.props.user === 'patient') ? true : false }
                     component={Datalist}  user={this.props.user} id={this.props.id}  /> 
                      </div> 
+                     
                  : <div>
                      <AuthorizedComponent    permission={(this.props.user === 'clinic') ? true : false }
                     component={Clinicdate}  user={this.props.user} id={this.props.id} /> 

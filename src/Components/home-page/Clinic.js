@@ -130,7 +130,7 @@ class Clinic extends Component {
       current:index
     })
     console.log('filename'+temparr[index].file);
-    let uploadTask = firebase.storage().ref(event.target.id).put(temparr[index].file);
+    let uploadTask = firebase.storage().ref(event.target.id).child(temparr[index].file.name).put(temparr[index].file);
     uploadTask.on("state_changed",this.handleProgress,this.handleUploadError,this.handleUploadSuccess);
   }
 
@@ -143,11 +143,15 @@ class Clinic extends Component {
     let index = this.state.appointments.findIndex(function (element) {
       return element.id == id;
     });
+    let filename1 = (this.state.appointments[index].file).name;
+    let description1 = this.state.appointments[index].description;
+    console.log(this.state.appointments);
     temparr.splice(index, 1);
     this.setState(prevState => {
       prevState["appointments"] = temparr;
       return prevState;
     });
+    this.uploadhandler(id,filename1,description1);
     alert('patient succesfully checked out');
 
   };
@@ -157,12 +161,11 @@ class Clinic extends Component {
     
   };
 
-  uploadhandler = event => {
-    event.preventDefault();
-    let clinic1 = this.props.clinic;
-    let patient = event.target.id;
-    let filename1 = this.state.file;
-    let description1 = this.state.description;
+  uploadhandler = (id,filename1,description1) => {
+    //event.preventDefault();
+    let clinic1 = this.props.clinicname;
+    let patient = id;
+    console.log('id:'+id+'  filename:'+filename1+'  description:'+description1+'  clinic:'+clinic1);
     firebase
       .database()
       .ref("storage")
@@ -207,7 +210,7 @@ class Clinic extends Component {
 
   //fetch data from firebase
   fetchData = (date, clinic) => {
-    var patientdata = [];
+    
     this.setState(prevState => {
       prevState["isloading"] = true;
       return prevState;
@@ -220,12 +223,16 @@ class Clinic extends Component {
     var starthour, startminit, slottime;
     var flag = 0;
 
-    firebase
+    let db=firebase
       .database()
       .ref("clinic")
-      .child(clinicname)
-      .once("value")
+      .child(clinicname);
+    if(db)
+    {
+      db.once("value")
       .then(snapshot => {
+        if(snapshot.val()==null)
+        this.setState({isloading:false});
         var a = snapshot.val();
         var workingarray = a.workingtime.split(" ");
         var hourandminit = workingarray[0].split(":");
@@ -240,86 +247,76 @@ class Clinic extends Component {
           .child(clinicname)
           .child("date")
           .child(today)
+          .child('patient_booking')
           .once("value")
           .then(snapshot => {
             //console.log(snapshot.val());
-            if (
-              snapshot.val() == null ||
-              snapshot.hasChild("patient_booking") == false
-            ) {
+            if (snapshot.val() == null)
+             {
+               console.log('no values');
               this.setState({
                 isloading: false
               });
-            } else {
-              firebase
-                .database()
-                .ref("clinic")
-                .child(clinicname)
-                .child("date")
-                .child(today)
-                .child("patient_booking")
-                .once("value")
-                .then(snapshot => {
-                  var a = snapshot.val();
-                  // console.log('in patient');
-                  for (var i = 0; i < 40; i++) {
-                    if (a[i]) {
-                      arr1.push(a[i]);
-                      arr2.push(i);
-                    }
-                  }
+            } 
+            else
+             {
+              var a = snapshot.val();
+              snapshot.forEach(child=>{
+                console.log(child.key+'       '+child.val());
+                let j1=child.key;
+                let j2=child.val().id;
+                let j3=child.val().num;
+                console.log('id and num  '+ j1+"   "+j2);
+                firebase
+                  .database()
+                  .ref("patient")
+                  .child(j2)
+                  .once("value")
+                  .then(snapshot => {
+                    var a = snapshot.val();
+                    let arrayofslottime = this.calculateslottime(
+                      starthour,
+                      startminit,
+                      slottime,
+                      j1
+                    );
+                    let slotttime = arrayofslottime[0];
+                    let totalminit = arrayofslottime[1];
+                    let patientdata = this.state.appointments;
+                    patientdata.push({
+                      name: a.name,
+                      slottime: slotttime,
+                      totalminit: totalminit,
+                      gender: a.gender,
+                      age: a.age,
+                      id: j2,
+                      num:j3,
+                      file: "",
+                      fileuploaded: false,
+                      showprogressbar: false,
+                      description: ''
+                    });
+                    patientdata.sort(function (a, b) {
+                      return a.totalminit - b.totalminit;
+                    });
 
-                  for (var i = 0; i < arr1.length; i++) {
-                    let j1 = arr2[i];
-                    let j2 = arr1[i];
-                    firebase
-                      .database()
-                      .ref("patient")
-                      .child(arr1[i])
-                      .once("value")
-                      .then(snapshot => {
-                        var a = snapshot.val();
-                        let arrayofslottime = this.calculateslottime(
-                          starthour,
-                          startminit,
-                          slottime,
-                          j1
-                        );
-                        let slotttime = arrayofslottime[0];
-                        let totalminit = arrayofslottime[1];
-
-                        patientdata.push({
-                          name: a.name,
-                          slottime: slotttime,
-                          totalminit: totalminit,
-                          gender: a.gender,
-                          age: a.age,
-                          id: j2,
-                          file: "",
-                          fileuploaded: false,
-                          showprogressbar:false
-                        });
-                      })
-                      .then(() => {
-                        flag = flag + 1;
-                        let f1 = true;
-                        f1 = false;
-
-                        patientdata.sort(function(a, b) {
-                          return a.totalminit - b.totalminit;
-                        });
-
-                        this.setState(prevState => {
-                          prevState["appointments"] = patientdata;
-                          prevState["isloading"] = f1;
-                          return prevState;
-                        });
-                      });
-                  }
-                });
+                    this.setState(prevState => {
+                      prevState["appointments"] = patientdata;
+                      prevState["isloading"] = false;
+                      return prevState;
+                    });
+                  })
+                
+              })
             }
           });
       });
+    }
+    else
+    {
+      console.log('hiii i am in else')
+      this.setState({isloading:false});
+    }
   };
 
   //componentdid update for checking changed props in parent
@@ -369,52 +366,114 @@ class Clinic extends Component {
         varient="success"
         label={this.state.progress}
         now={this.state.progress}
-      /> 
+      />
       );
 
       return (
-        <div href="#" className="list-group-item ">
-          <h4 className="list-group-item-heading"> {appointment.name} </h4>
-          <p className="list-group-item-text">
-            slottime: {appointment.slottime}
-          </p>
-          <p className="list-group-item-text"> gender: {appointment.gender} </p>
-          <p className="list-group-item-text"> age: {appointment.age} </p>
 
-          <label> Description: </label>
-          <Input
-            type="text"
-            placeholder="Description"
-            required
-            id={appointment.id}
-            onChange={this.descriptionhandler}
-          />
+        <div className="d-flex justify-content-center" >
+                <div className="d-flex justify-content-center" style={{width:'50%'}}>
+                <form  style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
+                <div className='list-group'  style={{border:"3px solid grey"}}>
+                <div className='list-group-item' style={{backgroundColor:'#f1f1f1'}}>
+                
+                <h4 style={{fontSize:'17px'}}><b>Patient's Name: </b>{appointment.name}</h4>
+                <h4 style={{fontSize:'17px'}}><b>Slot Time: </b>{appointment.slottime}</h4>
+                <h4 style={{fontSize:'17px'}}><b>Gender: </b>{appointment.gender}</h4>
+                <h4 style={{fontSize:'17px'}}><b>Age: </b>{appointment.age}</h4>
+                <h4 style={{fontSize:'17px'}}>
+                  <b style={{marginRight:'2%'}}>Description: </b>
+                  <Input
+                    type="text"
+                    placeholder="Description"
+                    required
+                    id={appointment.id}
+                    onChange={this.descriptionhandler}
+                    style={{backgroundColor:'white'}}
+                    />
+                </h4>
+                <h4 style={{fontSize:'14px'}}>
+                  <b>Prescription File:</b>
+                  <form inline onSubmit={this.fileuploadhandler} id={appointment.id}>
+                  <Input
+                    type="file"
+                    id={appointment.id}
+                    required
+                    onChange={this.fileChangedHandler}
+                    style={{backgroundColor:'white'}}
+                  />
+                  <button className="upload" style={{marginTop:'1%',border:'3px solid black'}} disabled={this.state.current==''?false:true}>Upload</button>
+                  </form>
+                  {pbar}
+                </h4>
+                
+                <div className="d-flex justify-content-between" style={{marginTop:"3%"}}>
+                <div className="d-flex justify-content-start">
+                    <Link to={`/prescription/${appointment.id}`}>
+                      <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9"}}>Check History</button>
+                    </Link>
+                               
+                </div>
+                <div className="d-flex justify-content-start">
+                    
+                      <button className="btn btn" id={appointment.id} onClick={this.checkouthandler} style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>CheckOut</button>
+                    
+                               
+                </div>
 
-          <label> Prescription File: &nbsp; &nbsp; &nbsp; </label>
-          <form inline onSubmit={this.fileuploadhandler} id={appointment.id}>
-            <input
-              type="file"
-              id={appointment.id}
-              required
-              onChange={this.fileChangedHandler}
-            />
-            <button className="upload" disabled={this.state.current==''?false:true}>Upload</button>
-          </form>
-          {pbar}
-          <button className="delete" onClick={this.checkouthandler} id={appointment.id}>CheckOut</button>
-          {/* <button className="history" onClick={this.historyhandler} id={appointment.id}> History </button> */}
-           <Link to={`/prescription/${appointment.id}`} >
-               <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>See History</button>
-           </Link>
-        </div>
+                </div>
+                </div>
+                </div>
+                </form>
+                </div>
+                </div>
+
+
+
+        //{/* // <form className="list-group-item " style={{marginTop:'2%'}}>
+        //   <h4 className="list-group-item-heading"> {appointment.name} </h4>
+        //   <p className="list-group-item-text">
+        //     slottime: {appointment.slottime}
+        //   </p>
+        //   <p className="list-group-item-text"> gender: {appointment.gender} </p>
+        //   <p className="list-group-item-text"> age: {appointment.age} </p>
+
+        //   <label> Description: </label>
+        //   <Input */}
+       // {/* //     type="text"
+        //     placeholder="Description"
+        //     required
+        //     id={appointment.id}
+        //     onChange={this.descriptionhandler}
+        //   />
+
+        //   <label> Prescription File: &nbsp; &nbsp; &nbsp; </label>
+        //   <form inline onSubmit={this.fileuploadhandler} id={appointment.id}>
+        //     <input
+        //       type="file"
+        //       id={appointment.id}
+        //       required
+        //       onChange={this.fileChangedHandler}
+        //     />
+        //     <button className="upload" disabled={this.state.current==''?false:true}>Upload</button>
+        //   </form>
+        //   {pbar}
+        //   <button className="delete" onClick={this.checkouthandler} id={appointment.id}>CheckOut</button>
+        //   {/* <button className="history" onClick={this.historyhandler} id={appointment.id}> History </button> */}
+       // {/* //    <Link to={`/prescription/${appointment.id}`} >
+        //        <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>See History</button>
+        //    </Link>
+        // </form> */} */}
       );
       
     });
 
     if (this.state.isloading) {
       return (
-        <div>
+        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center">
           <Spinner color="primary" />
+        </div>
         </div>
       );
     }
