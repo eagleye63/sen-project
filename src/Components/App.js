@@ -242,17 +242,20 @@ class App extends React.PureComponent{
                         email={this.state.email} password={this.state.password}
                         id={this.state.key}
                         />
-                      
+
                    <AuthorizedRoute permission={true}  path="/signupclinic" exact strict 
                         component={Signuppagedoc}/>
                         <AuthorizedRoute permission={true}  path="/signuppatient" exact strict 
                         component={Signuppagepat}/>
+
                           {
                                 !this.state.isAuthenticated ? 
                                 <Redirect to='/'></Redirect>
                                 :''
 
                           }
+
+                          
                     {this.state.user==='patient'?
                     <AuthorizedRoute permission={this.state.user === 'patient' ? true : false } path="/currappoitment" exact strict 
                         component={Currappo} patientid={this.state.key} />
