@@ -258,7 +258,7 @@ class SlotBooking extends Component {
         <NavigationBar/>
           <div className="d-flex justify-content-center" style={{marginTop:'1%'}}>
           <div  className="d-flex justify-content-center">
-          <h3><button className="btn btn" style={{backgroundColor:'#254e58',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>Book a Slot</b></button></h3>
+          <h3><button className="btn btn" style={{color:'white',backgroundColor:'#254e58',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>Book a Slot</b></button></h3>
           </div>
           </div>
           <form  style={{marginLeft:'13%',marginTop:'3%',marginRight:'13%',paddingBottom:'1%'}}>
@@ -305,7 +305,7 @@ class SlotBooking extends Component {
             <div className="d-flex justify-content-center">
             <div className="d-flex justify-content-center">
             <form action={link} method="get" target="_blank">
-                                 <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9",fontSize:'90%'}}>Confirm Booking</button>
+                                 <button className="btn btn" style={{color:'white',borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9",fontSize:'90%'}}>Confirm Booking</button>
             </form>
             </div>
             </div>

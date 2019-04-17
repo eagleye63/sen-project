@@ -111,7 +111,7 @@ class ClinicDate extends Component {
 
                 <div className="d-flex justify-content-center">
                 <div className="d-flex justify-content-start" style={{marginBottom:'1%'}}>
-                <h3><button className="btn btn" style={{backgroundColor:'#116466',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>List Of Appointments</b></button></h3>
+                <h3><button className="btn btn" style={{color:'white',backgroundColor:'#116466',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>List Of Appointments</b></button></h3>
                 </div>
                 </div>
            

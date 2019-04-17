@@ -225,7 +225,7 @@ class Profileclinic extends Component{
         </form>
         <div className="d-flex justify-content-sm-end" style={{marginTop:'5%'}}>
                                 
-        <button className="btn btn" onClick={this.Openedit} style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>Edit Profile</button>
+        <button className="btn btn" onClick={this.Openedit} style={{color:'white',borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>Edit Profile</button>
 
 
         </div>

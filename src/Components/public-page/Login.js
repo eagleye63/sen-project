@@ -22,9 +22,18 @@ import Stylee from './Stylee.css'
 
 
   render() {
+
     return (
 
-      
+      // <div>
+      // <input type="text" name="username" hint="email" onChange={this.props.handleChage} />
+      // <input type="password" name="password" hint="password" onChange={this.props.handleChage} />
+      // <button  name="submit" onClick={this.props.submitHandler}> Submit</button></div>
+
+
+
+
+
       <body className="BACK" style={{display:'flex',justifyContent:'center',alignItems:'center',height:'100vh'}}>
          
 

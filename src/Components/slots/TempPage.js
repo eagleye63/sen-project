@@ -123,7 +123,7 @@ class TempPage extends Component {
             
             <div className="d-flex justify-content-center">
                 <div  className="d-flex justify-content-center">
-                <h3><button className="btn btn" style={{backgroundColor:'#114466',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>Book a Slot</b></button></h3>
+                <h3><button className="btn btn" style={{color:'white',backgroundColor:'#114466',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>Book a Slot</b></button></h3>
                 </div>
             </div>
 
