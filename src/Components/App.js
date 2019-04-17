@@ -163,7 +163,7 @@ class App extends React.PureComponent{
                         component={this.state.isAuthenticated ? Home : Login }
                         user={this.state.user} email={this.state.email} password={this.state.password} 
                         submitHandler={this.submitHandler} 
-                        handleChage={this.handleChage}
+                        handleChage={this.handleChage}  
                         email={this.state.email} password={this.state.password}
                         id={this.state.key}
                         />

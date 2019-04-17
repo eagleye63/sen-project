@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Collapse, NavbarToggler, NavbarBrand } from 'react-bootstrap';
 import { NavDropdown, Navbar, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'react-bootstrap';
 import { FormControl } from 'react-bootstrap';
-import { Spinner, Col, Button, Form, FormGroup, Label, Input, FormText, Container } from 'reactstrap';
+import { Spinner, Col, Button, Form, FormGroup, h3, Input, FormText, Container } from 'reactstrap';
 //import './Clin.css'
 import { CardBody, Card } from 'reactstrap';
 import firebase from './../../config/configuration';
