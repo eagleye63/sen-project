@@ -16,7 +16,7 @@ function NavLink ({path,text,onClick,className,currPath,icon}){
     return(
         <li className={"nav-item"+(currPath==path ? "active" : " ")+" "+className}>
             <Link className="nav-link" onClick={onClick} to={{
-                pathname: path,
+                pathname: path, 
             }}>
             <i className={"fa fa-"+icon} style={{marginRight:"5px"}}/>
             {text}

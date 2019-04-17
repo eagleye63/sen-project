@@ -126,7 +126,7 @@ class TempPage extends Component {
             
             <div className="d-flex justify-content-center">
                 <div  className="d-flex justify-content-center">
-                <h3><button className="btn btn" style={{backgroundColor:'#114466',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>Book a Slot</b></button></h3>
+                <h3><button className="btn btn" style={{backgroundColor:'#116466',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>Book a Slot</b></button></h3>
                 </div>
             </div>
 
@@ -145,10 +145,13 @@ class TempPage extends Component {
                                 
             </div>
             
+
             
             <div>                
 
                 <div className="d-flex justify-content-center" style={{width:'50%'}}>
+
+
 
                 <form style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
                 <div className='list-group' style={{border:"3px solid grey"}}>
