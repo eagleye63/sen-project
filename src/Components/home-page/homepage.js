@@ -83,6 +83,7 @@ class Home extends React.Component{
             iscurrappoitmentopen: !this.state.iscurrappoitmentopen
         });
     }
+    
     openrevisapp=()=>{
         console.log('open currappoitment ');
         this.setState({
