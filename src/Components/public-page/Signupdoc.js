@@ -14,8 +14,7 @@ export class Signupdoc extends Component {
          age:"",
          city:"",
          area:"",
-         breaktime:"Required to set  Ex:     12:00 to 13:00,14:00 to 20:01",
-         slot_time:'Required to set  Ex: 15  for 15 minites',
+         breaktime:"",
          clinicfees:"",
          degree:"",
          doctor:"",
@@ -32,7 +31,8 @@ export class Signupdoc extends Component {
          wednesday:0,
          thursday:0,
          friday:0,
-         saturday:0
+         saturday:0,
+         link:""
 
       }
     }
@@ -94,10 +94,10 @@ export class Signupdoc extends Component {
             specialist:this.state.specialist,
             clinicfees:this.state.clinicfees,
             doctor:this.state.doctor,
-            slot_time:this.state.slot_time,
             workingtime:workingtime1,
             breaktime:'',
-            workingdays:workingdays1
+            workingdays:workingdays1,
+            link:this.state.link
         
         })
         firebase.database().ref('list').child(user).set({
@@ -206,12 +206,17 @@ export class Signupdoc extends Component {
             <Label htmlFor="pincode">Pincode:</Label>
             <Input type="text" placeholder="Enter Pincode" name="pincode" onChange={this.handleChage}
                 value={this.state.pincode} required style={{backgroundColor:'white'}}/><hr/>
+
+              <Label htmlFor="link">Link:</Label>
+              <Input type="text" placeholder="Enter Address Link" name="link" onChange={this.handleChage}
+              value={this.state.link} required style={{backgroundColor:'white'}}/> <hr/>
             <Label htmlFor="starttime" >Start time:</Label>
             <Input type="time" placeholder="" name="starttime" value="10:00" 
                 onChange={this.handleChage} value={this.state.starttime} required style={{backgroundColor:'white',padding:10,height:35}}/><hr/>
             <Label htmlFor="endtime">End time:</Label>
             <Input type="time" placeholder="" name="endtime" value="15:00" 
                 onChange={this.handleChage} value={this.state.endtime} required style={{backgroundColor:'white',padding:10,height:35}}/><hr/>
+
             <FormGroup row>
                 <Label for="exampleCheckbox"><b>Select Working days from below:</b></Label>
                 </FormGroup>
