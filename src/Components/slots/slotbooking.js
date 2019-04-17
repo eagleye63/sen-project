@@ -6,8 +6,13 @@ import firebase from '../../config/configuration'
 //import "./SlotBooking.scss";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from '.././navigationbar'
+
 import cookie from 'react-cookies'
 import {Redirect} from 'react-router-dom';
+
+
+
+
 
 class SlotBooking extends Component {
 
@@ -190,7 +195,11 @@ class SlotBooking extends Component {
         slots:newString
       },()=>{
 
+
         const clinic=firebase.database().ref('clinic').child(this.props.location.state.doctorName).child("date").child(this.dateString);
+
+       // const clinic=firebase.database().ref('clinic').child(this.props.doctorName).child("date").child(this.dateString);
+
        clinic.update({slot_string:this.state.slots});
        //clinic.update({patient_booking:this.patient_booking}); //updates booking info
        //adding clinic details to patient's current appointment
@@ -295,11 +304,13 @@ class SlotBooking extends Component {
 
   render() {
 
+
     console.log("printing in slotbooking "+this.clinicname);
       if(!this.dateString || !this.clinicname)
       {
         return (<Redirect  to='/'> </Redirect>)
       }
+
 
     var link='https://www.paytm.com'
     return (
@@ -316,9 +327,7 @@ class SlotBooking extends Component {
             <div className="d-flex justify-content-between"  style={{marginLeft:'2%',marginTop:'3%'}}>
               <div className="d-flex justify-content-start" style={{marginTop:'10%'}}>
               <form>
-              <h4 inline style={{fontSize:'14px'}}><b>Your Name: </b>
-                
-              </h4>
+              
               <h4 style={{fontSize:'14px',marginTop:'3%'}}><b>Clinic's Name: </b></h4>
               <h4 style={{fontSize:'14px',marginTop:'3%'}}><b>Doctor's Name: </b></h4>
               <h4 style={{fontSize:'14px',marginTop:'3%'}}><b>Clinic Fees: </b></h4>
@@ -328,13 +337,14 @@ class SlotBooking extends Component {
               
               <div className="d-flex justify-content-center" style={{marginTop:'10%'}}>
               <form>
-              <h4 inline style={{fontSize:'14px'}}>
-                Nayan Parmar
-              </h4>
+             
+
               <h4 inline style={{fontSize:'14px',marginTop:'3%'}}>{this.clinicname}</h4>
               <h4 style={{fontSize:'14px',marginTop:'3%'}}>{this.doctor}</h4>
               <h4 style={{fontSize:'14px',marginTop:'3%'}}>{this.clinicfees}</h4>
               <h4 style={{fontSize:'14px',marginTop:'3%'}}>{this.buttonclick}</h4>
+
+             
               
               
                 
@@ -356,7 +366,11 @@ class SlotBooking extends Component {
             <div className="d-flex justify-content-center">
             <div className="d-flex justify-content-center">
             <form action={link} method="get" target="_blank">
+
              <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9",fontSize:'90%'}}>Confirm Booking</button>
+
+   //          <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9",fontSize:'90%'}}>Confirm Booking</button>
+
             </form>
             </div>
             </div>
@@ -369,7 +383,11 @@ class SlotBooking extends Component {
       // <div> 
       //   {/*  Props of doctorName and other doctor details  will be send by Parent Page */}
       //   <div >
+
       //     <h2 align="center">{this.props.location.state.doctorName}</h2>
+
+      //     <h2 align="center">{this.props.doctorName}</h2>
+
       //     <p> {this.description}</p>
       //   </div>
       //   <text className="datestring">Slots for {this.dateString} </text>
