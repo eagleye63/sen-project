@@ -42,6 +42,7 @@ class SlotBooking extends Component {
 
       this.slotsDatabase = cookie.load('slotsDatabase') ;
       this.workingtime = cookie.load('workingtime') ;
+      console.log('working time..........'+this.workingtime);
       this.slotInterval = cookie.load('slotInterval');
       this.breaktime = cookie.load('breaktime') ;
       this.patient_booking = cookie.load('patient_booking');
@@ -62,9 +63,13 @@ class SlotBooking extends Component {
         var startMinute = arrayWorkingtime[0].split(":")[1];
         var endHour = arrayWorkingtime[2].split(":")[0];
         var endMinute = arrayWorkingtime[2].split(":")[1];
+        if(this.breaktime.length!=0)
+        {
           this.breaktime=this.breaktime.split(",");
+        }
           this.breakArray = [];
           this.buttonclick="";
+          console.log(this.breaktime+'breaktime length')
         for (let i = 0; i < this.breaktime.length; i++) {
           let tempObj = this.breaktime[i].split(" ");
           this.breakArray.push({
@@ -130,24 +135,24 @@ class SlotBooking extends Component {
         {
             //booked
             cnt++;
-            this.rows.push(<button key={i} type="button" className="btn btn-outline-danger" style={{width:'23%',height:'13%',fontSize:'11px',paddingBottom:'5%'}} data-key={i} data-id="Booked" onClick={this.giveErrorPrompt}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
+            this.rows.push(<button key={i} type="button" className="btn btn-outline-danger" style={{width:'23%',height:'10%',fontSize:'11px',paddingBottom:'5%'}} data-key={i} data-id="Booked" onClick={this.giveErrorPrompt}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
             tempvar++;
             if(tempvar%4==0)
             {
               this.rows.push(<br></br>);
-              this.rows.push(<br></br>);
+              //this.rows.push(<br></br>);
             }  
         }
         else
         {
             //not booked
             cnt++;
-            this.rows.push(<button key={i} type="button" className="btn btn-outline-success" style={{width:'23%',height:'13%',fontSize:'11px',paddingBottom:'5%'}} data-key={i} data-id="notBooked" data-value={currentHour+":"+currentMinute +" "+ NextHour+":"+NextMinute} onClick={this.bookThisSlot}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
+            this.rows.push(<button key={i} type="button" className="btn btn-outline-success" style={{width:'23%',height:'10%',fontSize:'11px',paddingBottom:'5%'}} data-key={i} data-id="notBooked" data-value={currentHour+":"+currentMinute +" "+ NextHour+":"+NextMinute} onClick={this.bookThisSlot}>{currentHour}:{currentMinute} - {NextHour}:{NextMinute}</button>);
             tempvar++;
             if(tempvar%4==0)
             {
               this.rows.push(<br></br>);
-              this.rows.push(<br></br>);
+              //this.rows.push(<br></br>);
             }
         }
         currentHour=NextHour;
@@ -368,7 +373,7 @@ class SlotBooking extends Component {
             <form action={link} method="get" target="_blank">
 
 
-             <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9",fontSize:'90%'}}>Confirm Booking</button>
+             <button className="btn btn" style={{color:'white',borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9",fontSize:'90%'}}>Confirm Booking</button>
 
    
 

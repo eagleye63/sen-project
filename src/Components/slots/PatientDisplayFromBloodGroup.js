@@ -78,15 +78,43 @@ class PatientDisplayFromBloodGroup extends Component {
 
 
     render() {
-
+        var link='https://www.google.com/maps/place/Nidhi+Multispeciality+Hospital/@23.0401044,72.5592146,17z/data=!3m1!4b1!4m15!1m7!3m6!1s0x395e84f521640d4b:0x6853ee97a9a2996b!2sNavrangpura,+Ahmedabad,+Gujarat!3b1!8m2!3d23.0365437!4d72.5611395!3m6!1s0x395e848c996426c3:0x915350ab1da7fe78!8m2!3d23.0400999!4d72.5614035!9m1!1b1';
         var patientdetails = this.state.display.map(name1 => {
             return (
-                <div className="list-group-item ">
-                    <p4 className="list-group-item-text">name:{name1.name}</p4>
-                    <p className="list-group-item-text">gender:{name1.gender}</p>
-                    <p className="list-group-item-text">age:{name1.age}</p>
-                    <p className="list-group-item-text">area:{name1.area}</p>
+
+
+                <div className="d-flex justify-content-center" >
+                <div className="d-flex justify-content-center" style={{width:'40%'}} >
+                <form  style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%',width:'100%' }}>
+                <div className='list-group'  style={{border:"3px solid grey"}}>
+                <div className='list-group-item' style={{backgroundColor:'#f1f1f1'}}>
+                
+                <h4 style={{fontSize:'14px'}}><b>Patient's Name: </b>{name1.name}</h4>
+                <h4 style={{fontSize:'14px'}}><b>Gender: </b>{name1.gender}</h4>
+                <h4 style={{fontSize:'14px'}}><b>Age: </b>{name1.age}</h4>
+                <h4 style={{fontSize:'14px'}}><b>Area: </b>{name1.area}</h4>
+
+                <div className="d-flex justify-content-between" style={{marginTop:'2%'}}>
+                                <div className="d-flex justify-content-start">
+                                <form action={link} method="get" target="_blank">
+                                 <button className="btn btn" style={{color:'white',borderRadius:'5%',height:"70%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9"}}   >Locate<i style={{marginLeft:'10%'}} className={'fas fa-map-marker-alt'} color="green"/></button>
+                                </form>
+                                 </div>
+                                 </div>
+                                
                 </div>
+                </div>
+                </form>
+                </div>
+                </div>
+
+
+                // <div className="list-group-item ">
+                //     <p4 className="list-group-item-text">name:{name1.name}</p4>
+                //     <p className="list-group-item-text">gender:{name1.gender}</p>
+                //     <p className="list-group-item-text">age:{name1.age}</p>
+                //     <p className="list-group-item-text">area:{name1.area}</p>
+                // </div>
             );
         })
 
@@ -102,7 +130,20 @@ class PatientDisplayFromBloodGroup extends Component {
             (this.state.isDataAvailable &&
                 (<div>
                     <NavigationBar/>
-                    <h1>Display</h1>
+
+                    
+                <div className="d-flex justify-content-center">
+
+                <div className="d-flex justify-content-start" style={{marginBottom:'0%'}}>
+                <h3><button className="btn btn" style={{color:'white',backgroundColor:'#116466',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>Patients of Blood Group:   {this.props.location.state.bloodgroup} </b></button></h3>
+
+                </div>
+                </div>
+           
+
+
+
+                    {/* <h1>Display</h1> */}
                     <br></br>
                     {
                         patientdetails

@@ -115,7 +115,7 @@ class ClinicDate extends Component {
               </form>
               
 
-              <button className="btn btn" type="submit" style={{borderRadius:'5%',backgroundColor:'green',height:'89%',fontSize:'89%'}} onClick={this.submithandler}>Search</button>
+              <button className="btn btn" type="submit" style={{color:'white',borderRadius:'5%',backgroundColor:'green',height:'89%',fontSize:'89%'}} onClick={this.submithandler}>Search</button>
 
 
               
@@ -128,7 +128,7 @@ class ClinicDate extends Component {
                 <div className="d-flex justify-content-center">
 
                 <div className="d-flex justify-content-start" style={{marginBottom:'0%'}}>
-                <h3><button className="btn btn" style={{backgroundColor:'#116466',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>List Of Appointments</b></button></h3>
+                <h3><button className="btn btn" style={{color:'white',backgroundColor:'#116466',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>List Of Appointments</b></button></h3>
 
                 </div>
                 </div>

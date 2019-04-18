@@ -137,7 +137,7 @@
   .upload{
     background-color:rgb(166, 37, 241);
     opacity: 0.8;
-    margin-left:60px;
+    /* margin-left:60px; */
     border:1px solid black;
   }
   .checkbutton{

@@ -94,10 +94,10 @@ import NavigationBar from './../navigationbar';
 
         let arrayofhistory=this.state.prescription.map(prescription=>{
           return (
-
+            
 
             <div className="d-flex justify-content-center">
-            <div  style={{width:'50%'}}   style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
+            <div  style={{width:'50%'}}   style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.25%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
             {/* <form style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}> */}
             <div className='list-group'  style={{border:"3px solid grey"}}>
             <div className='list-group-item' style={{backgroundColor:'#f1f1f1'}}>
@@ -156,7 +156,9 @@ import NavigationBar from './../navigationbar';
         })
       
     return (
-      <div>
+
+      <React.Fragment>
+        <NavigationBar/>
         <div className="d-flex justify-content-center">
                 <div  className="d-flex justify-content-center" style={{marginTop:'1%'}}>
                 <h3><button className="btn btn" style={{color:'white',backgroundColor:'#116466',height:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%',marginTop:'2%'}}><b>Prescription</b></button></h3>
@@ -165,7 +167,7 @@ import NavigationBar from './../navigationbar';
         <FlipMove duration={500} easing="cubic-bezier(0,0,1,1)">
           {arrayofhistory}
         </FlipMove>
-      </div>
+        </React.Fragment>
     );
   }
 }

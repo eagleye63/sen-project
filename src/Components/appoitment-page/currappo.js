@@ -68,7 +68,7 @@ import firebase from '../../config/configuration';
                 let a1=clinicsref.child(key).on("value",snapshot=>{
                     const val=snapshot.val();
                     let arr=this.state.clinicdetail;
-                    let obj={'clinicname':val.name ,'slot_time':obj1.slot_time,'date':obj1.date,'doname': val.doctor ,'phone': val.phone ,'area' : val.area ,'city':val.city };
+                    let obj={'clinicname':val.name ,'slot_time':obj1.slot_time,'date':obj1.date,'doname': val.doctor ,'phone': val.phone ,'area' : val.area ,'city':val.city ,'link':val.link};
                     arr.push(obj);
                     this.setState({
                         clinicdetail : arr,
@@ -113,9 +113,9 @@ import firebase from '../../config/configuration';
         let print= this.state.clinicdetail.map(obj1=>{
             return (
 
-                <div className="d-flex justify-content-center" style={{margintop:'5%'}}>
-                <div className="d-flex justify-content-center" style={{width:'50%',marginLeft:'2%'}}>
-                <form  style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%' }}>
+                <div className="d-flex justify-content-center" style={{margintop:'5%',width:'100%'}}>
+                <div className="d-flex justify-content-center" style={{marginLeft:'2%',width:'40%'}}>
+                <form  style={{border:"3px solid grey",marginTop:'1%',borderRadius:'4%',padding:'0.5%',backgroundColor:'#254e58',borderBottomLeftRadius:'4%', width:'100%' }}>
                 <div className='list-group'  style={{border:"3px solid grey"}}>
                 <div className='list-group-item' style={{backgroundColor:'#f1f1f1'}}>
                 <h3 style={{textAlign:'center'}}><b>{obj1.clinicname}</b></h3>
@@ -126,8 +126,8 @@ import firebase from '../../config/configuration';
                 <h4 style={{fontSize:'14px'}}><b>Slot Time: </b>{obj1.slot_time}</h4>
                 <div className="d-flex justify-content-start" style={{marginTop:"3%"}}>
                 <div className="d-flex justify-content-start">
-                                <form action={link} method="get" target="_blank">
-                                 <button className="btn btn" style={{borderRadius:'5%',height:"70%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9",fontSize:'70%'}}>Locate<i style={{marginLeft:'10%'}} className={'fas fa-map-marker-alt'} color="green"/></button>
+                                <form action={obj1.link} method="get" target="_blank">
+                                 <button className="btn btn" style={{color:'white',borderRadius:'5%',height:"70%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9",fontSize:'70%'}}>Locate<i style={{marginLeft:'10%'}} className={'fas fa-map-marker-alt'} color="green"/></button>
                 </form>
                 </div>
                 </div>
@@ -156,13 +156,13 @@ import firebase from '../../config/configuration';
         console.log('currappo name  ' +this.state.clinicname) ; 
        // console.log(`${this.state.clinickey}`);
          return(
-             this.state.flag  && 
+              
              <div>
                 <NavigationBar/>
                 <div className="d-flex justify-content-center">
                 <div className="d-flex justify-content-start" style={{marginBottom:'1%'}}>
 
-                <h3><button className="btn btn" style={{backgroundColor:'#116466',height:'70%',width:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>Current Appointment</b></button></h3>
+                <h3><button className="btn btn" style={{color:'white',backgroundColor:'#116466',height:'70%',width:'70%',marginBottom:'10%',fontSize:'70%',padding:'1%'}}><b>Current Appointments</b></button></h3>
 
 
                 </div>

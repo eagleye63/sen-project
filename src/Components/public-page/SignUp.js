@@ -138,7 +138,7 @@ export class SignUp extends Component {
             <FormGroup row>
             <Label htmlFor="age" sm={1}><b>Age:</b></Label>
             <Col sm={8}>
-            <Input type="number"  name="age" onChange={this.handleChage}
+            <Input type="text"  name="age" onChange={this.handleChage}
             value={this.state.age} placeholder="age" required/><hr/>
             </Col>
             </FormGroup>
@@ -178,7 +178,7 @@ export class SignUp extends Component {
             <FormGroup row>
             <Label htmlFor="phone" sm={1}><b>Phone:</b></Label>
             <Col sm={8}>
-            <Input type="number" placeholder="Enter Phone Number" name="phone" onChange={this.handleChage}
+            <Input type="text" placeholder="Enter Phone Number" name="phone" onChange={this.handleChage}
             value={this.state.phone} required/><hr/>
             </Col>
             </FormGroup>

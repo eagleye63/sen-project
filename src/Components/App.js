@@ -73,10 +73,11 @@ class App extends React.PureComponent{
               flag=0;
           }).then(()=>{
             //1  
-              var user=firebase.auth().currentUser.uid;
+              
               
               if(flag)
               { 
+                var user=firebase.auth().currentUser.uid;
                 //1
                 firebase.database().ref('list').child(user).on('value',snapshot=>{
                     console.log(this);

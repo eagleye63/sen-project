@@ -64,8 +64,8 @@ class Home extends React.Component{
                         clinicfees: snapshot1.val().clinicfees,
                         street: snapshot1.val().street,
                         city: snapshot1.val().city,
-                        area: snapshot1.val().area
-                       
+                        area: snapshot1.val().area,
+                       link:snapshot1.val().link
 
                     })
                  //   console.log(currentcliniclist[currentcliniclist.length-1].age)

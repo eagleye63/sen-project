@@ -8,6 +8,7 @@ import FlipMove from "react-flip-move";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import {Input} from "reactstrap";
 import {Link} from 'react-router-dom';
+import cookie from 'react-cookies';
 
 class Clinic extends Component {
   constructor(props) {
@@ -137,7 +138,7 @@ class Clinic extends Component {
   };
 
   //delete appointment from firebase
-  deletehandler = id => {
+  deletehandler = (id,num) => {
     // console.log(event.target.name)
     let temparr=this.state.appointments;
     let index = this.state.appointments.findIndex(function (element) {
@@ -152,6 +153,7 @@ class Clinic extends Component {
       return prevState;
     });
     this.uploadhandler(id,filename1,description1);
+    this.deletefromfirebase(id,num);
     alert('patient succesfully checked out');
 
   };
@@ -160,6 +162,21 @@ class Clinic extends Component {
   historyhandler = () => {
     
   };
+
+  deletefromfirebase=(id,num)=>{
+    firebase.database().ref('patient').child(id).child('current_appointment').child(num).remove();
+    firebase.database().ref('clinic').child(cookie.load('uid')).child('date').child(this.props.date).child('patient_booking')
+    .once('value').then(snapshot=>{
+      snapshot.forEach(child=>{
+        if(child.val().id==id)
+        {
+          firebase.database().ref('clinic').child(cookie.load('uid')).child('date').child(this.props.date).child('patient_booking')
+          .child(child.key).remove();
+        }
+      })
+    })
+   // firebase.database().ref('clinic').child(cookie.load('uid')).child('date').child(this.props.date).child(num).remove();
+  }
 
   uploadhandler = (id,filename1,description1) => {
     //event.preventDefault();
@@ -194,7 +211,7 @@ class Clinic extends Component {
             max: max1
           });
       });
-    alert("visit completed");
+   // alert("visit completed");
   };
 
   //state change handler
@@ -351,7 +368,7 @@ class Clinic extends Component {
     }
     else
     {
-        this.deletehandler(event.target.id);
+        this.deletehandler(event.target.id,event.target.name);
     }
   }
 
@@ -410,15 +427,13 @@ class Clinic extends Component {
                 <div className="d-flex justify-content-between" style={{marginTop:"3%"}}>
                 <div className="d-flex justify-content-start">
                     <Link to={`/prescription/${appointment.id}`}>
-                      <button className="btn btn" style={{color:'white',borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9"}}>Check History</button>
+                      <button className="btn btn" style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9"}}>Check History</button>
                     </Link>
                                
                 </div>
                 <div className="d-flex justify-content-start">
                     
-
-                      <button className="btn btn" id={appointment.id} onClick={this.checkouthandler} style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>CheckOut</button>
-
+                      <button className="btn btn" id={appointment.id} name={appointment.num} onClick={this.checkouthandler} style={{borderRadius:'5%',height:"90%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}}>CheckOut</button>
                     
                                
                 </div>

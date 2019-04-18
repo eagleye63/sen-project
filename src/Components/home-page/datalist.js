@@ -66,8 +66,8 @@ redirect(data){
         // console.log('i am in data list '+ user);
         // co console.log('i am in data list '+ user);
         // console.log('datalist'+this.props.data);
-
-        var link='https://www.google.com/maps/place/Nidhi+Multispeciality+Hospital/@23.0401044,72.5592146,17z/data=!3m1!4b1!4m15!1m7!3m6!1s0x395e84f521640d4b:0x6853ee97a9a2996b!2sNavrangpura,+Ahmedabad,+Gujarat!3b1!8m2!3d23.0365437!4d72.5611395!3m6!1s0x395e848c996426c3:0x915350ab1da7fe78!8m2!3d23.0400999!4d72.5614035!9m1!1b1'
+      //  console.log(data[0].link);
+        //var link='https://www.google.com/maps/place/Nidhi+Multispeciality+Hospital/@23.0401044,72.5592146,17z/data=!3m1!4b1!4m15!1m7!3m6!1s0x395e84f521640d4b:0x6853ee97a9a2996b!2sNavrangpura,+Ahmedabad,+Gujarat!3b1!8m2!3d23.0365437!4d72.5611395!3m6!1s0x395e848c996426c3:0x915350ab1da7fe78!8m2!3d23.0400999!4d72.5614035!9m1!1b1'
 
         return(
             
@@ -90,7 +90,7 @@ redirect(data){
                                 <h4 style={{fontSize:'14px'}}><b>Degree: </b>{data.degree}</h4>
                                 <h4 style={{fontSize:'14px'}}><b>Gender: </b>{data.gender}</h4>
                                 <h4 style={{fontSize:'14px'}}><b>Age: </b>{data.age}</h4>
-                                <h4 style={{fontSize:'14px'}}><b>Phone: </b>{data.Phone}</h4>                                
+                                <h4 style={{fontSize:'14px'}}><b>Phone: </b>{data.phone}</h4>                                
                                 <h4 style={{fontSize:'14px'}}><b>Clinicfees: </b>{data.clinicfees}</h4>
                                 <h4 style={{fontSize:'14px'}}><b>Street: </b>{data.street} </h4>
                                 <h4 style={{fontSize:'14px'}}><b>Area: </b>{data.area} </h4>
@@ -102,7 +102,7 @@ redirect(data){
                                  {/* <Link to="/slotbook/john" >go to sloot book</Link>    */}
                                 <div className="d-flex justify-content-between" style={{marginTop:'2%'}}>
                                 <div className="d-flex justify-content-start">
-                                <form action={link} method="get" target="_blank">
+                                <form action={data.link} method='get'  target="_blank">
                                  <button className="btn btn" style={{color:'white',borderRadius:'5%',height:"70%",borderEndStartRadius:'5%',backgroundColor:"#3aafa9"}}   >Locate<i style={{marginLeft:'10%'}} className={'fas fa-map-marker-alt'} color="green"/></button>
                                 </form>
                                  </div>
@@ -111,7 +111,7 @@ redirect(data){
                                  <div className="d-flex justify-content-end">
 
                                  {/* <Link to={'/slotbook'}  > */}
-                                    <button className="btn btn" data-name={data.doctorkey} style={{borderRadius:'5%',height:"70%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}} onClick={this.setcookie}>Book an appointment</button>
+                                    <button className="btn btn" data-name={data.doctorkey} style={{color:'white',borderRadius:'5%',height:"70%",borderEndStartRadius:'5%',backgroundColor:"#5680E9"}} onClick={this.setcookie}>Book an appointment</button>
                                  {/* </Link> */}
 
                                  </div>

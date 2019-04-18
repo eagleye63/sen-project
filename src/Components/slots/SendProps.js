@@ -29,6 +29,7 @@ import cookie from 'react-cookies';
         const val=snapshot.val();
         console.log(val);
         this.workingtime=val.workingtime;
+        console.log('working time:::::::'+this.workingtime);
         this.workingdays=val.workingdays;
         this.willWork=(this.workingdays.charAt(this.dayObject[this.day],1)=='1')?true:false;
         console.log(this.workingdays.substring(this.dayObject[this.day],1)+ "  this will work on "+this.willWork);
@@ -82,7 +83,7 @@ import cookie from 'react-cookies';
           cookie.save('slotsDatabase', this.slotsDatabase, { path: '/', expires: expires1 })
           cookie.save('workingtime', this.workingtime, { path: '/', expires: expires1 })
           cookie.save('slotInterval', this.slotInterval, { path: '/', expires: expires1 })
-          cookie.save('breaktime', JSON.stringify(this.breaktime), { path: '/', expires: expires1 })
+          cookie.save('breaktime', (this.breaktime), { path: '/', expires: expires1 })
           cookie.save('patient_booking',JSON.stringify( this.patient_booking), { path: '/', expires: expires1 })
           cookie.save('patientId', cookie.load('uid'), { path: '/', expires: expires1 })
           cookie.save('dateString', this.dateString, { path: '/', expires: expires1 })
@@ -146,7 +147,7 @@ import cookie from 'react-cookies';
           cookie.save('slotsDatabase', this.slotsDatabase, { path: '/', expires: expires1 })
           cookie.save('workingtime', this.workingtime, { path: '/', expires: expires1 })
           cookie.save('slotInterval', this.slotInterval, { path: '/', expires: expires1 })
-          cookie.save('breaktime', JSON.stringify(this.breaktime), { path: '/', expires: expires1 })
+          cookie.save('breaktime', (this.breaktime), { path: '/', expires: expires1 })
           cookie.save('patient_booking', JSON.stringify(this.patient_booking), { path: '/', expires: expires1 })
           cookie.save('patientId', cookie.load('uid'), { path: '/', expires: expires1 })
           cookie.save('dateString', this.dateString, { path: '/', expires: expires1 })
