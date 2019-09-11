@@ -11,7 +11,7 @@ import Clinicdate from './ClinicDate';
 import { CLIENT_RENEG_LIMIT } from 'tls';
 
 
-import { MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
+//1import { MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
 import cookie from 'react-cookies';
 class Home extends React.Component{
     constructor(props){

@@ -12,9 +12,9 @@ import FlipMove from "react-flip-move";
 import Clinic from './Clinic';
 import DatePicker from "react-custom-date-picker";
 import NavigationBar from './../navigationbar';
-import {Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom'; 
 
-import "react-datepicker/dist/react-datepicker.css";
+//1import "react-datepicker/dist/react-datepicker.css";
 import cookie from 'react-cookies';
 
 //hello2

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import firebase from '../../config/configuration';
 import { CustomInput,Col,Button, Form, FormGroup, Label, Input, FormText ,Container} from 'reactstrap';
-import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
+//1import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 
 export class Signupdoc extends Component {
     constructor(props) {
@@ -141,9 +141,10 @@ export class Signupdoc extends Component {
     
   render() {
     return (
-      <MDBContainer>
-      <MDBRow>
-        <MDBCol md="10">
+      // <MDBContainer>
+      // <MDBRow>
+      //   <MDBCol md="10">
+         <div>
           <form onSubmit={this.Signup} className="container" >
             <p className="h4 text-center mb-4" style={{marginTop:'5%'}} >Sign up Doctor</p>
             
@@ -284,9 +285,10 @@ export class Signupdoc extends Component {
               </div>
             </div>
           </form>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
+          </div>
+    //     </MDBCol>
+    //   </MDBRow>
+    // </MDBContainer>
 
 
 

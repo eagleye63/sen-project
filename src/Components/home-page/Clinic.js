@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { Spinner } from "reactstrap";
 //import "./Clin.css";
-import FileUploader from "react-firebase-file-uploader";
+//1import FileUploader from "react-firebase-file-uploader";
 import firebase from "../../config/configuration";
 import FlipMove from "react-flip-move";
 import ProgressBar from "react-bootstrap/ProgressBar";

@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from '../navigationbar'
 import DatePicker from 'react-custom-date-picker'
 import {Spinner} from 'reactstrap'
-import { CLIENT_RENEG_LIMIT } from "tls";
+import { CLIENT_RENEG_LIMIT } from "tls"; 
 import cookie from 'react-cookies';
 ////// WARNING : PASS ALL THE PROPS RECEIVED IN THIS COMPONENT TO SLOT BOOKING PAGE OTHERWISE IT WILL NOT WORK/////
 

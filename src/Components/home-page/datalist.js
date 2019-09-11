@@ -7,7 +7,7 @@ import AuthorizedComponent from '../AuthorizedComponent';
 import AuthorizedRoute from '../AuthorizedRoute';
 import { withRouter } from 'react-router-dom';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
-import { MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
+//1import { MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
 import cookie from 'react-cookies';
 class Datalist extends  React.PureComponent{
     constructor(props){

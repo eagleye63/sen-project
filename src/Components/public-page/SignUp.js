@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import firebase from '../../config/configuration';
 import { Col,Button, Form, FormGroup, Label, Input, FormText ,Container} from 'reactstrap';
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
-import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
+//1import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 's';
 
 import Stylee from './Stylee.css'
 export class SignUp extends Component {
